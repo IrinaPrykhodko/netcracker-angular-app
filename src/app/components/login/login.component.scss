@@ -5,19 +5,23 @@ form {
   margin-left: 35%;
   margin-right: 35%;
   margin-top: 15%;
-  background-color: green;
-  color: black;
-  
 }
+
+::ng-deep .mat-form-field-label{
+  color: #BDBDBD !important;
+}
+
+::ng-deep .mat-form-field-underline{
+  background-color: #BDBDBD !important;
+}
+
 
 mat-form-field {
   width: 100%;
-  color: black;
 }
 
 input {
 	margin-top: 2%;
-  color: black;
 }
 
 #button-login {

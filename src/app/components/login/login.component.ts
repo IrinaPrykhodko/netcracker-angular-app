@@ -12,15 +12,12 @@ export class LoginComponent implements OnInit {
 	public user: Login = new Login();
 	public loginForm: FormGroup;
 
-	public title: string = 'Login';
-
-  constructor(private formBilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-  	this.loginForm = this.formBilder.group({
+  	this.loginForm = this.formBuilder.group({
   		'login': [this.user.login, [Validators.required]],
   		'password': [this.user.password, [Validators.required]]
-
   	});
   }
 

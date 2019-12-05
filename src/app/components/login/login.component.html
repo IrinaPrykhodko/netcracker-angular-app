@@ -1,19 +1,19 @@
 <form [formGroup] = "loginForm">
 	<mat-form-field>
-		<input id="login" 
-				matInput 
+		<input id="login"
+				matInput
 				[formControl]="login"
 				[(ngModel)]="user.login"
 				placeholder="Enter your login" required/>
 	</mat-form-field>
 
-	<mat-form-field>
-		<input id="password" 
-				matInput 
+	<mat-form-field color="accent">
+		<input id="password"
+				matInput
 				[formControl]="password"
 				[(ngModel)]="user.password"
 				type = "password"
-				placeholder="Enter your password" required/>
+				placeholder="Enter your password" required />
 	</mat-form-field>
 
 <nav>
