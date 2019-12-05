@@ -1,0 +1,35 @@
+form {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 15%;
+  background-color: green;
+  color: black;
+  
+}
+
+mat-form-field {
+  width: 100%;
+  color: black;
+}
+
+input {
+	margin-top: 2%;
+  color: black;
+}
+
+#button-login {
+	margin-left: 40%;
+}
+
+#button-signup {
+  margin-left: 38.5%;
+  margin-top: 15%;
+}
+
+#forgot-password {
+  margin-left: 27%;
+  margin-top: 1%;
+}
