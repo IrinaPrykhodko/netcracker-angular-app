@@ -1,0 +1,36 @@
+.login {
+
+    width: 300px;
+    margin: 15% auto;
+
+  .login-form {
+    button {
+      width: 100%;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ::ng-deep .mat-form-field-label{
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline{
+    background-color: #BDBDBD !important;
+  }
+
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  input {
+    margin-top: 2%;
+  }
+
+
+}

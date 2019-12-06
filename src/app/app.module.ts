@@ -6,15 +6,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LoginComponent } from './modules/login/components/login/login.component';
+import {HttpClientModule} from "@angular/common/http";
+import { LoginRoutingModule } from './modules/login/login-routing.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignUpComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,11 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatButtonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    LoginRoutingModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

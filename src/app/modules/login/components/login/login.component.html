@@ -1,0 +1,28 @@
+<div class="login">
+<form [formGroup]="loginForm" class="login-form">
+	<mat-form-field color="primary">
+		<input id="login"
+				matInput
+				formControlName="login"
+				[(ngModel)]="user.login"
+				placeholder="Enter your login" required/>
+	</mat-form-field>
+
+	<mat-form-field color="primary">
+		<input id="password"
+				matInput
+        formControlName="password"
+				[(ngModel)]="user.password"
+				type = "password"
+				placeholder="Enter your password" required />
+	</mat-form-field>
+
+	<button id="button-login" mat-raised-button (click)="submitForm()">Log in</button>
+
+</form>
+
+<div class="buttons">
+  <button id="button-signup" mat-button routerLink="">Sign up</button>
+  <button id="forgot-password" mat-button routerLink="">Forgot password</button>
+</div>
+</div>
