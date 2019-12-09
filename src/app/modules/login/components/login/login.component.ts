@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms'
-import {AuthService} from "../../../../services/auth.service";
-import {Router} from "@angular/router";
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +10,8 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-	public user: User = new User();
-	public loginForm: FormGroup;
+  public user: User = new User();
+  public loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService
@@ -20,22 +19,22 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  	this.loginForm = this.formBuilder.group({
-  		'login': [this.user.login, [Validators.required]],
-  		'password': [this.user.password, [Validators.required]]
-  	});
+    this.loginForm = this.formBuilder.group({
+      login: [this.user.login, [Validators.required]],
+      password: [this.user.password, [Validators.required]]
+    });
   }
 
-  submitForm(){
+  submitForm() {
     console.log(this.loginForm.value);
     this.authService.login(this.loginForm.value)
-      .subscribe((userData)=>{
+      .subscribe((userData) => {
         console.log(userData);
 
-      },(error => {
+      }, (error => {
         console.log(error);
 
-      }))
+      }));
 
   }
 
