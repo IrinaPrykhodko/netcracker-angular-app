@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      login: [this.user.login, [Validators.required]],
+      email: [this.user.email, [Validators.required, Validators.email]],
       password: [this.user.password, [Validators.required]]
     });
   }
@@ -30,12 +30,17 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe((userData) => {
         console.log(userData);
-
       }, (error => {
         console.log(error);
-
       }));
 
   }
 
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
 }

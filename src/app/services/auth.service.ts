@@ -10,6 +10,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(cread: User) {
-    return this.http.post('login', cread);
+    return this.http.post('https://med-kit.herokuapp.com/login', cread);
   }
 }

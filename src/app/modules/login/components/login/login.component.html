@@ -1,28 +1,39 @@
 <div class="login">
+
 <form [formGroup]="loginForm" class="login-form">
 	<mat-form-field color="primary">
-		<input id="login"
+		<input
 				matInput
-				formControlName="login"
-				[(ngModel)]="user.login"
-				placeholder="Enter your login" required/>
+				formControlName="email"
+				[(ngModel)]="user.email"
+				placeholder="Enter your email" required/>
+
 	</mat-form-field>
+  <p class="error-massage" [hidden]="email.untouched" *ngIf="email.errors">* Email is incorrect</p>
 
 	<mat-form-field color="primary">
-		<input id="password"
+		<input
 				matInput
         formControlName="password"
 				[(ngModel)]="user.password"
 				type = "password"
-				placeholder="Enter your password" required />
-	</mat-form-field>
+				placeholder="Enter your password" required/>
 
-	<button id="button-login" mat-raised-button (click)="submitForm()">Log in</button>
+	</mat-form-field>
+  <p class="error-massage" [hidden]="password.untouched" *ngIf="password.errors">* Password is required</p>
+
+  <div *ngIf="loginForm.valid; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <button mat-raised-button (click)="submitForm()">Log in</button>
+  </ng-template>
+  <ng-template #elseBlock>
+    <button disabled mat-raised-button>Log in</button>
+  </ng-template>
 
 </form>
 
 <div class="buttons">
-  <button id="button-signup" mat-button routerLink="">Sign up</button>
-  <button id="forgot-password" mat-button routerLink="">Forgot password</button>
+  <button mat-button routerLink="">Sign up</button>
+  <button mat-button routerLink="">Forgot password</button>
 </div>
 </div>
