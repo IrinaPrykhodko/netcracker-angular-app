@@ -9,13 +9,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/login/components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginRoutingModule } from './modules/login/login-routing.module';
-
+import {RegisterComponent} from './modules/register/сomponents/register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +27,7 @@ import { LoginRoutingModule } from './modules/login/login-routing.module';
     ReactiveFormsModule,
     MatInputModule,
     HttpClientModule,
-    LoginRoutingModule,
-
-
+    LoginRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
