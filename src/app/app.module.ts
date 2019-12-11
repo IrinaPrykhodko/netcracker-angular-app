@@ -16,6 +16,7 @@ import {RegisterComponent} from './modules/register/сomponents/register/registe
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     RegisterComponent
   ],
   imports: [

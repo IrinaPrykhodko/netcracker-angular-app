@@ -1,1 +1,123 @@
-<p>register works!</p>
+<div class="register">
+
+  <form [formGroup]="registerForm" class="register-form">
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="firstName"
+        [(ngModel)]="patient.firstName"
+        type = "firstName"
+        placeholder="Enter your first name" required/>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="firstName.untouched" *ngIf="firstName.errors">* First name is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="lastName"
+        [(ngModel)]="patient.lastName"
+        type = "lastName"
+        placeholder="Enter your last name" required/>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="lastName.untouched" *ngIf="lastName.errors">* Last name is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="dateOfBirth"
+        [(ngModel)]="patient.dateOfBirth"
+        type = "Date"
+        placeholder="Enter your date of birth" />
+    </mat-form-field>
+
+    <label>
+      <input type="radio" value="Male" formControlName="gender">
+      <span>male</span>
+    </label>
+    <label>
+      <input type="radio" value="Female" formControlName="gender">
+      <span>female</span>
+    </label>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="height"
+        [(ngModel)]="patient.height"
+        type = "height"
+        placeholder="Enter your height" />
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="weight"
+        [(ngModel)]="patient.weight"
+        type = "weight"
+        placeholder="Enter your weight" />
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="location"
+        [(ngModel)]="patient.location"
+        type = "location"
+        placeholder="Enter your location" />
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="email"
+        [(ngModel)]="patient.email"
+        placeholder="Enter your email" required/>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="email.untouched" *ngIf="email.errors">* Email is incorrect</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="phoneNumber"
+        [(ngModel)]="patient.phoneNumber"
+        placeholder="Enter your phone number" required/>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="phoneNumber.untouched" *ngIf="phoneNumber.errors">* Phone number is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="password"
+        [(ngModel)]="patient.password"
+        type = "password"
+        placeholder="Enter your password" required/>
+
+    </mat-form-field>
+    <p class="error-massage" [hidden]="password.untouched" *ngIf="password.errors">* Password is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="passwordConfirm"
+        [(ngModel)]="patient.passwordConfirm"
+        type = "password"
+        placeholder="Confirm your password" required/>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="passwordConfirm.untouched" *ngIf="passwordConfirm.errors">* Confirm password is required</p>
+
+    <div *ngIf="registerForm.valid; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <button mat-raised-button (click)="submitForm()">Sign up</button>
+    </ng-template>
+    <ng-template #elseBlock>
+      <button disabled mat-raised-button>Sign up</button>
+    </ng-template>
+
+  </form>
+</div>

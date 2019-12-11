@@ -1,0 +1,48 @@
+.register {
+
+  width: 300px;
+  margin: 12% auto;
+
+  .register-form {
+    button {
+      width: 100%;
+      margin-top: 2%;
+    }
+  }
+
+  .buttons {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  input {
+    margin-top: 2%;
+  }
+
+  .error-massage {
+    margin-top: -5%;
+    color: red;
+    font-size: 80%;
+  }
+
+  button:disabled,
+  button[disabled] {
+    background-color: #BDBDBD;
+    color: white;
+  }
+
+}
