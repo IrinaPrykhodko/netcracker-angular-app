@@ -11,7 +11,7 @@
         placeholder="Enter your first name" required/>
     </mat-form-field>
 
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="firstName.untouched" *ngIf="firstName.errors">* First name is required</p>
+    <p style="margin-top: 1%"  class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
 
     <mat-form-field color="primary">
       <input
@@ -22,7 +22,7 @@
         placeholder="Enter your last name" required/>
     </mat-form-field>
 
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="lastName.untouched" *ngIf="lastName.errors">* Last name is required</p>
+    <p style="margin-top: 1%"  class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
     <p style="color: #BDBDBD">Enter your date of birth</p>
     <mat-form-field color="primary">
       <input
@@ -79,7 +79,7 @@
         placeholder="Enter your email" required/>
     </mat-form-field>
 
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="email.untouched" *ngIf="email.errors">* Email is incorrect</p>
+    <p style="margin-top: 1%"  class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
 
     <p style="color: #BDBDBD">Enter your phone number</p>
     <div style="margin-bottom: 2%" class="phone">
@@ -101,7 +101,7 @@
         type = "tel"
         placeholder="Enter your phone number" required>
       </ngx-intl-tel-input>
-      <p style="margin-top: 2%" class="error-massage" [hidden]="phoneNumber.untouched" *ngIf="phoneNumber.errors">* Phone number is required</p>
+      <p style="margin-top: 2%" class="error-massage" [hidden]="phoneNumber.untouched || phoneNumber.valid">* Phone number is required</p>
     </div>
 
     <mat-form-field color="primary">
@@ -112,7 +112,7 @@
         type = "password"
         placeholder="Enter your password" required/>
     </mat-form-field>
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="password.untouched" *ngIf="password.errors">* Password is required</p>
+    <p style="margin-top: 1%"  class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
 
     <mat-form-field color="primary">
       <input
@@ -123,7 +123,7 @@
         placeholder="Confirm your password" required
         />
     </mat-form-field>
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="passwordConfirm.untouched" *ngIf="passwordConfirm.errors">* Confirm password is required</p>
+    <p style="margin-top: 1%"  class="error-massage" [hidden]="passwordConfirm.untouched || passwordConfirm.valid">* Confirm password is required</p>
 
     <div *ngIf="registerForm.valid; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
