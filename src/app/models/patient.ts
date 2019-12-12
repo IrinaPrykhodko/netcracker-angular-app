@@ -9,5 +9,4 @@ export class Patient extends User{
   weight: number;
   location: string;
   phoneNumber: number;
-  passwordConfirm: string;
 }

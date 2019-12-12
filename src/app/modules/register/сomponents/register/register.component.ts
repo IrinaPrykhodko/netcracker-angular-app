@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {RegisterService} from "../../../../services/register.service";
 import {Patient} from "../../../../models/patient";
+import {MyErrorStateMatcher} from "../../../../models/MyErrorStateMatcher";
+import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +14,12 @@ export class RegisterComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public registerForm: FormGroup;
+  public matcher = new MyErrorStateMatcher();
+  separateDialCode = true;
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.Ukraine];
 
   constructor(private formBuilder: FormBuilder,
               private registerService: RegisterService
@@ -30,8 +38,8 @@ export class RegisterComponent implements OnInit {
       email: [this.patient.email, [Validators.required, Validators.email]],
       phoneNumber: [this.patient.phoneNumber, [Validators.required]],
       password: [this.patient.password, [Validators.required]],
-      passwordConfirm: [this.patient.passwordConfirm, [Validators.required]]
-    });
+      passwordConfirm: ['', [Validators.required]]
+    }, {validator: this.checkPasswords});
   }
 
   submitForm() {
@@ -43,6 +51,13 @@ export class RegisterComponent implements OnInit {
         console.log(error);
       }));
 
+  }
+
+  checkPasswords(group: FormGroup) {
+    let password = group.get('password').value;
+    let passwordConfirm = group.get('passwordConfirm').value;
+
+    return password === passwordConfirm ? null : { notSame: true }
   }
 
   get email() {
