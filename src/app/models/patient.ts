@@ -1,6 +1,6 @@
-import {User} from "./user";
+import {User} from './user';
 
-export class Patient extends User{
+export class Patient extends User {
   firstName: string;
   lastName: string;
   dateOfBirth: any;

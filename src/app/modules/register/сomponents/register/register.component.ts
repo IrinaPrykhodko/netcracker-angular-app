@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {RegisterService} from "../../../../services/register.service";
-import {Patient} from "../../../../models/patient";
-import {MyErrorStateMatcher} from "../../../../models/MyErrorStateMatcher";
+import {RegisterService} from '../../../../services/register.service';
+import {Patient} from '../../../../models/patient';
+import {MyErrorStateMatcher} from '../../../../models/MyErrorStateMatcher';
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
@@ -54,10 +54,10 @@ export class RegisterComponent implements OnInit {
   }
 
   checkPasswords(group: FormGroup) {
-    let password = group.get('password').value;
-    let passwordConfirm = group.get('passwordConfirm').value;
+    const password = group.get('password').value;
+    const passwordConfirm = group.get('passwordConfirm').value;
 
-    return password === passwordConfirm ? null : { notSame: true }
+    return password === passwordConfirm ? null : { notSame: true };
   }
 
   get email() {

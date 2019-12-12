@@ -10,7 +10,7 @@ import { LoginComponent } from './modules/login/components/login/login.component
 import { HttpClientModule } from '@angular/common/http';
 import { LoginRoutingModule } from './modules/login/login-routing.module';
 import {RegisterComponent} from './modules/register/сomponents/register/register.component';
-import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
+import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 
 
 @NgModule({
