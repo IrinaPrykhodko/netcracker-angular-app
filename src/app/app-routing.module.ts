@@ -9,8 +9,8 @@ const appRoutes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule) }
 ];
 
 @NgModule({

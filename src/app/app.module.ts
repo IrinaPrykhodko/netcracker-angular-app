@@ -11,26 +11,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginRoutingModule } from './modules/login/login-routing.module';
 import {RegisterComponent} from './modules/register/сomponents/register/register.component';
 import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
+import {LoginModule} from './modules/login/login.module';
+import {RegisterModule} from './modules/register/register.module';
+import {SharedModule} from './modules/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    RegisterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    HttpClientModule,
+    SharedModule,
     LoginRoutingModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    LoginModule,
+    RegisterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
