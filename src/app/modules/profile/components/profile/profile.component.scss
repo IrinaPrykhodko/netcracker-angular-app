@@ -1,0 +1,17 @@
+.profile {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+
+  &__sidebar {
+    width: 20%;
+    padding: 1rem;
+    border: 1px solid #BDBDBD;
+    background: #EDEDED;
+  }
+
+  &__content {
+    width: 80%;
+    padding: 1rem;
+  }
+}
