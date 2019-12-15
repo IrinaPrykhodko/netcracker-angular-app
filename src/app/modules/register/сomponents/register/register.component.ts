@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.registerForm.value.phoneNumber.internationalNumber);
+    console.log(this.registerForm.value);
     this.registerService.register(this.registerForm.value)
       .subscribe((userData) => {
         console.log(userData);
