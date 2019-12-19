@@ -10,11 +10,12 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
 import {ProfileRoutingModule} from "./profile-routing.module";
+import { AccountComponent } from './components/account/account.component';
 
 
 
 @NgModule({
-  declarations: [SidebarComponent, ProfileComponent, MedicineKitComponent, AllMedicinesComponent, PurchasesComponent, NotificationsComponent, DoctorsComponent, PrescriptionsComponent],
+  declarations: [SidebarComponent, ProfileComponent, MedicineKitComponent, AllMedicinesComponent, PurchasesComponent, NotificationsComponent, DoctorsComponent, PrescriptionsComponent, AccountComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule

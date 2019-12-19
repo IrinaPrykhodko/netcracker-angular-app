@@ -7,6 +7,7 @@ import {PrescriptionsComponent} from "./components/prescriptions/prescriptions.c
 import {NotificationsComponent} from "./components/notifications/notifications.component";
 import {PurchasesComponent} from "./components/purchases/purchases.component";
 import {AllMedicinesComponent} from "./components/all-medicines/all-medicines.component";
+import {AccountComponent} from "./components/account/account.component";
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'all-medicines',
         component: AllMedicinesComponent
+      },
+      {
+        path: 'account',
+        component: AccountComponent
       }
     ]
   }
