@@ -9,13 +9,23 @@ import { PurchasesComponent } from './components/purchases/purchases.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
-import {ProfileRoutingModule} from "./profile-routing.module";
+import {ProfileRoutingModule} from './profile-routing.module';
 import { AccountComponent } from './components/account/account.component';
 
 
 
 @NgModule({
-  declarations: [SidebarComponent, ProfileComponent, MedicineKitComponent, AllMedicinesComponent, PurchasesComponent, NotificationsComponent, DoctorsComponent, PrescriptionsComponent, AccountComponent],
+  declarations: [
+    SidebarComponent,
+    ProfileComponent,
+    MedicineKitComponent,
+    AllMedicinesComponent,
+    PurchasesComponent,
+    NotificationsComponent,
+    DoctorsComponent,
+    PrescriptionsComponent,
+    AccountComponent
+  ],
   imports: [
     CommonModule,
     ProfileRoutingModule
