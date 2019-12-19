@@ -16,7 +16,8 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
     ReactiveFormsModule,
     MatInputModule,
     FormsModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    HttpClientModule
   ],
   exports: [
     MatButtonModule,

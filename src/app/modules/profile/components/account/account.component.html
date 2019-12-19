@@ -1,0 +1,21 @@
+<div>
+  <div class="info">
+    <h1 class="title">
+    <p class="name">{{patient?.firstName}} </p>
+    <p class="name">{{patient?.lastName}}</p>
+    </h1>
+    <div class="param">
+      <p class="date">Date of birth: {{patient?.dateOfBirth}}</p>
+      <p class="gender">Gender: {{patient?.gender}}</p>
+      <p class="dimensions">Height: {{patient?.height}} </p>
+      <p class="dimensions">Weight: {{patient?.weight}}</p>
+      <p class="location">Location: {{patient?.location}}</p>
+      <p class="email">Email: {{patient?.email}}</p>
+      <p class="phone">Phone number: {{patient?.phoneNumber}}</p>
+    </div>
+  </div>
+  <div>
+    <button class="button" routerLink="/edit">Edit</button>
+    <button class="button" routerLink="/change-password">Change password</button>
+  </div>
+</div>

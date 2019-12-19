@@ -1,0 +1,41 @@
+.button{
+  background-color: #db6974;
+  border: none;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
+  font-size: 14px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display:block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {opacity: 1}
+
+.info{
+  font-family: 'Varela Round';
+  color: #777;
+  text-decoration: none;
+  transition: all 0.40s;
+}
+
+h1{
+  text-align: center;
+}
+
+p{
+  font-size: 24px;
+}
+
+.name{
+  display: inline;
+  padding-top: 5px;
+  font-size: 40px;
+}
+
+.param{
+
+}

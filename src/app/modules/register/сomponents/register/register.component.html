@@ -3,33 +3,36 @@
   <form [formGroup]="registerForm" class="register-form">
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="firstName"
-        [(ngModel)]="patient.firstName"
-        type = "firstName"
-        placeholder="Enter your first name" required/>
+      <label>
+        <input
+          matInput
+          formControlName="firstName"
+          type = "firstName"
+          placeholder="Enter your first name" required/>
+      </label>
     </mat-form-field>
 
     <p style="margin-top: 1%"  class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="lastName"
-        [(ngModel)]="patient.lastName"
-        type = "lastName"
-        placeholder="Enter your last name" required/>
+      <label>
+        <input
+          matInput
+          formControlName="lastName"
+          type = "lastName"
+          placeholder="Enter your last name" required/>
+      </label>
     </mat-form-field>
 
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
-    <p style="color: #BDBDBD">Enter your date of birth</p>
+    <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
+    <p>Enter your date of birth</p>
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="dateOfBirth"
-        [(ngModel)]="patient.dateOfBirth"
-        type = "Date"/>
+      <label>
+        <input
+          matInput
+          formControlName="dateOfBirth"
+          type = "Date"/>
+      </label>
     </mat-form-field>
 
     <div style="margin-bottom: 4%" >
@@ -44,45 +47,50 @@
     </div>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="height"
-        [(ngModel)]="patient.height"
-        type = "number"
-        placeholder="Enter your height" />
+      <label>
+        <input
+          matInput
+          formControlName="height"
+          type = "number"
+          placeholder="Enter your height" />
+      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="weight"
-        [(ngModel)]="patient.weight"
-        type = "number"
-        placeholder="Enter your weight" />
+      <label>
+        <input
+          matInput
+          formControlName="weight"
+          type = "number"
+          placeholder="Enter your weight" />
+      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="location"
-        [(ngModel)]="patient.location"
-        type = "location"
-        placeholder="Enter your location" />
+      <label>
+        <input
+          matInput
+          formControlName="location"
+
+          type = "location"
+          placeholder="Enter your location" />
+      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="email"
-        [(ngModel)]="patient.email"
-        type = "email"
-        placeholder="Enter your email" required/>
+      <label>
+        <input
+          matInput
+          formControlName="email"
+          type = "email"
+          placeholder="Enter your email" required/>
+      </label>
     </mat-form-field>
 
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
+    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
 
-    <p style="color: #BDBDBD">Enter your phone number</p>
-    <div style="margin-bottom: 2%" class="phone">
+    <p>Enter your phone number</p>
+    <div class="phone">
       <ngx-intl-tel-input
         [preferredCountries]="preferredCountries"
         [enableAutoCountrySelect]="true"
@@ -91,39 +99,39 @@
         [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
         [selectFirstCountry]="false"
         [selectedCountryISO]="CountryISO.Ukraine"
-        [maxLength]="11"
+        [maxLength]= '11'
         [tooltipField]="TooltipLabel.Name"
         [phoneValidation]="true"
         [separateDialCode]="separateDialCode"
         name="phone"
         formControlName="phoneNumber"
-        [(ngModel)]="patient.phoneNumber"
-        type = "tel"
-        placeholder="Enter your phone number" required>
+      >
       </ngx-intl-tel-input>
-      <p style="margin-top: 2%" class="error-massage" [hidden]="phoneNumber.untouched || phoneNumber.valid">* Phone number is required</p>
+      <p class="error-massage" [hidden]="phoneNumber.untouched || phoneNumber.valid">* Phone number is required</p>
     </div>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="password"
-        [(ngModel)]="patient.password"
-        type = "password"
-        placeholder="Enter your password" required/>
+      <label>
+        <input
+          matInput
+          formControlName="password"
+          type = "password"
+          placeholder="Enter your password" required/>
+      </label>
     </mat-form-field>
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
+    <p class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
 
     <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="passwordConfirm"
-        type = "password"
-        [errorStateMatcher]="matcher"
-        placeholder="Confirm your password" required
-        />
+      <label>
+        <input
+          matInput
+          formControlName="passwordConfirm"
+          type = "password"
+          placeholder="Confirm your password" required
+          />
+      </label>
     </mat-form-field>
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="passwordConfirm.untouched || passwordConfirm.valid">* Confirm password is required</p>
+    <p class="error-massage" [hidden]="passwordConfirm.untouched || passwordConfirm.valid">* Confirm password is required</p>
 
     <div *ngIf="registerForm.valid; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>

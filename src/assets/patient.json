@@ -1,0 +1,12 @@
+{
+  "firstName": "Sergey",
+  "lastName": "Ududenko",
+  "dateOfBirth": "27.01.1998",
+  "gender": "Male",
+  "height": "177",
+  "weight": "68",
+  "location": "Odessa",
+  "phoneNumber": "+380505123274",
+  "email": "ududenko.s98@gmail.com",
+  "password": "qwerty"
+}
