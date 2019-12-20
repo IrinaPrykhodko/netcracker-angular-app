@@ -1,0 +1,41 @@
+.edit {
+
+  width: 35%;
+  margin: 1% auto;
+
+  .edit-form {
+    button {
+      width: 100%;
+      margin-top: 4%;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  input {
+    margin-top: 2%;
+  }
+
+  .error-massage {
+    margin-top: -5%;
+    color: red;
+    font-size: 80%;
+  }
+
+  button:disabled,
+  button[disabled] {
+    background-color: #BDBDBD;
+    color: white;
+  }
+
+}

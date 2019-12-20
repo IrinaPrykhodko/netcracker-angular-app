@@ -1,0 +1,91 @@
+<div class="edit">
+
+  <form [formGroup]="editForm" class="edit-form">
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="firstName"
+          type = "firstName"
+          value = "{{patient.firstName}}"
+          placeholder="Enter your first name" required/>
+      </label>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="lastName"
+          type = "lastName"
+          value = "{{patient.lastName}}"
+          placeholder="Enter your last name" required/>
+      </label>
+    </mat-form-field>
+
+    <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
+    <p>Enter your date of birth</p>
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="dateOfBirth"
+          type = "Date"
+          value = "{{patient.dateOfBirth}}"/>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="height"
+          type = "number"
+          value = "{{patient.height}}"
+          placeholder="Enter your height" />
+      </label>
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="weight"
+          type = "number"
+          value = "{{patient.weight}}"
+          placeholder="Enter your weight" />
+      </label>
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="location"
+          value = "{{patient.location}}"
+          type = "location"
+          placeholder="Enter your location" />
+      </label>
+    </mat-form-field>
+
+    <mat-form-field color="primary">
+      <label>
+        <input
+          matInput
+          formControlName="email"
+          type = "email"
+          value = "{{patient.email}}"
+          placeholder="Enter your email" required/>
+      </label>
+    </mat-form-field>
+    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
+
+    <button [disabled]="firstName.invalid || lastName.invalid || email.invalid"
+            mat-raised-button (click)="submit()">Confirm
+    </button>
+
+  </form>
+</div>

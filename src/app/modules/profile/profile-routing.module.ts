@@ -8,6 +8,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {PurchasesComponent} from './components/purchases/purchases.component';
 import {AllMedicinesComponent} from './components/all-medicines/all-medicines.component';
 import {AccountComponent} from './components/account/account.component';
+import {EditComponent} from './components/account/components/edit/edit.component';
 
 
 const routes: Routes = [
@@ -46,7 +47,13 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: AccountComponent
+        component: AccountComponent,
+        children: [
+          {
+            path: 'edit',
+            component: EditComponent
+          }
+        ]
       }
     ]
   }

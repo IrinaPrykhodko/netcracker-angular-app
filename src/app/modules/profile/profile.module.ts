@@ -11,6 +11,8 @@ import { DoctorsComponent } from './components/doctors/doctors.component';
 import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
 import {ProfileRoutingModule} from './profile-routing.module';
 import { AccountComponent } from './components/account/account.component';
+import { EditComponent } from './components/account/components/edit/edit.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -24,11 +26,13 @@ import { AccountComponent } from './components/account/account.component';
     NotificationsComponent,
     DoctorsComponent,
     PrescriptionsComponent,
-    AccountComponent
+    AccountComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    SharedModule
   ]
 })
 export class ProfileModule { }
