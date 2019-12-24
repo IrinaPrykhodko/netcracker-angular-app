@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(JSON.parse(sessionStorage.getItem('registerUser')));
     this.loginForm = this.formBuilder.group({
       email: [this.user.email, [Validators.required, Validators.email]],
       password: [this.user.password, [Validators.required]]
@@ -34,6 +35,14 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }));
 
+  }
+
+  get registerUserEmail() {
+    if (sessionStorage.length !== 0) {
+      return JSON.parse(sessionStorage.getItem('registerUser')).email;
+    } else {
+      return '';
+    }
   }
 
   get email() {

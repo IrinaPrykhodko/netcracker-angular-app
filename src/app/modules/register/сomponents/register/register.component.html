@@ -3,93 +3,76 @@
   <form [formGroup]="registerForm" class="register-form">
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="firstName"
           type = "firstName"
           placeholder="Enter your first name" required/>
-      </label>
     </mat-form-field>
-
-    <p style="margin-top: 1%"  class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
+    <p class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="lastName"
           type = "lastName"
           placeholder="Enter your last name" required/>
-      </label>
     </mat-form-field>
-
     <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
-    <p>Enter your date of birth</p>
-    <mat-form-field color="primary">
-      <label>
+
+    <p class="p-date">Enter your date of birth</p>
+    <mat-form-field color="primary" class="mat-date">
         <input
           matInput
           formControlName="dateOfBirth"
           type = "Date"/>
-      </label>
     </mat-form-field>
 
-    <div style="margin-bottom: 4%" >
-    <label style="margin-right: 10%">
-      <input type="radio" value="Male" formControlName="gender">
+    <div class="radio-sex">
+    <label>
+      <input type="radio" value="MALE" formControlName="gender">
       <span>male</span>
     </label>
     <label>
-      <input type="radio" value="Female" formControlName="gender">
+      <input type="radio" value="FEMALE" formControlName="gender">
       <span>female</span>
     </label>
     </div>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="height"
           type = "number"
           placeholder="Enter your height" />
-      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="weight"
           type = "number"
           placeholder="Enter your weight" />
-      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="location"
-
           type = "location"
           placeholder="Enter your location" />
-      </label>
     </mat-form-field>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="email"
           type = "email"
           placeholder="Enter your email" required/>
-      </label>
     </mat-form-field>
-
     <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
 
-    <p>Enter your phone number</p>
+    <p class="p-phone-number">Enter your phone number *</p>
     <div class="phone">
       <ngx-intl-tel-input
         [preferredCountries]="preferredCountries"
@@ -111,35 +94,27 @@
     </div>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="password"
           type = "password"
           placeholder="Enter your password" required/>
-      </label>
     </mat-form-field>
     <p class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
 
     <mat-form-field color="primary">
-      <label>
         <input
           matInput
           formControlName="passwordConfirm"
           type = "password"
           placeholder="Confirm your password" required
           />
-      </label>
     </mat-form-field>
     <p class="error-massage" [hidden]="passwordConfirm.untouched || passwordConfirm.valid">* Confirm password is required</p>
 
-    <div *ngIf="registerForm.valid; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-      <button mat-raised-button (click)="submitForm()">Sign up</button>
-    </ng-template>
-    <ng-template #elseBlock>
-      <button disabled mat-raised-button>Sign up</button>
-    </ng-template>
+    <button [disabled]="registerForm.invalid"
+            mat-raised-button (click)="submitForm()">Sign up
+    </button>
 
   </form>
 </div>

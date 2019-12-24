@@ -4,6 +4,8 @@ import {RegisterService} from '../../../../services/register.service';
 import {Patient} from '../../../../models/patient';
 import {MyErrorStateMatcher} from '../../../../models/MyErrorStateMatcher';
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
+import { PhoneNumberUtil, PhoneNumber } from 'google-libphonenumber';
+
 
 @Component({
   selector: 'app-register',
@@ -36,46 +38,64 @@ export class RegisterComponent implements OnInit {
       weight: [this.patient.weight],
       location: [this.patient.location],
       email: [this.patient.email, [Validators.required, Validators.email]],
-      phoneNumber: [this.patient.phoneNumber, [Validators.required]],
+      phoneNumber: [this.patient.phoneNumber, [Validators.required], PhoneNumberUtil.getInsta],
       password: [this.patient.password, [Validators.required]],
       passwordConfirm: ['', [Validators.required]]
     }, {validator: this.checkPasswords});
   }
 
-  submitForm() {
-    console.log(this.registerForm.value);
-    this.registerService.register(this.registerForm.value)
-      .subscribe((userData) => {
-        console.log(userData);
-      }, (error => {
-        console.log(error);
-      }));
-
+  clearForm(registerForm: FormGroup) {
+    const clearRegisterForm = {
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      dateOfBirth: this.registerForm.value.dateOfBirth,
+      gender: this.registerForm.value.gender,
+      height: this.registerForm.value.height,
+      weight: this.registerForm.value.weight,
+      location: this.registerForm.value.location,
+      email: this.registerForm.value.email,
+      phoneNumber: this.registerForm.value.phoneNumber.dialCode + this.registerForm.value.phoneNumber.number,
+      password: this.registerForm.value.password
+    };
+    return clearRegisterForm;
   }
 
-  checkPasswords(group: FormGroup) {
+submitForm() {
+    console.log(this.clearForm(this.registerForm));
+    this.registerService.register(this.clearForm(this.registerForm))
+      .subscribe((userData) => {
+        console.log(userData);
+        sessionStorage.setItem('registerUser', JSON.stringify(userData));
+        window.location.href = 'login';
+      }, (error => {
+        console.log(error);
+        window.alert('Error');
+      }));
+  }
+
+checkPasswords(group: FormGroup) {
     const password = group.get('password').value;
     const passwordConfirm = group.get('passwordConfirm').value;
 
     return password === passwordConfirm ? null : { notSame: true };
   }
 
-  get email() {
+get email() {
     return this.registerForm.get('email');
   }
-  get password() {
+get password() {
     return this.registerForm.get('password');
   }
-  get firstName() {
+get firstName() {
     return this.registerForm.get('firstName');
   }
-  get lastName() {
+get lastName() {
     return this.registerForm.get('lastName');
   }
-  get phoneNumber() {
+get phoneNumber() {
     return this.registerForm.get('phoneNumber');
   }
-  get passwordConfirm() {
+get passwordConfirm() {
     return this.registerForm.get('passwordConfirm');
   }
 }
