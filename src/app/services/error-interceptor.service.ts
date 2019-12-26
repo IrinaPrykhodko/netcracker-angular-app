@@ -14,7 +14,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(catchError((error: HttpErrorResponse) => {
-        let errorMessage = '';
+        let errorMessage: string;
 
         if (error.error instanceof ErrorEvent) {
           errorMessage = `Error: ${error.error.message}`;
