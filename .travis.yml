@@ -16,5 +16,6 @@ notifications:
     recipients:
       - alex638000@gmail.com
       - ir.prikhodko@gmail.com
+      - ududenko.s98@gmail.com
     on_success: always
     on_failure: always

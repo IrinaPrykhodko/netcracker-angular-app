@@ -8,8 +8,8 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {PurchasesComponent} from './components/purchases/purchases.component';
 import {AllMedicinesComponent} from './components/all-medicines/all-medicines.component';
 import {AccountComponent} from './components/account/account.component';
-import {EditComponent} from "./components/account/components/edit/edit.component";
-import {ChangePasswordComponent} from "./components/account/components/change-password/change-password.component";
+import {EditComponent} from './components/account/components/edit/edit.component';
+import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
 
 const routes: Routes = [
   {
