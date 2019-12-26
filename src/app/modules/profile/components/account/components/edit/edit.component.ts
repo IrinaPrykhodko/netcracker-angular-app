@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Patient} from '../../../../../../models/patient';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PatientService} from '../../../../../../services/patient.service';
+import {PatientService} from "../../../../../../services/patient.service";
+import {Patient} from "../../../../../../models/patient";
 
 @Component({
   selector: 'app-edit',
@@ -19,15 +19,14 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
     this.editForm = this.formBuilder.group({
-      firstName: [this.patient.firstName, [Validators.required]],
-      lastName: [this.patient.lastName, [Validators.required]],
+      firstName: [this.patient.firstName],
+      lastName: [this.patient.lastName],
       dateOfBirth: [this.patient.dateOfBirth],
       gender: [this.patient.gender],
       height: [this.patient.height],
       weight: [this.patient.weight],
       location: [this.patient.location],
-      email: [this.patient.email, [Validators.required, Validators.email]],
-      phoneNumber: [this.patient.phoneNumber, [Validators.required]]
+      email: [this.patient.email, [Validators.email]],
     });
   }
 

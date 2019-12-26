@@ -9,11 +9,9 @@
           formControlName="firstName"
           type = "firstName"
           value = "{{patient.firstName}}"
-          placeholder="Enter your first name" required/>
+          placeholder="Enter your first name">
       </label>
     </mat-form-field>
-
-    <p class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
 
     <mat-form-field color="primary">
       <label>
@@ -22,11 +20,10 @@
           formControlName="lastName"
           type = "lastName"
           value = "{{patient.lastName}}"
-          placeholder="Enter your last name" required/>
+          placeholder="Enter your last name">
       </label>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
     <p>Enter your date of birth</p>
     <mat-form-field color="primary">
       <label>
@@ -78,12 +75,11 @@
           formControlName="email"
           type = "email"
           value = "{{patient.email}}"
-          placeholder="Enter your email" required/>
+          placeholder="Enter your email">
       </label>
     </mat-form-field>
-    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
 
-    <button [disabled]="firstName.invalid || lastName.invalid || email.invalid"
+    <button
             mat-raised-button (click)="submit()">Confirm
     </button>
 

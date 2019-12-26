@@ -1,5 +1,8 @@
-<div>
-  <div class="info">
+<div class = account>
+  <div mat-dialog-content class="account__modal">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="account__info">
     <h1 class="title">
     <p class="name">{{patient?.firstName}} </p>
     <p class="name">{{patient?.lastName}}</p>
@@ -14,11 +17,6 @@
       <p class="phone">Phone number: {{patient?.phoneNumber}}</p>
     </div>
   </div>
-  <nav>
-    <router-outlet></router-outlet>
-  </nav>
-  <div>
-    <button class="button" routerLink="/edit">Edit</button>
-    <button class="button" routerLink="/change-password">Change password</button>
-  </div>
+    <button class="button" routerLink="edit" routerLinkActive="active">Edit</button>
+    <button class="button" routerLink="change-password" routerLinkActive="active">Change password</button>
 </div>

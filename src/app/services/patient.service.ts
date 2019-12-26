@@ -14,6 +14,11 @@ export class PatientService {
   }
 
   editPatient(cread: Patient) {
-    return this.http.post('assets/patient.json', cread);
+    return this.http.post('https://med-kit.herokuapp.com/profile/edit', cread);
   }
+
+  changePassword(cread: Patient) {
+    return this.http.post('https://med-kit.herokuapp.com/profile/change-password', cread);
+  }
+
 }
