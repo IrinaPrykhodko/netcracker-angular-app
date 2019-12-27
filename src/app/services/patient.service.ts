@@ -13,7 +13,14 @@ export class PatientService {
     return this.http.get('assets/patient.json');
   }
 
-  editPatient(cread: Patient) {
-    return this.http.post('assets/patient.json', cread);
+  editPatient(cred: Patient) {
+    return this.http.put('https://med-kit.herokuapp.com/profile/edit', cred);
   }
+
+  changePassword(cred: Patient) {
+    return this.http.put('https://med-kit.herokuapp.com/profile/change-password', cred);
+  }
+
 }
+
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Patient} from '../../../../../../models/patient';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
+import {Patient} from '../../../../../../models/patient';
 
 @Component({
   selector: 'app-edit',
@@ -22,12 +22,11 @@ export class EditComponent implements OnInit {
       firstName: [this.patient.firstName, [Validators.required]],
       lastName: [this.patient.lastName, [Validators.required]],
       dateOfBirth: [this.patient.dateOfBirth],
-      gender: [this.patient.gender],
       height: [this.patient.height],
       weight: [this.patient.weight],
       location: [this.patient.location],
-      email: [this.patient.email, [Validators.required, Validators.email]],
-      phoneNumber: [this.patient.phoneNumber, [Validators.required]]
+      phoneNumber: [this.patient.phoneNumber, [Validators.required]],
+      email: [this.patient.email, [Validators.email, Validators.required]],
     });
   }
 
@@ -37,7 +36,7 @@ export class EditComponent implements OnInit {
   get firstName() {
     return this.editForm.get('firstName');
   }
-  get lastName() {
+  public get lastName() {
     return this.editForm.get('lastName');
   }
   get phoneNumber() {
