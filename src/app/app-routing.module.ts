@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './modules/login/components/login/login.component';
 import {RegisterComponent} from './modules/register/сomponents/register/register.component';
+import {AuthGuard} from "./helpers/auth-guard.service";
 
 const appRoutes: Routes = [
   { path: '',
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthGuard]
   }
 ];
 
