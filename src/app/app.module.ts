@@ -10,6 +10,7 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 import {LoginModule} from './modules/login/login.module';
 import {RegisterModule} from './modules/register/register.module';
 import {SharedModule} from './modules/shared/shared.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {SharedModule} from './modules/shared/shared.module';
     NgxIntlTelInputModule,
     LoginModule,
     RegisterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

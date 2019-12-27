@@ -13,6 +13,7 @@ import {ProfileRoutingModule} from './profile-routing.module';
 import { AccountComponent } from './components/account/account.component';
 import { EditComponent } from './components/account/components/edit/edit.component';
 import {SharedModule} from '../shared/shared.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -29,10 +30,11 @@ import {SharedModule} from '../shared/shared.module';
     AccountComponent,
     EditComponent
   ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        SharedModule,
+        NgxPaginationModule
+    ]
 })
 export class ProfileModule { }
