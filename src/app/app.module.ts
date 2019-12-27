@@ -10,7 +10,7 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 import {LoginModule} from './modules/login/login.module';
 import {RegisterModule} from './modules/register/register.module';
 import {SharedModule} from './modules/shared/shared.module';
-import {ErrorInterceptorService} from './services/error-interceptor.service';
+import {ErrorInterceptorService} from './helpers/error-interceptor.service';
 
 
 @NgModule({
