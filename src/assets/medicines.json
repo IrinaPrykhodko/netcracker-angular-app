@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "medicine 1",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 2,
+    "name": "medicine 2",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 3,
+    "name": "medicine 3",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 4,
+    "name": "medicine 4",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 5,
+    "name": "medicine 5",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 6,
+    "name": "medicine 6",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 7,
+    "name": "medicine 7",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 8,
+    "name": "medicine 8",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 9,
+    "name": "medicine 9",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  },
+  {
+    "id": 10,
+    "name": "medicine 10",
+    "manufacturer": "manufacturer",
+    "form": "form",
+    "contraindications": "contraindications",
+    "interaction": "interaction",
+    "packageContents": "package contents",
+    "admissionMethod": "admission method",
+    "description": "description"
+  }
+]

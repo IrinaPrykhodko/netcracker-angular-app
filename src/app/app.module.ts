@@ -10,6 +10,7 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 import {LoginModule} from './modules/login/login.module';
 import {RegisterModule} from './modules/register/register.module';
 import {SharedModule} from './modules/shared/shared.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 import {ErrorInterceptor} from './helpers/error-interceptor.service';
 import {TokenInterceptorService} from './helpers/token-interceptor.service';
 
@@ -27,7 +28,8 @@ import {TokenInterceptorService} from './helpers/token-interceptor.service';
     NgxIntlTelInputModule,
     LoginModule,
     RegisterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     {
