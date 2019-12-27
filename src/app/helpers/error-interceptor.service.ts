@@ -2,26 +2,30 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
-  handleError(error: HttpErrorResponse) {
+  handleError(err: HttpErrorResponse) {
     let errorMessage: string;
 
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${err.error.message}`;
     } else {
-      errorMessage = `Error status: ${error.status}`;
+      errorMessage = `Error status: ${err.status}`;
 
-      if (error.status === 500) {
+      if (err.status === 500) {
         alert('Sorry, try again later');
-        errorMessage += (`\nMessage: ${error.message}`);
+        errorMessage += (`\nMessage: ${err.message}`);
+      } else if (err.status === 401) {
+        this.authService.logout();
+        location.reload(true);
       }
     }
 
