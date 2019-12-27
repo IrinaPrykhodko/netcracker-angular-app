@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './modules/login/components/login/login.component';
-import {RegisterComponent} from './modules/register/сomponents/register/register.component';
+import {AuthGuard} from './helpers/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: '',
+  {
+    path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
@@ -19,7 +18,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -28,4 +28,5 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
