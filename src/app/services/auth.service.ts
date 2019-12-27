@@ -1,42 +1,47 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private currentUserTokenSubject: BehaviorSubject<string>;
-  private currentUserToken: Observable<string>;
-  private tokenKey = 'token';
+  private tokenSessionStorageKey = 'token';
+  public redirectUrl: string;
 
-  constructor(private http: HttpClient) {
-    this.currentUserTokenSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem(this.tokenKey)));
-    this.currentUserToken = this.currentUserTokenSubject.asObservable();
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
 
-  public get currentUserTokenValue(): string {
-    return this.currentUserTokenSubject.value;
+  getCurrentUserToken(): string {
+    return localStorage.getItem(this.tokenSessionStorageKey);
   }
 
   login(cred: User) {
-    return this.http.post('https://med-kit.herokuapp.com/login', cred)
-      .pipe(map(token => {
-        console.log(`Raw token: ${token}`);
-        const tokenAsString = JSON.stringify(token);
-        console.log(`String token: ${tokenAsString}`);
-        localStorage.setItem(this.tokenKey, tokenAsString);
-        this.currentUserTokenSubject.next(tokenAsString);
+    return this.http.post('https://med-kit.herokuapp.com/login', cred).pipe(
+      map(value => {
+        if (this.redirectUrl) {
+          this.router.navigate([this.redirectUrl]);
+          this.redirectUrl = null;
 
-        return tokenAsString;
+          return value;
+        }
       }));
   }
 
+  isUserLoggedIn(): boolean {
+    return this.getCurrentUserToken() !== null;
+  }
+
+  setUserToken(token: string) {
+    localStorage.setItem(this.tokenSessionStorageKey, token);
+  }
+
   logout() {
-    console.log(this.currentUserTokenValue);
-    localStorage.removeItem(this.tokenKey);
+    console.log(this.getCurrentUserToken());
+    localStorage.removeItem(this.tokenSessionStorageKey);
   }
 }
