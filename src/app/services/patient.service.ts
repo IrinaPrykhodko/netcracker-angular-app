@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Patient} from '../models/patient';
 
@@ -7,10 +7,11 @@ import {Patient} from '../models/patient';
 })
 export class PatientService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getPatient() {
-    return this.http.get('assets/patient.json');
+    return this.http.get('https://med-kit.herokuapp.com/profile/account');
   }
 
   editPatient(cred: Patient) {
