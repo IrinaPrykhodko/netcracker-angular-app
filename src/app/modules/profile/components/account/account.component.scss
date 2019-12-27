@@ -5,8 +5,6 @@
     position: absolute;
     width: 80%;
     height: 100%;
-    //background-color: rgba(0,0,0,0.5);
-
   }
 
   &__info{
@@ -29,22 +27,25 @@
       font-size: 40px;
     }
   }
-}
-.button {
-  background-color: #db6974;
-  border: none;
-  color: white;
-  padding: 5px 20px;
-  text-align: center;
-  font-size: 14px;
-  margin: 4px 2px;
-  opacity: 0.6;
-  transition: 0.3s;
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
-}
-.button:hover {
-  opacity: 1
+
+  button {
+    z-index: 10;
+    background-color: #BDBDBD;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 14px;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: 1
+  }
+
 }
 

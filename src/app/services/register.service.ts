@@ -9,7 +9,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(cread: User) {
-    return this.http.post('https://med-kit.herokuapp.com/register', cread);
+  register(cred: User) {
+    return this.http.post('https://med-kit.herokuapp.com/register', cred);
   }
 }

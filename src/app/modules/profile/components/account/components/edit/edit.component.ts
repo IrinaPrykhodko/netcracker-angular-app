@@ -19,14 +19,14 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
     this.editForm = this.formBuilder.group({
-      firstName: [this.patient.firstName],
-      lastName: [this.patient.lastName],
+      firstName: [this.patient.firstName, [Validators.required]],
+      lastName: [this.patient.lastName, [Validators.required]],
       dateOfBirth: [this.patient.dateOfBirth],
-      gender: [this.patient.gender],
       height: [this.patient.height],
       weight: [this.patient.weight],
       location: [this.patient.location],
-      email: [this.patient.email, [Validators.email]],
+      phoneNumber: [this.patient.phoneNumber, [Validators.required]],
+      email: [this.patient.email, [Validators.email, Validators.required]],
     });
   }
 
@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
   get firstName() {
     return this.editForm.get('firstName');
   }
-  get lastName() {
+  public get lastName() {
     return this.editForm.get('lastName');
   }
   get phoneNumber() {
