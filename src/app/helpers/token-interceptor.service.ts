@@ -22,6 +22,8 @@ export class TokenInterceptorService implements HttpInterceptor {
       });
     }
 
+    console.log(`token = "${token.toString()}"`);
+    console.log(`Request headers = "${req.headers.get('Authorization')}"`);
     return next.handle(req);
   }
 }

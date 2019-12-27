@@ -25,7 +25,9 @@ export class AuthService {
   login(cred: User) {
     return this.http.post('https://med-kit.herokuapp.com/login', cred)
       .pipe(map(token => {
+        console.log(`Raw token: ${token}`);
         const tokenAsString = JSON.stringify(token);
+        console.log(`String token: ${tokenAsString}`);
         localStorage.setItem(this.tokenKey, tokenAsString);
         this.currentUserTokenSubject.next(tokenAsString);
 
@@ -34,6 +36,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log(this.currentUserTokenValue);
     localStorage.removeItem(this.tokenKey);
   }
 }
