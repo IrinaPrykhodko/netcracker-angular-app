@@ -1,1 +1,28 @@
-<p>all-medicines works!</p>
+<div class="search">
+  <mat-form-field>
+    <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"/>
+  </mat-form-field>
+  <button mat-button (click)="onSearch()">Search</button>
+</div>
+
+<ul class="medicines">
+  <li *ngFor="let medicine of medicineList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+      [class.selected]="medicine === selectedMedicine"
+      (click)="onSelected(medicine)">
+    <span>{{medicine.name}}</span>
+    <span>{{medicine.manufacturer}}</span>
+    <button mat-raised-button >Add to purchase</button>
+  </li>
+</ul>
+
+<div class="medicine-information" *ngIf="selectedMedicine">
+  <h2>{{selectedMedicine.name}} | Information</h2>
+  <span>Form: {{selectedMedicine.form}}</span>
+  <span>Contraindications: {{selectedMedicine.contraindications}}</span>
+  <span>Interaction: {{selectedMedicine.interaction}}</span>
+  <span>Package contents: {{selectedMedicine.packageContents}}</span>
+  <span>Method of admission: {{selectedMedicine.admissionMethod}}</span>
+  <span>Description: {{selectedMedicine.description}}</span>
+</div>
+
+<pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
