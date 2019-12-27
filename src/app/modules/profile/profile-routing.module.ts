@@ -10,6 +10,7 @@ import {AllMedicinesComponent} from './components/all-medicines/all-medicines.co
 import {AccountComponent} from './components/account/account.component';
 import {EditComponent} from './components/account/components/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
+import {AuthGuard} from '../../helpers/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -23,39 +24,48 @@ const routes: Routes = [
       },
       {
         path: 'medicine-kit',
-        component: MedicineKitComponent
+        component: MedicineKitComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'doctors',
-        component: DoctorsComponent
+        component: DoctorsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'prescriptions',
-        component: PrescriptionsComponent
+        component: PrescriptionsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'notifications',
-        component: NotificationsComponent
+        component: NotificationsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'purchases',
-        component: PurchasesComponent
+        component: PurchasesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'all-medicines',
-        component: AllMedicinesComponent
+        component: AllMedicinesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'account',
         component: AccountComponent,
+        canActivate: [AuthGuard],
         children: [
           {
             path: 'edit',
-            component: EditComponent
+            component: EditComponent,
+            canActivate: [AuthGuard]
           },
           {
             path: 'change-password',
-            component: ChangePasswordComponent
+            component: ChangePasswordComponent,
+            canActivate: [AuthGuard]
           }
         ]
       }
