@@ -1,1 +1,45 @@
-<p>medicine-kit works!</p>
+<div class="search">
+  <mat-form-field>
+    <input matInput
+           [(ngModel)]="searchText"
+           type="search" name="search"
+           placeholder="Search"/>
+  </mat-form-field>
+  <button mat-button (click)="onSearch()">Search</button>
+</div>
+
+<ul class="medicine-instance">
+  <li *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+      [class.selected]="medicineInstance === selectedMedicineInstance"
+      (click)="onSelected(medicineInstance)">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span>{{medicineInstance.name}}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span>{{medicineInstance.manufacturer}}</span>
+            <span>{{medicineInstance.selfLife}}</span>
+            <span>{{medicineInstance.amount}}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="test">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="test">
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </li>
+</ul>
+
+<div class="medicine-instance-edit" *ngIf="selectedMedicineInstance">
+
+</div>
+
+<pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+
