@@ -1,85 +1,93 @@
-.medicine-instance {
-  margin: 5em 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
-.medicine-instance li {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EDEDED;
-  margin: 8px;
-  padding: 10px;
-  border-radius: 4px;
-  color: #757575;
-  button{
-    position: absolute;
-    right: 0px;
-    height: 100%;
-    margin-top: -10px;
-  }
-  ::ng-deep .mat-raised-button{
-    background: #757575;
-  }
-  span{
-    margin-right: 40px;
-  }
-}
-.medicine-instance li:hover {
-  color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
-}
-.medicine-kit li.selected {
-  background-color: #CFD8DC;
-  color: white;
-}
-.medicine-instance li.selected:hover {
-  background-color: #BBD8DC;
-  color: white;
+div{
+  z-index: 999;
 }
 
-::ng-deep .ngx-pagination {
-  margin-top: 2em;
-  .current {
-    background: #757575 !important;
+.add-modal {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+}
+.kit {
+  padding-top: 5%;
+
+  .medicine-instance {
+    list-style-type: none;
+    margin-top: 4%;
+  }
+
+  .medicine-instance li {
+    cursor: pointer;
+    position: relative;
+    margin: 4px;
+
+    &.expired ::ng-deep .mat-expansion-panel{
+      background: #bd6d6d;
+    }
+    &.expired ::ng-deep .mat-expansion-panel-header{
+      background: #bd6d6d;
+    }
+
+    span {
+      margin-right: 20%;
+    }
+  }
+
+  .mat-expansion-panel-header {
+    background-color: #777;
+  }
+
+  .mat-accordion {
+    background-color: #777;
+  }
+
+  .mat-accordion:hover {
+    background-color: #777;
+  }
+
+  ::ng-deep .ngx-pagination {
+    margin-top: 2em;
+
+    .current {
+      background: #757575 !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
   }
 }
-
-.medicine-information{
-  border-top: 1px solid #757575;
-  margin: 0 0.5em;
-  h2{
-    margin-top: 1em;
-  }
-  span{
-    display: flex;
-    flex-direction: column;
-    padding: 0.3em 0;
-  }
-}
-
-::ng-deep .mat-form-field-label{
-  color: #BDBDBD !important;
-}
-
-::ng-deep .mat-form-field-underline{
-  background-color: #BDBDBD !important;
-}
-
 .search{
   display: inline-block;
   position: absolute;
-  right: 1.5em;
+  right: 0.3em;
   button{
     margin-left: 0.5em;
   }
   ::ng-deep .mat-button{
     background: #EDEDED;
+    color: #757575;
   }
   ::ng-deep .mat-button:hover{
     background: #757575;
     color: white;
   }
 }
+.add{
+  margin-top: 0.5em;
+  display: inline;
+  position: absolute;
+  left: 17.2em;
+  button{
+    background: #EDEDED;
+    color: #757575;
+  }
+  button:hover{
+    background: #757575;
+    color: white;
+  }
+}
+

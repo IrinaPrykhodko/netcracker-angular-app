@@ -10,7 +10,6 @@ import {PatientService} from '../../../../../../services/patient.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
-
   public patient: Patient = new Patient();
   public changeForm: FormGroup;
 
