@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ProfileComponent} from './components/profile/profile.component';
 import {MedicineKitComponent} from './components/medicine-kit/medicine-kit.component';
 import {DoctorsComponent} from './components/doctors/doctors.component';
@@ -11,6 +11,7 @@ import {AccountComponent} from './components/account/account.component';
 import {EditComponent} from './components/account/components/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
 import {AuthGuard} from '../../helpers/auth-guard.service';
+import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'purchases/add',
+        component: AddPurchaseComponent
+      },
+      {
         path: 'all-medicines',
         component: AllMedicinesComponent,
         canActivate: [AuthGuard]
@@ -77,4 +82,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {
+}
