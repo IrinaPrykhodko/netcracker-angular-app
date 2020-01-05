@@ -54,6 +54,14 @@
     margin-left: 0.5em;
   }
 
+  ::ng-deep .mat-form-field-label{
+    color: #BDBDBD;
+  }
+
+  ::ng-deep .mat-form-field-underline{
+    background-color: #BDBDBD;
+  }
+
   ::ng-deep .mat-button {
     background: #EDEDED;
     color: #757575;
