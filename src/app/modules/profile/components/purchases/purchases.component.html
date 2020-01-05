@@ -1,1 +1,58 @@
-<p>purchases works!</p>
+<div>
+
+  <div class="add">
+    <button mat-button routerLink="add" routerLinkActive="active">Add</button>
+  </div>
+
+  <div class="search">
+    <mat-form-field>
+      <input matInput
+             [(ngModel)]="searchText"
+             type="search"
+             name="search"
+             placeholder="Search"/>
+    </mat-form-field>
+    <button mat-button (click)="onSearch()">Search</button>
+  </div>
+  <div class="purchase">
+    <ul class="purchase-items">
+      <li
+        *ngFor="let purchaseItem of purchaseItems | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+        [class.selected]="purchaseItem === selectedPurchaseItem"
+        (click)="onSelected(purchaseItem)">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <span>{{purchaseItem.medicine.name}}</span>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span>{{purchaseItem.medicine.manufacturer}}</span>
+                <span>{{purchaseItem.amount}}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <input
+                matInput
+                [(ngModel)]="purchaseItem.amount"
+                type="number"
+                value="{{purchaseItem.amount}}"
+                placeholder="Self life">
+            </mat-form-field>
+
+            <button
+              mat-raised-button (click)="submit()">Confirm
+            </button>
+
+            <button
+              mat-raised-button (click)="delete(purchaseItem.id)">Delete
+            </button>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </li>
+    </ul>
+
+    <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  </div>
+</div>

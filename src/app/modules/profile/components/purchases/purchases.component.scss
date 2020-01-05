@@ -1,0 +1,83 @@
+.purchase {
+  padding-top: 5%;
+
+  .purchase-items {
+    list-style-type: none;
+    margin-top: 4%;
+  }
+
+  .purchase-items li {
+    cursor: pointer;
+    position: relative;
+    margin: 5px 2% 5px 2%;
+
+    span {
+      margin-right: 20%;
+    }
+  }
+
+  .mat-expansion-panel-header {
+    background-color: #777;
+  }
+
+  .mat-accordion {
+    background-color: #777;
+  }
+
+  .mat-accordion:hover {
+    background-color: #777;
+  }
+
+  ::ng-deep .ngx-pagination {
+    margin-top: 2em;
+
+    .current {
+      background: #757575 !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
+  }
+}
+
+.search {
+  display: inline-block;
+  position: absolute;
+  right: 0.3em;
+
+  button {
+    margin-left: 0.5em;
+  }
+
+  ::ng-deep .mat-button {
+    background: #EDEDED;
+    color: #757575;
+  }
+
+  ::ng-deep .mat-button:hover {
+    background: #757575;
+    color: white;
+  }
+}
+
+.add {
+  margin-top: 0.5em;
+  display: inline-block;
+  position: absolute;
+  margin-left: 2%;
+
+  button {
+    background: #EDEDED;
+    color: #757575;
+  }
+
+  button:hover {
+    background: #757575;
+    color: white;
+  }
+}
