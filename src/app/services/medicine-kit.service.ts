@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MedicineInstance} from "../models/medicineInstance";
+import {MedicineInstance} from '../models/medicineInstance';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,12 @@ export class MedicineKitService {
   }
 
   addMedicineInstance(cred: MedicineInstance) {
-    return this.http.post('https://med-kit.herokuapp.com/profile/medicine-kit', cred);
+    return this.http.post('https://med-kit.herokuapp.com/profile/medicine-kit/add', cred);
   }
   deleteMedicineInstance(id: number) {
     return this.http.put('https://med-kit.herokuapp.com/profile/medicine-kit', id);
   }
 
-  editMedicineInstances(cred: MedicineInstance) {
+  editMedicineInstance(cred: MedicineInstance) {
     return this.http.put('https://med-kit.herokuapp.com/profile/medicine-kit', cred);  }
 }

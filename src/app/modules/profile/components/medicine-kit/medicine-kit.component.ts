@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicineKitService} from "../../../../services/medicine-kit.service";
-import {MedicineInstance} from "../../../../models/medicineInstance";
-import {map} from "rxjs/operators";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MedicineKitService} from '../../../../services/medicine-kit.service';
+import {MedicineInstance} from '../../../../models/medicineInstance';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-medicine-kit',
@@ -11,13 +11,11 @@ import {map} from "rxjs/operators";
 })
 export class MedicineKitComponent implements OnInit {
 
-  panelOpenState = false;
   medicineKit: MedicineInstance[];
   editForm: FormGroup;
-  medicineInstance: MedicineInstance;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
-    pageNumber: 0,
+    pageNumber: 1,
     size: 8
   };
   searchText: string;
@@ -71,7 +69,7 @@ export class MedicineKitComponent implements OnInit {
 
   submit() {
     console.log(this.editForm.value);
-    this.medicineKitService.editMedicineInstances(this.editForm.value)
+    this.medicineKitService.editMedicineInstance(this.editForm.value)
       .subscribe((userData) => {
         console.log(userData);
       }, (error => {
@@ -80,7 +78,7 @@ export class MedicineKitComponent implements OnInit {
   }
 
   delete(id: number) {
-    console.log();
+    console.log(id);
     this.medicineKitService.deleteMedicineInstance(id)
       .subscribe((userData) => {
         console.log(userData);

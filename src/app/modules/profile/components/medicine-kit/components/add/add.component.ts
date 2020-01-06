@@ -17,6 +17,8 @@ export class AddComponent implements OnInit {
               private medicineKitService: MedicineKitService) { }
 
   ngOnInit() {
+    console.log(this.medicineInstance);
+
     this.addForm = this.formBuilder.group({
       name: [this.medicineInstance.name, [Validators.required]],
       manufacturer: [this.medicineInstance.manufacturer, [Validators.required]],

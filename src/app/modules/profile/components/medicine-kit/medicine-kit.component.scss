@@ -1,12 +1,9 @@
-div{
-  z-index: 999;
-}
-
 .add-modal {
   position: absolute;
   width: 80%;
   height: 100%;
 }
+
 .kit {
   padding-top: 5%;
 
@@ -20,10 +17,15 @@ div{
     position: relative;
     margin: 4px;
 
-    &.expired ::ng-deep .mat-expansion-panel{
+    .mat-expansion-panel {
+      background: #757575;
+    }
+
+    &.expired ::ng-deep .mat-expansion-panel {
       background: #bd6d6d;
     }
-    &.expired ::ng-deep .mat-expansion-panel-header{
+
+    &.expired ::ng-deep .mat-expansion-panel-header {
       background: #bd6d6d;
     }
 
@@ -46,6 +48,7 @@ div{
 
   ::ng-deep .ngx-pagination {
     margin-top: 2em;
+    position: relative;
 
     .current {
       background: #757575 !important;
@@ -60,34 +63,40 @@ div{
     background-color: #BDBDBD !important;
   }
 }
-.search{
+
+button {
+  background: #EDEDED;
+  color: #757575;
+}
+
+button:hover {
+  background: #757575;
+  color: white;
+}
+
+::ng-deep .mat-form-field-label {
+  color: #BDBDBD !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: #BDBDBD !important;
+}
+
+.search {
   display: inline-block;
   position: absolute;
   right: 0.3em;
-  button{
+
+  button {
     margin-left: 0.5em;
   }
-  ::ng-deep .mat-button{
-    background: #EDEDED;
-    color: #757575;
-  }
-  ::ng-deep .mat-button:hover{
-    background: #757575;
-    color: white;
-  }
+
 }
-.add{
+
+.add {
   margin-top: 0.5em;
   display: inline;
   position: absolute;
   left: 17.2em;
-  button{
-    background: #EDEDED;
-    color: #757575;
-  }
-  button:hover{
-    background: #757575;
-    color: white;
-  }
 }
 
