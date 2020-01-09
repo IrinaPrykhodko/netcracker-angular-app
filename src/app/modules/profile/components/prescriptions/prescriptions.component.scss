@@ -1,0 +1,82 @@
+.prescriptions {
+  margin: 5em 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+
+}
+.prescriptions li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EDEDED;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 4px;
+  color: #757575;
+
+  ::ng-deep .mat-raised-button{
+    background: #757575;
+  }
+  span{
+    margin-right: 40px;
+  }
+}
+.prescriptions li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.prescriptions li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+.prescriptions li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+
+::ng-deep .ngx-pagination {
+  margin-top: 2em;
+  .current {
+    background: #757575 !important;
+  }
+}
+
+.prescriptionItem{
+  border-top: 1px solid #757575;
+  margin: 0 0.5em;
+  h2{
+    margin-top: 1em;
+  }
+  span{
+    display: flex;
+    flex-direction: column;
+    padding: 0.3em 0;
+  }
+}
+
+::ng-deep .mat-form-field-label{
+  color: #BDBDBD !important;
+}
+
+::ng-deep .mat-form-field-underline{
+  background-color: #BDBDBD !important;
+}
+
+.add{
+  display: inline-block;
+  position: absolute;
+  right: 1.5em;
+  button{
+    margin-left: 0.5em;
+  }
+  ::ng-deep .mat-button{
+    background: #EDEDED;
+  }
+  ::ng-deep .mat-button:hover{
+    background: #757575;
+    color: white;
+  }
+}
+
