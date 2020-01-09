@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineInstance} from '../../../../../../models/medicineInstance';
 import {MedicineKitService} from '../../../../../../services/medicine-kit.service';
@@ -14,7 +14,8 @@ export class AddComponent implements OnInit {
   public addForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private medicineKitService: MedicineKitService) { }
+              private medicineKitService: MedicineKitService) {
+  }
 
   ngOnInit() {
     console.log(this.medicineInstance);
@@ -24,7 +25,7 @@ export class AddComponent implements OnInit {
       manufacturer: [this.medicineInstance.manufacturer, [Validators.required]],
       selfLife: [this.medicineInstance.selfLife, [Validators.required]],
       amount: [this.medicineInstance.amount, [Validators.required]]
-    })
+    });
   }
 
   submit() {
@@ -40,12 +41,15 @@ export class AddComponent implements OnInit {
   get name() {
     return this.addForm.get('name');
   }
+
   get manufacturer() {
     return this.addForm.get('manufacturer');
   }
+
   get selfLife() {
     return this.addForm.get('selfLife');
   }
+
   get amount() {
     return this.addForm.get('amount');
   }
