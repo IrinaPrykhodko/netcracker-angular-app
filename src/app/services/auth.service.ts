@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class AuthService {
 
   private tokenSessionStorageKey = 'token';
-  public redirectUrl: string;
+  public redirectRoute = '/profile';
 
   constructor(private http: HttpClient,
               private router: Router) {
@@ -21,14 +21,16 @@ export class AuthService {
   }
 
   login(cred: User) {
-    return this.http.post('https://med-kit.herokuapp.com/login', cred).pipe(
-      map(value => {
-        if (this.redirectUrl) {
-          this.router.navigate([this.redirectUrl]);
-          this.redirectUrl = null;
+    return this.http.post('http://localhost:8080/login', cred)
+      .pipe(map(value => {
+        console.log(this.redirectRoute);
 
-          return value;
+        if (this.redirectRoute) {
+          this.router.navigate([this.redirectRoute]);
+          this.redirectRoute = null;
         }
+
+        return value;
       }));
   }
 
