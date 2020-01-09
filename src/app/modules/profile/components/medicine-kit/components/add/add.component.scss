@@ -1,0 +1,48 @@
+.add{
+  box-shadow: 0 20px 20px rgba(0,0,0,0.25), 0 15px 15px rgba(0,0,0,0.22);
+  width: 400px;
+  margin: 1% auto;
+  background-color: #fcfcfc;
+
+  .add-form {
+    button {
+      width: 100%;
+      margin-top: 4%;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
+  }
+
+  button:disabled,
+  button[disabled] {
+    background-color: #dbdbdb;
+    color: white;
+  }
+
+  mat-form-field {
+    padding-left: 1%;
+    width: 100%;
+  }
+
+  input {
+    margin: 2%;
+  }
+
+  error-massage {
+    margin-top: -5%;
+    color: red;
+    font-size: 80%;
+  }
+
+  button {
+    background-color: #BDBDBD;
+    color: white;
+  }
+
+}

@@ -16,6 +16,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {EditComponent} from './components/account/components/edit/edit.component';
 import { ChangePasswordComponent } from './components/account/components/change-password/change-password.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {AddComponent} from './components/medicine-kit/components/add/add.component';
+
 
 
 
@@ -31,14 +34,16 @@ import {MatDialogModule} from '@angular/material/dialog';
     PrescriptionsComponent,
     AccountComponent,
     EditComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddComponent
   ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    SharedModule,
-    MatDialogModule,
-    NgxPaginationModule
-  ]
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        SharedModule,
+        MatDialogModule,
+        NgxPaginationModule,
+        MatExpansionModule
+    ]
 })
 export class ProfileModule { }
