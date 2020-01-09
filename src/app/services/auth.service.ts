@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(cred: User) {
-    return this.http.post('http://localhost:8080/login', cred)
+    return this.http.post('https://med-kit.herokuapp.com/login', cred)
       .pipe(map(value => {
         console.log(this.redirectRoute);
 

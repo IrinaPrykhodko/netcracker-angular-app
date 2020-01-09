@@ -15,14 +15,14 @@ export class PurchaseService {
   }
 
   editPurchaseItem(cred: PurchaseItem) {
-    return this.http.put('http://localhost:8080/profile/purchases', cred);
+    return this.http.put('https://med-kit.herokuapp.com/profile/purchases', cred);
   }
 
   deletePurchaseItem(id: number) {
-    return this.http.put('http://localhost:8080/profile/purchases', id);
+    return this.http.put('https://med-kit.herokuapp.com/purchases', id);
   }
 
   addPurchaseItem(cred: PurchaseItem) {
-    return this.http.post('http://localhost:8080/profile/purchases/add', cred);
+    return this.http.post('https://med-kit.herokuapp.com/purchases/add', cred);
   }
 }
