@@ -12,7 +12,7 @@ export class AllMedicinesComponent implements OnInit {
   medicineList: Medicine[];
   selectedMedicine: Medicine;
   paginationOptions = {
-    pageNumber: 1,
+    pageNumber: 0,
     size: 8
   };
   searchText: string;

@@ -21,12 +21,13 @@ export class MedicineKitComponent implements OnInit {
   searchText: string;
 
   constructor(private medicineKitService: MedicineKitService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .pipe(map((data: MedicineInstance[]) => {
-        return data.map(item => this.checkDate(item))
+        return data.map(item => this.checkDate(item));
       }))
       .subscribe((data: MedicineInstance[]) => this.medicineKit = data);
   }
@@ -45,21 +46,22 @@ export class MedicineKitComponent implements OnInit {
     console.log(this.paginationOptions.pageNumber);
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .pipe(map((data: MedicineInstance[]) => {
-        return data.map(item => this.checkDate(item))
+        return data.map(item => this.checkDate(item));
       }))
       .subscribe((data: MedicineInstance[]) => this.medicineKit = data);
   }
-  checkDate(item: any){
-    if(new Date(item.selfLife) < new Date()){
+
+  checkDate(item: any) {
+    if (new Date(item.selfLife) < new Date()) {
       return {
         ...item,
-        isExpired:true
-      }
-    }else{
+        isExpired: true
+      };
+    } else {
       return {
         ...item,
-        isExpired:false
-      }
+        isExpired: false
+      };
     }
   }
 

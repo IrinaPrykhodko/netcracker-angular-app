@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {HttpClient} from '@angular/common/http';
 
@@ -7,7 +7,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class RegisterService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   register(cred: User) {
     return this.http.post('https://med-kit.herokuapp.com/register', cred);

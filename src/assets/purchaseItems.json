@@ -1,0 +1,152 @@
+[
+  {
+    "id": 10,
+    "medicine": {
+      "id": 100,
+      "name": "Medicine 10",
+      "manufacturer": "Manufactured by 10",
+      "productionForm": "Form №10",
+      "contraindications": "For 10 years old people",
+      "interactions": null,
+      "packageContent": "Contents 10 pills",
+      "takingMethod": "10 spoons before meal",
+      "description": "Med 10 description"
+    },
+    "amount": 10
+  },
+  {
+    "id": 11,
+    "medicine": {
+      "id": 121,
+      "name": "Medicine 11",
+      "manufacturer": "Manufactured by 11",
+      "productionForm": "Form №11",
+      "contraindications": "For 11 years old people",
+      "interactions": null,
+      "packageContent": "Contents 11 pills",
+      "takingMethod": "11 spoons before meal",
+      "description": "Med 11 description"
+    },
+    "amount": 11
+  },
+  {
+    "id": 12,
+    "medicine": {
+      "id": 144,
+      "name": "Medicine 12",
+      "manufacturer": "Manufactured by 12",
+      "productionForm": "Form №12",
+      "contraindications": "For 12 years old people",
+      "interactions": null,
+      "packageContent": "Contents 12 pills",
+      "takingMethod": "12 spoons before meal",
+      "description": "Med 12 description"
+    },
+    "amount": 12
+  },
+  {
+    "id": 13,
+    "medicine": {
+      "id": 169,
+      "name": "Medicine 13",
+      "manufacturer": "Manufactured by 13",
+      "productionForm": "Form №13",
+      "contraindications": "For 13 years old people",
+      "interactions": null,
+      "packageContent": "Contents 13 pills",
+      "takingMethod": "13 spoons before meal",
+      "description": "Med 13 description"
+    },
+    "amount": 13
+  },
+  {
+    "id": 14,
+    "medicine": {
+      "id": 196,
+      "name": "Medicine 14",
+      "manufacturer": "Manufactured by 14",
+      "productionForm": "Form №14",
+      "contraindications": "For 14 years old people",
+      "interactions": null,
+      "packageContent": "Contents 14 pills",
+      "takingMethod": "14 spoons before meal",
+      "description": "Med 14 description"
+    },
+    "amount": 14
+  },
+  {
+    "id": 15,
+    "medicine": {
+      "id": 225,
+      "name": "Medicine 15",
+      "manufacturer": "Manufactured by 15",
+      "productionForm": "Form №15",
+      "contraindications": "For 15 years old people",
+      "interactions": null,
+      "packageContent": "Contents 15 pills",
+      "takingMethod": "15 spoons before meal",
+      "description": "Med 15 description"
+    },
+    "amount": 15
+  },
+  {
+    "id": 16,
+    "medicine": {
+      "id": 256,
+      "name": "Medicine 16",
+      "manufacturer": "Manufactured by 16",
+      "productionForm": "Form №16",
+      "contraindications": "For 16 years old people",
+      "interactions": null,
+      "packageContent": "Contents 16 pills",
+      "takingMethod": "16 spoons before meal",
+      "description": "Med 16 description"
+    },
+    "amount": 16
+  },
+  {
+    "id": 17,
+    "medicine": {
+      "id": 289,
+      "name": "Medicine 17",
+      "manufacturer": "Manufactured by 17",
+      "productionForm": "Form №17",
+      "contraindications": "For 17 years old people",
+      "interactions": null,
+      "packageContent": "Contents 17 pills",
+      "takingMethod": "17 spoons before meal",
+      "description": "Med 17 description"
+    },
+    "amount": 17
+  },
+  {
+    "id": 18,
+    "medicine": {
+      "id": 324,
+      "name": "Medicine 18",
+      "manufacturer": "Manufactured by 18",
+      "productionForm": "Form №18",
+      "contraindications": "For 18 years old people",
+      "interactions": null,
+      "packageContent": "Contents 18 pills",
+      "takingMethod": "18 spoons before meal",
+      "description": "Med 18 description"
+    },
+    "amount": 18
+  },
+  {
+    "id": 19,
+    "medicine": {
+      "id": 361,
+      "name": "Medicine 19",
+      "manufacturer": "Manufactured by 19",
+      "productionForm": "Form №19",
+      "contraindications": "For 19 years old people",
+      "interactions": null,
+      "packageContent": "Contents 19 pills",
+      "takingMethod": "19 spoons before meal",
+      "description": "Med 19 description"
+    },
+    "amount": 19
+  }
+]
