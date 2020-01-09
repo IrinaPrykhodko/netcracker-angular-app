@@ -1,0 +1,45 @@
+<div class="add">
+
+  <form [formGroup]="addForm" class="add-form">
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Enter medicine name" required/>
+    </mat-form-field>
+    <p class="error-massage" [hidden]="name.untouched || name.valid">* Medicine name is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="manufacturer"
+        placeholder="Enter manufacturer" required
+      />
+    </mat-form-field>
+    <p class="error-massage" [hidden]="manufacturer.untouched || manufacturer.valid">* Manufacturer is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="selfLife"
+        placeholder="Enter self life" required
+      />
+    </mat-form-field>
+    <p class="error-massage" [hidden]="selfLife.untouched || selfLife.valid">* Self life is required</p>
+
+    <mat-form-field color="primary">
+      <input
+        matInput
+        formControlName="amount"
+        placeholder="Enter amount" required
+      />
+    </mat-form-field>
+    <p class="error-massage" [hidden]="amount.untouched || amount.valid">* Amount is required</p>
+
+    <button [disabled]="addForm.invalid"
+            mat-raised-button (click)="submit()">Confirm
+    </button>
+  </form>
+</div>
+

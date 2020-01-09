@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './components/account/components/change-
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AddPurchaseComponent } from './components/purchases/components/add-purhase/add-purchase.component';
+import {AddComponent} from './components/medicine-kit/components/add/add.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddPurchaseComponent } from './components/purchases/components/add-purh
     AccountComponent,
     EditComponent,
     ChangePasswordComponent,
+    AddComponent,
     AddPurchaseComponent,
   ],
   imports: [

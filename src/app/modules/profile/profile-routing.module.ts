@@ -12,6 +12,7 @@ import {EditComponent} from './components/account/components/edit/edit.component
 import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
 import {AuthGuard} from '../../helpers/auth-guard.service';
 import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
+import {AddComponent} from './components/medicine-kit/components/add/add.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,13 @@ const routes: Routes = [
       {
         path: 'medicine-kit',
         component: MedicineKitComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'add',
+            component: AddComponent
+          }
+        ]
       },
       {
         path: 'doctors',

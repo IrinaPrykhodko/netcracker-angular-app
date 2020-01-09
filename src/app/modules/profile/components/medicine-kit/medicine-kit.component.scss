@@ -1,0 +1,102 @@
+.add-modal {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+}
+
+.kit {
+  padding-top: 5%;
+
+  .medicine-instance {
+    list-style-type: none;
+    margin-top: 4%;
+  }
+
+  .medicine-instance li {
+    cursor: pointer;
+    position: relative;
+    margin: 4px;
+
+    .mat-expansion-panel {
+      background: #757575;
+    }
+
+    &.expired ::ng-deep .mat-expansion-panel {
+      background: #bd6d6d;
+    }
+
+    &.expired ::ng-deep .mat-expansion-panel-header {
+      background: #bd6d6d;
+    }
+
+    span {
+      margin-right: 20%;
+    }
+  }
+
+  .mat-expansion-panel-header {
+    background-color: #777;
+  }
+
+  .mat-accordion {
+    background-color: #777;
+  }
+
+  .mat-accordion:hover {
+    background-color: #777;
+  }
+
+  ::ng-deep .ngx-pagination {
+    margin-top: 2em;
+    position: relative;
+
+    .current {
+      background: #757575 !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: #BDBDBD !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    background-color: #BDBDBD !important;
+  }
+}
+
+button {
+  background: #EDEDED;
+  color: #757575;
+}
+
+button:hover {
+  background: #757575;
+  color: white;
+}
+
+::ng-deep .mat-form-field-label {
+  color: #BDBDBD !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: #BDBDBD !important;
+}
+
+.search {
+  display: inline-block;
+  position: absolute;
+  right: 0.3em;
+
+  button {
+    margin-left: 0.5em;
+  }
+
+}
+
+.add {
+  margin-top: 0.5em;
+  display: inline;
+  position: absolute;
+  left: 17.2em;
+}
+
