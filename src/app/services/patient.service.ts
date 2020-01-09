@@ -21,7 +21,6 @@ export class PatientService {
   changePassword(cred: Patient) {
     return this.http.put('https://med-kit.herokuapp.com/profile/change-password', cred);
   }
-
 }
 
 
