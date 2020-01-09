@@ -55,7 +55,6 @@ const routes: Routes = [
       {
         path: 'all-medicines',
         component: AllMedicinesComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: 'account',

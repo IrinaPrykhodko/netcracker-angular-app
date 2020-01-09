@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe((loginResponseItem: LoginResponseItem) => {
         console.log(loginResponseItem);
+
         this.authService.setUserToken(loginResponseItem.token);
       }, (error => {
         console.log(error);
