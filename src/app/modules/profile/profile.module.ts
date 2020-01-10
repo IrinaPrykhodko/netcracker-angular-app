@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,8 +17,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {EditComponent} from './components/account/components/edit/edit.component';
 import { ChangePasswordComponent } from './components/account/components/change-password/change-password.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AddPrescriptionComponent } from './components/prescriptions/components/add-prescription/add-prescription.component';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { AddPrescriptionComponent } from './components/prescriptions/components/
     ProfileRoutingModule,
     SharedModule,
     MatDialogModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatExpansionModule
   ],
   entryComponents: [
     PrescriptionsComponent,
