@@ -18,6 +18,8 @@ import {EditComponent} from './components/account/components/edit/edit.component
 import { ChangePasswordComponent } from './components/account/components/change-password/change-password.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AddPurchaseComponent } from './components/purchases/components/add-purhase/add-purchase.component';
+import {AddComponent} from './components/medicine-kit/components/add/add.component';
 import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
 
 
@@ -34,6 +36,8 @@ import {AddPrescriptionComponent} from './components/prescriptions/components/ad
     AccountComponent,
     EditComponent,
     ChangePasswordComponent,
+    AddComponent,
+    AddPurchaseComponent,
     AddPrescriptionComponent
   ],
   imports: [
