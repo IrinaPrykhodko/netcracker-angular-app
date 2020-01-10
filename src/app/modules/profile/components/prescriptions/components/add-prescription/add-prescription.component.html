@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Add prescription</h1>
+<div mat-dialog-content>
+  <p>Prescription name</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <p>Medicine id</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.medicineId">
+  </mat-form-field>
+  <p>Taking duration days</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.takingDurationDays">
+  </mat-form-field>
+  <p>Taking time</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.takingTime">
+  </mat-form-field>
+  <p>Start date</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.startDate">
+  </mat-form-field>
+  <p>End date</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.endDate">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</div>

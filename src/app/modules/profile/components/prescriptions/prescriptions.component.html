@@ -1,1 +1,33 @@
-<p>prescriptions works!</p>
+<div class="add">
+  <router-outlet></router-outlet>
+  <button (click)="openDialog()">Add prescription</button>
+</div>
+
+<ul class="prescriptions">
+
+  <li *ngFor="let prescription of prescriptionsList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+      [class.selected]="prescription === selectedPrescription"
+      (click)="onSelected(prescription)">
+    <span>{{prescription.name}}</span>
+    <span>{{prescription.date}}</span>
+    <span>{{prescription.doctorId}}</span>
+    <button mat-raised-button>Add reminder</button>
+    <button mat-raised-button (click)="onDelete(prescription)">Delete</button>
+  </li>
+</ul>
+
+<ng-container *ngIf="selectedPrescription">
+  <ul class="prescriptionItem">
+    <li *ngFor="let prescriptionItem of prescriptionItemList">
+      <h2>{{prescriptionItem.id}} | Information</h2>
+      <span>Medicine: {{prescriptionItem.medicineId}}</span>
+      <span>Start Date: {{prescriptionItem.startDate}}</span>
+      <span>End Date: {{prescriptionItem.endDate}}</span>
+      <span>Taking Duration days: {{prescriptionItem.takingDurationDays}}</span>
+      <span>Taking time: {{prescriptionItem.takingTime}}</span>
+      <span>Description: {{prescriptionItem.description}}</span>
+    </li>
+  </ul>
+</ng-container>
+
+<pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
