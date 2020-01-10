@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 2,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 3,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 4,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 5,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 6,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 7,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 8,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 9,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  },
+  {
+    "id": 10,
+    "name": "prescription 1",
+    "doctorId": "Doctor 1",
+    "date": "1"
+  }
+]
