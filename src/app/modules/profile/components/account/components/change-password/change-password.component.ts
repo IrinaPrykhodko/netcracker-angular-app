@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Patient} from '../../../../../../models/patient';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -13,8 +14,10 @@ export class ChangePasswordComponent implements OnInit {
   public patient: Patient = new Patient();
   public changeForm: FormGroup;
 
-  constructor( private formBuilder: FormBuilder,
-               private patientService: PatientService) { }
+  constructor(private formBuilder: FormBuilder,
+              private patientService: PatientService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
@@ -29,15 +32,17 @@ export class ChangePasswordComponent implements OnInit {
     const password = group.get('newPassword').value;
     const passwordConfirm = group.get('newPasswordConfirm').value;
 
-    return password === passwordConfirm ? null : { notSame: true };
+    return password === passwordConfirm ? null : {notSame: true};
   }
 
   get password() {
     return this.changeForm.get('password');
   }
+
   get newPassword() {
     return this.changeForm.get('newPassword');
   }
+
   get newPasswordConfirm() {
     return this.changeForm.get('newPasswordConfirm');
   }
@@ -46,6 +51,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.changeForm.value);
     this.patientService.changePassword(this.changeForm.value)
       .subscribe((userData) => {
+        this.router.navigate(['/profile/account']);
         console.log(userData);
       }, (error => {
         console.log(error);
