@@ -2,11 +2,11 @@ export class Medicine {
   id: number;
   name: string;
   manufacturer: string;
-  form: string;
+  productionForm: string;
   contraindications: string;
-  interaction: string;
-  packageContents: string;
-  admissionMethod: string;
+  interactions: string;
+  packageContent: string;
+  takingMethod: string;
   description: string;
   isExpired?: boolean;
 }
