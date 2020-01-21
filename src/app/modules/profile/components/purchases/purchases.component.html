@@ -2,6 +2,7 @@
 
   <div class="add">
     <button mat-button routerLink="add" routerLinkActive="active">Add</button>
+    <button mat-button (click)="onBuyButtonClick()">Buy everything!</button>
   </div>
 
   <div class="search">
@@ -53,6 +54,6 @@
       </li>
     </ul>
 
-    <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+    <pagination-controls (pageChange)="changePage($event)"></pagination-controls>
   </div>
 </div>

@@ -13,7 +13,7 @@ export class AllMedicinesComponent implements OnInit {
   selectedMedicine: Medicine;
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 20
   };
   searchText: string;
 
@@ -28,7 +28,7 @@ export class AllMedicinesComponent implements OnInit {
     this.selectedMedicine = medicine;
   }
 
-  pageChange(p: number) {
+  changePage(p: number) {
     this.paginationOptions.pageNumber = p;
     console.log(this.paginationOptions.pageNumber);
     this.getMedicines();

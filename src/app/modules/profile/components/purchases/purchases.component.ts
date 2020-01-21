@@ -25,8 +25,7 @@ export class PurchasesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.purchaseService.getPurchaseItems(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: PurchaseItem[]) => this.purchaseItems = data);
+    this.getPurchaseItems();
   }
 
   onSelected(purchaseItem: PurchaseItem) {
@@ -42,13 +41,12 @@ export class PurchasesComponent implements OnInit {
     console.log(this.searchText);
   }
 
-  pageChange(p: number) {
+  changePage(p: number) {
     this.paginationOptions.pageNumber = p;
 
     console.log(this.paginationOptions.pageNumber);
 
-    this.purchaseService.getPurchaseItems(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: PurchaseItem[]) => this.purchaseItems = data);
+    this.getPurchaseItems();
   }
 
   submit() {
@@ -65,11 +63,29 @@ export class PurchasesComponent implements OnInit {
   delete(id: number) {
     console.log(id);
 
-    this.purchaseService.deletePurchaseItem(id)
+    this.purchaseService.deletePurchaseItems([id])
       .subscribe(deletedPurchaseItem => {
         console.log(deletedPurchaseItem);
       }, (error => {
         console.log(error);
       }));
+  }
+
+  onBuyButtonClick() {
+    const idList = this.purchaseItems.map(value => value.id);
+
+    console.log('Buy: ' + idList);
+
+    this.purchaseService.buyPurchaseItems(idList)
+      .subscribe(approvedPurchaseIdList => {
+        console.log('Bought: ' + approvedPurchaseIdList);
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  private getPurchaseItems() {
+    this.purchaseService.getPurchaseItems(this.paginationOptions.pageNumber, this.paginationOptions.size)
+      .subscribe((data: PurchaseItem[]) => this.purchaseItems = data);
   }
 }
