@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Medicine} from '../models/medicine';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,6 @@ export class AllMedicinesService {
       params = params.set('query', searchText);
     }
 
-    console.log(params);
-
-    return this.http.get<Medicine[]>('http://localhost:8080/all-medicines', {params});
+    return this.http.get<Medicine[]>(`${environment.apiUrl}/all-medicines`, {params});
   }
 }
