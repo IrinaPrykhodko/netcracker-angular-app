@@ -21,8 +21,7 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Medicine[]) => this.medicineList = data);
+    this.getMedicines();
   }
 
   onSelected(medicine: Medicine): void {
@@ -32,17 +31,16 @@ export class AllMedicinesComponent implements OnInit {
   pageChange(p: number) {
     this.paginationOptions.pageNumber = p;
     console.log(this.paginationOptions.pageNumber);
-    this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Medicine[]) => this.medicineList = data);
+    this.getMedicines();
   }
 
   onSearch() {
-    this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, this.searchText)
-      .subscribe((data: Medicine[]) => {
-        this.medicineList = data;
-        console.log(this.searchText);
-        console.log(this.medicineList);
-        console.log(data);
-      });
+    this.getMedicines(this.searchText);
+  }
+
+
+  private getMedicines(searchText?: string) {
+    this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
+      .subscribe((data: Medicine[]) => this.medicineList = data);
   }
 }
