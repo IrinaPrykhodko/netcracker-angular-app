@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Medicine} from '../../../../models/medicine';
 import {AllMedicinesService} from '../../../../services/all-medicines.service';
 
@@ -17,7 +17,8 @@ export class AllMedicinesComponent implements OnInit {
   };
   searchText: string;
 
-  constructor(private medicinesService: AllMedicinesService) { }
+  constructor(private medicinesService: AllMedicinesService) {
+  }
 
   ngOnInit() {
     this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size)
@@ -36,7 +37,12 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   onSearch() {
-    console.log(this.searchText);
+    this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, this.searchText)
+      .subscribe((data: Medicine[]) => {
+        this.medicineList = data;
+        console.log(this.searchText);
+        console.log(this.medicineList);
+        console.log(data);
+      });
   }
-
 }
