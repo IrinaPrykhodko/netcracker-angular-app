@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
 import {Patient} from '../../../../../../models/patient';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -13,8 +14,10 @@ export class EditComponent implements OnInit {
   public patient: Patient = new Patient();
   public editForm: FormGroup;
 
-  constructor( private formBuilder: FormBuilder,
-               private patientService: PatientService) { }
+  constructor(private formBuilder: FormBuilder,
+              private patientService: PatientService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
@@ -33,12 +36,15 @@ export class EditComponent implements OnInit {
   get email() {
     return this.editForm.get('email');
   }
+
   get firstName() {
     return this.editForm.get('firstName');
   }
+
   public get lastName() {
     return this.editForm.get('lastName');
   }
+
   get phoneNumber() {
     return this.editForm.get('phoneNumber');
   }
@@ -48,6 +54,7 @@ export class EditComponent implements OnInit {
     this.patientService.editPatient(this.editForm.value)
       .subscribe((userData) => {
         console.log(userData);
+        this.router.navigate(['/profile/account']);
       }, (error => {
         console.log(error);
       }));

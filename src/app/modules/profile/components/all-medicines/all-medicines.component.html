@@ -6,23 +6,24 @@
 </div>
 
 <ul class="medicines">
-  <li *ngFor="let medicine of medicineList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
-      [class.selected]="medicine === selectedMedicine"
-      (click)="onSelected(medicine)">
+  <li
+    *ngFor="let medicine of medicineList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+    [class.selected]="medicine === selectedMedicine"
+    (click)="onSelected(medicine)">
     <span>{{medicine.name}}</span>
     <span>{{medicine.manufacturer}}</span>
-    <button mat-raised-button >Add to purchase</button>
+    <button mat-raised-button>Add to purchase</button>
   </li>
 </ul>
 
 <div class="medicine-information" *ngIf="selectedMedicine">
   <h2>{{selectedMedicine.name}} | Information</h2>
-  <span>Form: {{selectedMedicine.form}}</span>
+  <span>Form: {{selectedMedicine.productionForm}}</span>
   <span>Contraindications: {{selectedMedicine.contraindications}}</span>
-  <span>Interaction: {{selectedMedicine.interaction}}</span>
-  <span>Package contents: {{selectedMedicine.packageContents}}</span>
-  <span>Method of admission: {{selectedMedicine.admissionMethod}}</span>
+  <span>Interaction: {{selectedMedicine.interactions}}</span>
+  <span>Package contents: {{selectedMedicine.packageContent}}</span>
+  <span>Method of admission: {{selectedMedicine.takingMethod}}</span>
   <span>Description: {{selectedMedicine.description}}</span>
 </div>
 
-<pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+<pagination-controls (pageChange)="changePage($event)"></pagination-controls>

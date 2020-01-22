@@ -3,6 +3,7 @@ import {User} from '../models/user';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthService {
   }
 
   login(cred: User) {
-    return this.http.post('https://med-kit.herokuapp.com/login', cred)
+    return this.http.post(`${environment.apiUrl}/login`, cred)
       .pipe(map(value => {
         console.log(this.redirectRoute);
 
