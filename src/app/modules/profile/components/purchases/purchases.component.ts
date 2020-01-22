@@ -14,11 +14,10 @@ export class PurchasesComponent implements OnInit {
   selectedPurchaseItem: PurchaseItem;
   editForm: FormGroup;
   searchText: string;
-  medicineAmount: number;
 
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 20
   };
 
   constructor(private purchaseService: PurchaseService,
@@ -64,7 +63,7 @@ export class PurchasesComponent implements OnInit {
       }));
   }
 
-  delete(id: number) {
+  deletePurchaseItem(id: number) {
     console.log(id);
 
     this.purchaseService.deletePurchaseItems([id])
@@ -75,7 +74,7 @@ export class PurchasesComponent implements OnInit {
       }));
   }
 
-  onBuyButtonClick() {
+  buyPurchaseItems() {
     const idList = this.purchaseItems.map(value => value.id);
 
     console.log('Buy: ' + idList);

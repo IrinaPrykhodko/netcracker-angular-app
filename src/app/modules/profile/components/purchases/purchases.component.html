@@ -2,7 +2,7 @@
 
   <div class="add">
     <button mat-button routerLink="../all-medicines" routerLinkActive="active">Add</button>
-    <button mat-button (click)="onBuyButtonClick()">Buy everything!</button>
+    <button mat-button (click)="buyPurchaseItems()">Buy everything!</button>
   </div>
 
   <div class="search">
@@ -42,7 +42,7 @@
             </button>
 
             <button
-              mat-raised-button (click)="delete(purchaseItem.id)">Delete
+              mat-raised-button (click)="deletePurchaseItem(purchaseItem.id)">Delete
             </button>
           </mat-expansion-panel>
         </mat-accordion>
