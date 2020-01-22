@@ -101,3 +101,29 @@
   }
 }
 
+.amountInput {
+  position: absolute;
+  right: 370px;
+  max-width: 10%;
+
+  color: black;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.addToPurchaseButton {
+  position: absolute;
+  right: 200px;
+  width: auto;
+}
+
+.addPrescriptionButton {
+  position: absolute;
+  left: auto;
+  right: 15px;
+  width: auto;
+}
+
