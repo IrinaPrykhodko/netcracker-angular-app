@@ -1,7 +1,7 @@
 import {Medicine} from './medicine';
 
 export class PurchaseItem {
-  id: number;
+  id?: number;
   medicine: Medicine;
   amount: number;
 }

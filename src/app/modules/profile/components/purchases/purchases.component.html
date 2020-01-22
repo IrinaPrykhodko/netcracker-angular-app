@@ -1,7 +1,7 @@
 <div>
 
   <div class="add">
-    <button mat-button routerLink="add" routerLinkActive="active">Add</button>
+    <button mat-button routerLink="../all-medicines" routerLinkActive="active">Add</button>
     <button mat-button (click)="onBuyButtonClick()">Buy everything!</button>
   </div>
 
@@ -34,16 +34,11 @@
             </mat-expansion-panel-header>
 
             <mat-form-field>
-              <input
-                matInput
-                [(ngModel)]="purchaseItem.amount"
-                type="number"
-                value="{{purchaseItem.amount}}"
-                placeholder="Self life">
+              <input matInput #medicineAmount type="number" value="{{purchaseItem.amount}}">
             </mat-form-field>
 
             <button
-              mat-raised-button (click)="submit()">Confirm
+              mat-raised-button (click)="editPurchaseItem(medicineAmount.valueAsNumber)">Confirm
             </button>
 
             <button
