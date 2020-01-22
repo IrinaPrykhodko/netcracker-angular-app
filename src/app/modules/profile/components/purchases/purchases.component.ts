@@ -17,7 +17,7 @@ export class PurchasesComponent implements OnInit {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 20
   };
 
   constructor(private purchaseService: PurchaseService,
@@ -49,10 +49,13 @@ export class PurchasesComponent implements OnInit {
     this.getPurchaseItems();
   }
 
-  submit() {
-    console.log(this.editForm.value);
+  editPurchaseItem(amount: number) {
 
-    this.purchaseService.editPurchaseItem(this.editForm.value)
+    console.log(this.selectedPurchaseItem);
+    this.selectedPurchaseItem.amount = amount;
+    console.log(this.selectedPurchaseItem);
+
+    this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
       .subscribe(editedPurchaseItem => {
         console.log(editedPurchaseItem);
       }, (error => {
@@ -60,7 +63,7 @@ export class PurchasesComponent implements OnInit {
       }));
   }
 
-  delete(id: number) {
+  deletePurchaseItem(id: number) {
     console.log(id);
 
     this.purchaseService.deletePurchaseItems([id])
@@ -71,7 +74,7 @@ export class PurchasesComponent implements OnInit {
       }));
   }
 
-  onBuyButtonClick() {
+  buyPurchaseItems() {
     const idList = this.purchaseItems.map(value => value.id);
 
     console.log('Buy: ' + idList);
@@ -79,7 +82,17 @@ export class PurchasesComponent implements OnInit {
     this.purchaseService.buyPurchaseItems(idList)
       .subscribe(approvedPurchaseIdList => {
         console.log('Bought: ' + approvedPurchaseIdList);
+        this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
+          .subscribe(value => {
+            alert('Purchase items successfully bought!');
+            console.log(value);
+          }, error => {
+            alert('Could not remove bought purchase items. Try again');
+            console.log(error);
+          });
+
       }, error => {
+        alert('Could not buy purchase items. Try again');
         console.log(error);
       });
   }

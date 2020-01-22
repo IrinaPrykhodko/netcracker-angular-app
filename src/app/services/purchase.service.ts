@@ -20,8 +20,16 @@ export class PurchaseService {
     return this.http.get<PurchaseItem[]>(`${environment.apiUrl}/purchases`, {params});
   }
 
-  editPurchaseItem(cred: PurchaseItem) {
-    return this.http.put(`${environment.apiUrl}/purchases`, cred);
+  editPurchaseItem(purchaseItem: PurchaseItem) {
+    const body = {
+      id: purchaseItem.id,
+      medicineId: purchaseItem.medicine.id,
+      amount: purchaseItem.amount
+    };
+
+    console.log(body);
+
+    return this.http.put(`${environment.apiUrl}/purchases`, body);
   }
 
   deletePurchaseItems(idList: number[]) {
@@ -44,7 +52,12 @@ export class PurchaseService {
     return this.http.get<number[]>(`${environment.purchaseApiUrl}/buy`, {params});
   }
 
-  addPurchaseItem(cred: PurchaseItem) {
-    return this.http.post(`${environment.apiUrl}/purchases`, cred);
+  addPurchaseItem(purchaseItem: PurchaseItem) {
+    const body = {
+      medicineId: purchaseItem.medicine.id,
+      amount: purchaseItem.amount
+    };
+
+    return this.http.post(`${environment.apiUrl}/purchases`, body);
   }
 }

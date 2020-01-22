@@ -12,7 +12,13 @@
     (click)="onSelected(medicine)">
     <span>{{medicine.name}}</span>
     <span>{{medicine.manufacturer}}</span>
-    <button mat-raised-button>Add to purchase</button>
+    <div class="buttons">
+      <input matInput #medicineAmount type="number" placeholder="amount">
+      <button mat-raised-button class="addToPurchaseButton"
+              (click)="addMedicineToPurchase(medicineAmount.valueAsNumber)">Add to purchase
+      </button>
+      <button mat-raised-button>Add to prescription</button>
+    </div>
   </li>
 </ul>
 
