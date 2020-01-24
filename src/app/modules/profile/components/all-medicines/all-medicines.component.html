@@ -1,8 +1,13 @@
 <div class="search">
   <mat-form-field>
-    <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"/>
+    <input matInput #searchTextInput type="search" name="search" placeholder="Search"/>
   </mat-form-field>
-  <button mat-button (click)="findMedicines()">Search</button>
+  <button mat-button (click)="findMedicines(searchTextInput.value)">Search</button>
+</div>
+
+<div class="searchResultHeader" *ngIf="searchText">
+  <h4>Search result for {{searchText}}</h4>
+  <button mat-raised-button (click)="clearSearchText()">Clear</button>
 </div>
 
 <ul class="medicines">

@@ -34,23 +34,20 @@ export class AllMedicinesComponent implements OnInit {
 
   changePage(p: number) {
     this.paginationOptions.pageNumber = p - 1;
-    console.log(this.paginationOptions.pageNumber);
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
+
+    console.log(`Page ${this.paginationOptions.pageNumber}`);
     console.log(`Need ${requiredNumberOfMedicines} medicines. Have ${this.medicineList.length}`);
 
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
       this.medicineList.pop();
 
-      if (this.searchText) {
-        console.log('paging and searching');
-        this.getMedicines(this.searchText);
-      } else {
-        this.getMedicines();
-      }
+      this.getMedicines(this.searchText);
     }
   }
 
-  findMedicines() {
+  findMedicines(searchText: string) {
+    this.searchText = searchText;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;
 
@@ -80,5 +77,13 @@ export class AllMedicinesComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+  }
+
+  clearSearchText() {
+    this.searchText = undefined;
+    this.medicineList.length = 0;
+    this.paginationOptions.pageNumber = 0;
+
+    this.getMedicines();
   }
 }
