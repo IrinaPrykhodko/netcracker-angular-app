@@ -13,11 +13,12 @@ export class AllMedicinesComponent implements OnInit {
 
   medicineList: Medicine[];
   selectedMedicine: Medicine;
+  searchText: string;
+
   paginationOptions = {
     pageNumber: 0,
-    size: 20
+    size: 4,
   };
-  searchText: string;
 
   constructor(private medicinesService: AllMedicinesService,
               private purchaseService: PurchaseService) {
@@ -32,18 +33,35 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   changePage(p: number) {
-    this.paginationOptions.pageNumber = p;
+    this.paginationOptions.pageNumber = p - 1;
     console.log(this.paginationOptions.pageNumber);
-    this.getMedicines();
+    const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
+    console.log(`Need ${requiredNumberOfMedicines} medicines. Have ${this.medicineList.length}`);
+
+    if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
+      this.medicineList.pop();
+
+      if (this.searchText) {
+        console.log('paging and searching');
+        this.getMedicines(this.searchText);
+      } else {
+        this.getMedicines();
+      }
+    }
   }
 
-  onSearch() {
+  findMedicines() {
+    this.medicineList.length = 0;
+    this.paginationOptions.pageNumber = 0;
+
     this.getMedicines(this.searchText);
   }
 
   private getMedicines(searchText?: string) {
     this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
-      .subscribe((data: Medicine[]) => this.medicineList = data);
+      .subscribe((data: Medicine[]) => {
+        this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
+      });
   }
 
   addMedicineToPurchase(amount: number) {
