@@ -13,7 +13,6 @@ export class PurchasesComponent implements OnInit {
   purchaseItems: PurchaseItem[];
   selectedPurchaseItem: PurchaseItem;
   editForm: FormGroup;
-  searchText: string;
 
   paginationOptions = {
     pageNumber: 0,
@@ -37,8 +36,8 @@ export class PurchasesComponent implements OnInit {
     });
   }
 
-  onSearch() {
-    console.log(this.searchText);
+  onSearch(searchText: string) {
+    console.log(searchText);
   }
 
   changePage(p: number) {
@@ -50,14 +49,13 @@ export class PurchasesComponent implements OnInit {
   }
 
   editPurchaseItem(amount: number) {
-
-    console.log(this.selectedPurchaseItem);
     this.selectedPurchaseItem.amount = amount;
-    console.log(this.selectedPurchaseItem);
 
     this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
       .subscribe(editedPurchaseItem => {
         console.log(editedPurchaseItem);
+
+        this.ngOnInit();
       }, (error => {
         console.log(error);
       }));
@@ -69,6 +67,8 @@ export class PurchasesComponent implements OnInit {
     this.purchaseService.deletePurchaseItems([id])
       .subscribe(deletedPurchaseItem => {
         console.log(deletedPurchaseItem);
+
+        this.ngOnInit();
       }, (error => {
         console.log(error);
       }));
@@ -85,7 +85,8 @@ export class PurchasesComponent implements OnInit {
         this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
           .subscribe(value => {
             alert('Purchase items successfully bought!');
-            console.log(value);
+
+            this.ngOnInit();
           }, error => {
             alert('Could not remove bought purchase items. Try again');
             console.log(error);

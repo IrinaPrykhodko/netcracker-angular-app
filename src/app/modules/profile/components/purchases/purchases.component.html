@@ -7,13 +7,9 @@
 
   <div class="search">
     <mat-form-field>
-      <input matInput
-             [(ngModel)]="searchText"
-             type="search"
-             name="search"
-             placeholder="Search"/>
+      <input matInput #searchText type="search" placeholder="Search"/>
     </mat-form-field>
-    <button mat-button (click)="onSearch()">Search</button>
+    <button mat-button (click)="onSearch(searchText.value)">Search</button>
   </div>
   <div class="purchase">
     <ul class="purchase-items">

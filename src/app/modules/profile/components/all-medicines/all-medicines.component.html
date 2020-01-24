@@ -1,11 +1,11 @@
 <div class="search">
   <mat-form-field>
-    <input matInput #searchTextInput type="search" name="search" placeholder="Search"/>
+    <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"/>
   </mat-form-field>
-  <button mat-button (click)="findMedicines(searchTextInput.value)">Search</button>
+  <button mat-button (click)="findMedicines()">Search</button>
 </div>
 
-<div class="searchResultHeader" *ngIf="searchText">
+<div class="searchResultHeader" *ngIf="isSearching">
   <h4>Search result for {{searchText}}</h4>
   <button mat-raised-button (click)="clearSearchText()">Clear</button>
 </div>
@@ -25,6 +25,10 @@
   </li>
 </ul>
 
+<pagination-controls (pageChange)="changePage($event)"
+                     maxSize="">
+</pagination-controls>
+
 <div class="medicine-information" *ngIf="selectedMedicine">
   <h2>{{selectedMedicine.name}} | Information</h2>
   <span>Form: {{selectedMedicine.productionForm}}</span>
@@ -35,6 +39,4 @@
   <span>Description: {{selectedMedicine.description}}</span>
 </div>
 
-<pagination-controls (pageChange)="changePage($event)"
-                     maxSize="">
-</pagination-controls>
+

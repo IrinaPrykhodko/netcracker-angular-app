@@ -14,6 +14,7 @@ export class AllMedicinesComponent implements OnInit {
   medicineList: Medicine[];
   selectedMedicine: Medicine;
   searchText: string;
+  isSearching = false;
 
   paginationOptions = {
     pageNumber: 0,
@@ -37,7 +38,6 @@ export class AllMedicinesComponent implements OnInit {
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
     console.log(`Page ${this.paginationOptions.pageNumber}`);
-    console.log(`Need ${requiredNumberOfMedicines} medicines. Have ${this.medicineList.length}`);
 
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
       this.medicineList.pop();
@@ -46,8 +46,8 @@ export class AllMedicinesComponent implements OnInit {
     }
   }
 
-  findMedicines(searchText: string) {
-    this.searchText = searchText;
+  findMedicines() {
+    this.isSearching = true;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;
 
@@ -74,6 +74,7 @@ export class AllMedicinesComponent implements OnInit {
     this.purchaseService.addPurchaseItem(purchaseItem)
       .subscribe(value => {
         console.log(value);
+        alert('Purchase item created');
       }, error => {
         console.log(error);
       });
@@ -83,6 +84,7 @@ export class AllMedicinesComponent implements OnInit {
     this.searchText = undefined;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;
+    this.isSearching = false;
 
     this.getMedicines();
   }
