@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Prescription} from '../../../../models/prescription';
 import {PrescriptionsService} from '../../../../services/prescriptions.service';
 import {PrescriptionItem} from '../../../../models/prescriptionItem';
@@ -14,19 +14,19 @@ import {AddPrescriptionData} from '../../../../models/AddPrescriptionData';
 })
 export class PrescriptionsComponent implements OnInit {
 
-  prescriptionsList: Prescription[];
+  prescriptions: Prescription[];
   user = User;
   selectedPrescription: Prescription;
-  prescriptionItemList: PrescriptionItem[];
+  prescriptionItems: PrescriptionItem[];
   paginationOptions = {
-    pageNumber: 1,
+    pageNumber: 0,
     size: 8
   };
   addPrescriptionData: AddPrescriptionData;
 
 
-
-  constructor(private prescriptionsService: PrescriptionsService, public dialog: MatDialog) { }
+  constructor(private prescriptionsService: PrescriptionsService, public dialog: MatDialog) {
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddPrescriptionComponent, {
@@ -42,20 +42,21 @@ export class PrescriptionsComponent implements OnInit {
       this.addPrescriptionData.takingTime = res.takingTime;
       this.addPrescriptionData.startDate = res.startDate;
       this.addPrescriptionData.endDate = res.endDate;
+
       this.prescriptionsService.postPrescription(this.addPrescriptionData);
     });
   }
 
   ngOnInit() {
     this.prescriptionsService.getPrescriptions(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Prescription[]) => this.prescriptionsList = data);
+      .subscribe((data: Prescription[]) => this.prescriptions = data);
   }
 
   onSelected(prescription: Prescription): void {
     this.selectedPrescription = prescription;
     // tslint:disable-next-line:max-line-length
     this.prescriptionsService.getPrescriptionItems(this.paginationOptions.pageNumber, this.paginationOptions.size, this.selectedPrescription.id)
-      .subscribe((data: PrescriptionItem[]) => this.prescriptionItemList = data);
+      .subscribe((data: PrescriptionItem[]) => this.prescriptionItems = data);
   }
 
   onDelete(prescription: Prescription): void {
@@ -67,7 +68,7 @@ export class PrescriptionsComponent implements OnInit {
     this.paginationOptions.pageNumber = p;
     console.log(this.paginationOptions.pageNumber);
     this.prescriptionsService.getPrescriptions(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Prescription[]) => this.prescriptionsList = data);
+      .subscribe((data: Prescription[]) => this.prescriptions = data);
   }
 
 }

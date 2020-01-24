@@ -5,12 +5,12 @@
 
 <ul class="prescriptions">
 
-  <li *ngFor="let prescription of prescriptionsList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+  <li *ngFor="let prescription of prescriptions | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
       [class.selected]="prescription === selectedPrescription"
       (click)="onSelected(prescription)">
     <span>{{prescription.name}}</span>
     <span>{{prescription.date}}</span>
-    <span>{{prescription.doctorId}}</span>
+    <span>{{prescription.doctor.id}}</span>
     <button mat-raised-button>Add reminder</button>
     <button mat-raised-button (click)="onDelete(prescription)">Delete</button>
   </li>
@@ -18,9 +18,9 @@
 
 <ng-container *ngIf="selectedPrescription">
   <ul class="prescriptionItem">
-    <li *ngFor="let prescriptionItem of prescriptionItemList">
+    <li *ngFor="let prescriptionItem of prescriptionItems">
       <h2>{{prescriptionItem.id}} | Information</h2>
-      <span>Medicine: {{prescriptionItem.medicineId}}</span>
+      <span>Medicine: {{prescriptionItem.medicine.id}}</span>
       <span>Start Date: {{prescriptionItem.startDate}}</span>
       <span>End Date: {{prescriptionItem.endDate}}</span>
       <span>Taking Duration days: {{prescriptionItem.takingDurationDays}}</span>

@@ -1,9 +1,15 @@
+import {Medicine} from './medicine';
+import {Prescription} from './prescription';
+
 export class PrescriptionItem {
   id: number;
-  medicineId: number;
-  endDate: any;
+  medicine: Medicine;
+  startDate: Date;
+  endDate: Date;
   takingDurationDays: number;
-  takingTime: any;
-  startDate: any;
+  takingTime: string;
   description: string;
+  prescription: Prescription;
+  isReminderEnabled: boolean;
+  dosage: number;
 }

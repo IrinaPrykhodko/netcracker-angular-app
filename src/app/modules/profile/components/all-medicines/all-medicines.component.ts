@@ -13,11 +13,13 @@ export class AllMedicinesComponent implements OnInit {
 
   medicineList: Medicine[];
   selectedMedicine: Medicine;
+  searchText: string;
+  isSearching = false;
+
   paginationOptions = {
     pageNumber: 0,
-    size: 20
+    size: 4,
   };
-  searchText: string;
 
   constructor(private medicinesService: AllMedicinesService,
               private purchaseService: PurchaseService) {
@@ -32,18 +34,31 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   changePage(p: number) {
-    this.paginationOptions.pageNumber = p;
-    console.log(this.paginationOptions.pageNumber);
-    this.getMedicines();
+    this.paginationOptions.pageNumber = p - 1;
+    const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
+
+    console.log(`Page ${this.paginationOptions.pageNumber}`);
+
+    if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
+      this.medicineList.pop();
+
+      this.getMedicines(this.searchText);
+    }
   }
 
-  onSearch() {
+  findMedicines() {
+    this.isSearching = true;
+    this.medicineList.length = 0;
+    this.paginationOptions.pageNumber = 0;
+
     this.getMedicines(this.searchText);
   }
 
   private getMedicines(searchText?: string) {
     this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
-      .subscribe((data: Medicine[]) => this.medicineList = data);
+      .subscribe((data: Medicine[]) => {
+        this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
+      });
   }
 
   addMedicineToPurchase(amount: number) {
@@ -59,8 +74,18 @@ export class AllMedicinesComponent implements OnInit {
     this.purchaseService.addPurchaseItem(purchaseItem)
       .subscribe(value => {
         console.log(value);
+        alert('Purchase item created');
       }, error => {
         console.log(error);
       });
+  }
+
+  clearSearchText() {
+    this.searchText = undefined;
+    this.medicineList.length = 0;
+    this.paginationOptions.pageNumber = 0;
+    this.isSearching = false;
+
+    this.getMedicines();
   }
 }

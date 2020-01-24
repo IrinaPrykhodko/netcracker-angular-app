@@ -12,10 +12,14 @@ export class PurchaseService {
   constructor(private http: HttpClient) {
   }
 
-  getPurchaseItems(page: number, size: number): Observable<PurchaseItem[]> {
-    const params = new HttpParams()
+  getPurchaseItems(page: number, size: number, searchText?: string): Observable<PurchaseItem[]> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (searchText) {
+      params = params.set('query', searchText);
+    }
 
     return this.http.get<PurchaseItem[]>(`${environment.apiUrl}/purchases`, {params});
   }

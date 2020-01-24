@@ -1,6 +1,8 @@
+import {Doctor} from './doctor';
+
 export class Prescription {
   id: number;
   name: string;
-  doctorId: string;
-  date: any;
+  doctor: Doctor;
+  date: Date;
 }
