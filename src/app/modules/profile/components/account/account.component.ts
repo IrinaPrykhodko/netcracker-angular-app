@@ -38,7 +38,9 @@ export class AccountComponent implements OnInit {
     });
 
     this.dialogRefEdit.afterClosed().subscribe(result => {
-      this.patient = result;
+      if (result) {
+        this.patient = result;
+      }
     });
   }
 
