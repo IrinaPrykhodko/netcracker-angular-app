@@ -8,7 +8,8 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  private isLoading;
+
+  public isLoading;
 
   constructor(private patientService: PatientService) {
   }
