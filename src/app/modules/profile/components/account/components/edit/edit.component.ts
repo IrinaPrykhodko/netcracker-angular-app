@@ -60,12 +60,15 @@ export class EditComponent implements OnInit {
     console.log(this.editForm.value);
 
     this.patientService.editPatient(this.editForm.value)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
       .subscribe((userData) => {
-        console.log(userData);
-        this.dialogRef.close(userData);
+        this.patientService.getPatient()
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.dialogRef.close(userData);
+            })
+          )
+          .subscribe();
       }, (error => {
         console.log(error);
       }));
