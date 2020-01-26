@@ -1,6 +1,9 @@
 <div class="login">
-
+  <div class="login__title">
+    <h2>Login</h2>
+  </div>
   <form [formGroup]="loginForm" class="login-form">
+    <app-spinner *ngIf="isLoading"></app-spinner>
 
     <mat-form-field color="primary">
 
@@ -14,7 +17,7 @@
 
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
+    <p class="error-massage" [hidden]="email.valid || email.untouched">* Email is incorrect</p>
 
     <mat-form-field color="primary">
 
