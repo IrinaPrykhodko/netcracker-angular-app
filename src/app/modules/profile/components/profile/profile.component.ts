@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PatientService} from '../../../../services/patient.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  private isLoading;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private patientService: PatientService) {
   }
 
+  ngOnInit() {
+    this.isLoading = true;
+
+    this.patientService.getPatient()
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe();
+  }
 }
