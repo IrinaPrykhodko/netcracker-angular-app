@@ -30,17 +30,15 @@ export class AccountComponent implements OnInit {
         this.patient = data;
         this.isLoading = false;
       });
-
-    if (this.dialogRefEdit) {
-      this.dialogRefEdit.afterClosed().subscribe(result => {
-        this.patient = result;
-      });
-    }
   }
 
   editUser() {
     this.dialogRefEdit = this.dialog.open(EditComponent, {
       data: {patient: this.patient},
+    });
+
+    this.dialogRefEdit.afterClosed().subscribe(result => {
+      this.patient = result;
     });
   }
 
