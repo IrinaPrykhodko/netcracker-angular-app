@@ -1,5 +1,8 @@
 <div class="edit">
-
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="edit__title">
+    <h3>Edit user</h3>
+  </div>
   <form [formGroup]="editForm" class="edit-form">
 
     <mat-form-field color="primary">
@@ -7,8 +10,6 @@
         <input
           matInput
           formControlName="firstName"
-          [(ngModel)]="patient.firstName"
-          value="{{patient.firstName}}"
           placeholder="Enter your first name">
       </label>
     </mat-form-field>
@@ -20,8 +21,6 @@
         <input
           matInput
           formControlName="lastName"
-          [(ngModel)]="patient.lastName"
-          value="{{patient.lastName}}"
           placeholder="Enter your last name">
       </label>
     </mat-form-field>
@@ -34,9 +33,8 @@
         <input
           matInput
           formControlName="dateOfBirth"
-          [(ngModel)]="patient.dateOfBirth"
           type="Date"
-          value="{{patient.dateOfBirth}}"/>
+        />
       </label>
     </mat-form-field>
 
@@ -45,9 +43,7 @@
         <input
           matInput
           formControlName="height"
-          [(ngModel)]="patient.height"
           type="number"
-          value="{{patient.height}}"
           placeholder="Enter your height"/>
       </label>
     </mat-form-field>
@@ -57,9 +53,7 @@
         <input
           matInput
           formControlName="weight"
-          [(ngModel)]="patient.weight"
           type="number"
-          value="{{patient.weight}}"
           placeholder="Enter your weight"/>
       </label>
     </mat-form-field>
@@ -69,8 +63,6 @@
         <input
           matInput
           formControlName="location"
-          [(ngModel)]="patient.location"
-          value="{{patient.location}}"
           type="location"
           placeholder="Enter your location"/>
       </label>
@@ -81,9 +73,7 @@
         <input
           matInput
           formControlName="phoneNumber"
-          [(ngModel)]="patient.phoneNumber"
           type="email"
-          value="{{patient.phoneNumber}}"
           pattern="[+][0-9]{12}"
           placeholder="Enter your phone number">
       </label>
@@ -96,9 +86,7 @@
         <input
           matInput
           formControlName="email"
-          [(ngModel)]="patient.email"
           type="email"
-          value="{{patient.email}}"
           placeholder="Enter your email">
       </label>
     </mat-form-field>
