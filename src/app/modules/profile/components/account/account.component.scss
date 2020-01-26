@@ -1,49 +1,53 @@
 .account {
-  &__modal {
-    position: absolute;
-    width: 80%;
-    height: 100%;
+  position: relative;
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+
+    button + button {
+      margin-left: 1rem;
+    }
   }
 
-  &__info{
-    font-family: 'Varela Round';
-    color: #777;
-    text-decoration: none;
-    transition: all 0.40s;
-    padding: 2%;
-    h1{
+  &__info {
+    display: flex;
+
+    &-title {
+      width: 100%;
       text-align: center;
+      margin-bottom: 1.5rem;
     }
 
-    p{
-      font-size: 24px;
+    &-table {
+      padding-right: 1.5rem;
+      flex-grow: 1;
     }
 
-    .name{
-      display: inline;
-      padding-top: 5px;
-      font-size: 40px;
+    &-image {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfHt0Za4GXm56N5KYpNOhQHL3sU1UCdd8zkol-x35zIV525FYN");
+      background-position: center;
+      background-size: contain;
+    }
+
+    &-row {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-top: 1px solid #EAEAEA;
+
+      &:last-child {
+        border-bottom: 1px solid #EAEAEA;
+      }
+
+      &-value {
+        margin-left: 1.5rem;
+        font-weight: bold;
+      }
     }
   }
-
-  button {
-
-    background-color: #BDBDBD;
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    text-align: center;
-    font-size: 14px;
-    margin: 4px 2px;
-    opacity: 0.6;
-    transition: 0.3s;
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  button:hover {
-    opacity: 1
-  }
-
 }
-

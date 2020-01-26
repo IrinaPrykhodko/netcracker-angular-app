@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
 import {Patient} from '../../../../../../models/patient';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit',

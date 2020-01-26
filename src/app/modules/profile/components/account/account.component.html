@@ -1,22 +1,43 @@
-<div class = account>
-  <div mat-dialog-content class="account__modal">
-    <router-outlet></router-outlet>
-  </div>
+<div class=account>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <h1 class="account__info-title">
+    <span class="name">{{patient?.firstName}} {{patient?.lastName}}</span>
+  </h1>
   <div class="account__info">
-    <h1 class="title">
-    <p class="name">{{patient?.firstName}} </p>
-    <p class="name">{{patient?.lastName}}</p>
-    </h1>
-    <div class="param">
-      <p class="date">Date of birth: {{patient?.dateOfBirth}}</p>
-      <p class="gender">Gender: {{patient?.gender}}</p>
-      <p class="dimensions">Height: {{patient?.height}} </p>
-      <p class="dimensions">Weight: {{patient?.weight}}</p>
-      <p class="location">Location: {{patient?.location}}</p>
-      <p class="email">Email: {{patient?.email}}</p>
-      <p class="phone">Phone number: {{patient?.phoneNumber}}</p>
+    <div class="account__info-table">
+      <div class="account__info-row">
+        <div class="account__info-row-title">Date of birth:</div>
+        <div class="account__info-row-value">{{patient?.dateOfBirth}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Gender</div>
+        <div class="account__info-row-value">{{patient?.gender}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Height</div>
+        <div class="account__info-row-value">{{patient?.height}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Weight</div>
+        <div class="account__info-row-value">{{patient?.weight}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Location</div>
+        <div class="account__info-row-value">{{patient?.location}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Email</div>
+        <div class="account__info-row-value">{{patient?.email}}</div>
+      </div>
+      <div class="account__info-row">
+        <div class="account__info-row-title">Phone number</div>
+        <div class="account__info-row-value">{{patient?.phoneNumber}}</div>
+      </div>
     </div>
+    <div class="account__info-image"></div>
   </div>
-    <button routerLink="edit" routerLinkActive="active">Edit</button>
-    <button routerLink="change-password" routerLinkActive="active">Change password</button>
+  <div class="account__buttons">
+    <button mat-raised-button (click)="editUser()">Edit</button>
+    <button mat-raised-button (click)="changePassword()">Change password</button>
+  </div>
 </div>
