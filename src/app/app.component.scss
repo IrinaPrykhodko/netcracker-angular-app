@@ -1,0 +1,19 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__footer {
+    margin-top: auto;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+    color: white;
+  }
+
+  &__content {
+    padding: 1.5rem 0;
+  }
+}

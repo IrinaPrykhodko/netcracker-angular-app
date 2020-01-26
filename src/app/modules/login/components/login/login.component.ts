@@ -3,6 +3,7 @@ import {User} from 'src/app/models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../services/auth.service';
 import {LoginResponseItem} from '../../../../models/loginResponseItem';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   public user: User = new User();
   public loginForm: FormGroup;
+  public isLoading;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -29,7 +31,12 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     console.log(this.loginForm.value);
+
+    this.isLoading = true;
     this.authService.login(this.loginForm.value)
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe((loginResponseItem: LoginResponseItem) => {
         console.log(loginResponseItem);
 

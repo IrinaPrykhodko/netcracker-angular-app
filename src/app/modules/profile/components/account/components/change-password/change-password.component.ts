@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Patient} from '../../../../../../models/patient';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
-import {Router} from '@angular/router';
+import {finalize} from 'rxjs/operators';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password',
@@ -11,20 +11,19 @@ import {Router} from '@angular/router';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  public patient: Patient = new Patient();
+  public isLoading;
   public changeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
-              private router: Router) {
+              public dialogRef: MatDialogRef<ChangePasswordComponent>) {
   }
 
   ngOnInit() {
-    this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
     this.changeForm = this.formBuilder.group({
-      password: [this.patient.password, [Validators.required]],
-      newPassword: [this.patient.password, [Validators.required]],
-      newPasswordConfirm: [this.patient.dateOfBirth, [Validators.required]]
+      password: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
+      newPasswordConfirm: ['', [Validators.required]]
     }, {validator: this.checkPasswords});
   }
 
@@ -49,12 +48,14 @@ export class ChangePasswordComponent implements OnInit {
 
   submit() {
     console.log(this.changeForm.value);
+    this.isLoading = true;
     this.patientService.changePassword(this.changeForm.value)
-      .subscribe((userData) => {
-        this.router.navigate(['/profile/account']);
-        console.log(userData);
-      }, (error => {
-        console.log(error);
-      }));
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.dialogRef.close();
+        })
+      )
+      .subscribe();
   }
 }

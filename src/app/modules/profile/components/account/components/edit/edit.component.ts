@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
 import {Patient} from '../../../../../../models/patient';
-import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit',
@@ -13,24 +14,29 @@ export class EditComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public editForm: FormGroup;
+  public isLoading;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { patient: Patient },
+              private formBuilder: FormBuilder,
               private patientService: PatientService,
-              private router: Router) {
+              public dialogRef: MatDialogRef<EditComponent>) {
   }
 
   ngOnInit() {
-    this.patientService.getPatient().subscribe((data: Patient) => this.patient = data);
     this.editForm = this.formBuilder.group({
-      firstName: [this.patient.firstName, [Validators.required]],
-      lastName: [this.patient.lastName, [Validators.required]],
-      dateOfBirth: [this.patient.dateOfBirth],
-      height: [this.patient.height],
-      weight: [this.patient.weight],
-      location: [this.patient.location],
-      phoneNumber: [this.patient.phoneNumber, [Validators.required]],
-      email: [this.patient.email, [Validators.email, Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      dateOfBirth: [''],
+      height: [''],
+      weight: [''],
+      location: [''],
+      phoneNumber: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
     });
+
+    this.patient = this.data.patient;
+
+    this.editForm.patchValue({...this.patient});
   }
 
   get email() {
@@ -50,11 +56,19 @@ export class EditComponent implements OnInit {
   }
 
   submit() {
+    this.isLoading = true;
     console.log(this.editForm.value);
+
     this.patientService.editPatient(this.editForm.value)
       .subscribe((userData) => {
-        console.log(userData);
-        this.router.navigate(['/profile/account']);
+        this.patientService.getPatient()
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+              this.dialogRef.close(userData);
+            })
+          )
+          .subscribe();
       }, (error => {
         console.log(error);
       }));

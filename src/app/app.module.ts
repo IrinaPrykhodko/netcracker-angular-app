@@ -29,7 +29,7 @@ import {TokenInterceptorService} from './helpers/token-interceptor.service';
     LoginModule,
     RegisterModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     {

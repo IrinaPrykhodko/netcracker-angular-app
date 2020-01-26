@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
-
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {RouterModule} from '@angular/router';
+import {SpinnerComponent} from './components/spinner/spinner.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [HeaderComponent, FooterComponent, SpinnerComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -17,7 +21,9 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
     MatInputModule,
     FormsModule,
     NgxIntlTelInputModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,
@@ -26,7 +32,12 @@ import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
     MatInputModule,
     FormsModule,
     CommonModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    HeaderComponent,
+    FooterComponent,
+    SpinnerComponent,
+    MatMenuModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

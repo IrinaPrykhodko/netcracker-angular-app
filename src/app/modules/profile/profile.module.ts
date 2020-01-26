@@ -48,7 +48,9 @@ import {AddPrescriptionComponent} from './components/prescriptions/components/ad
   ],
   entryComponents: [
     PrescriptionsComponent,
-    AddPrescriptionComponent
+    AddPrescriptionComponent,
+    ChangePasswordComponent,
+    EditComponent
   ]
 })
 export class ProfileModule {

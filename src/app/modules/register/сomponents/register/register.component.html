@@ -1,7 +1,9 @@
 <div class="register">
-
+  <div class="register__title">
+    <h2>Register</h2>
+  </div>
   <form [formGroup]="registerForm" class="register-form">
-
+    <app-spinner *ngIf="isLoading"></app-spinner>
     <mat-form-field color="primary">
         <input
           matInput

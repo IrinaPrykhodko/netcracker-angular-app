@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RegisterService} from '../../../../services/register.service';
 import {Patient} from '../../../../models/patient';
 import {MyErrorStateMatcher} from '../../../../models/MyErrorStateMatcher';
-import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
-import { PhoneNumberUtil, PhoneNumber } from 'google-libphonenumber';
+import {CountryISO, SearchCountryField, TooltipLabel} from 'ngx-intl-tel-input';
+import {PhoneNumberUtil} from 'google-libphonenumber';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class RegisterComponent implements OnInit {
   public patient: Patient = new Patient();
   public registerForm: FormGroup;
   public matcher = new MyErrorStateMatcher();
+  public isLoading;
+
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
   TooltipLabel = TooltipLabel;
@@ -25,8 +28,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private registerService: RegisterService
-
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -60,9 +63,13 @@ export class RegisterComponent implements OnInit {
     return clearRegisterForm;
   }
 
-submitForm() {
+  submitForm() {
+    this.isLoading = true;
     console.log(this.clearForm(this.registerForm));
     this.registerService.register(this.clearForm(this.registerForm))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe((userData) => {
         console.log(userData);
         sessionStorage.setItem('registerUser', JSON.stringify(userData));
@@ -73,29 +80,34 @@ submitForm() {
       }));
   }
 
-checkPasswords(group: FormGroup) {
+  checkPasswords(group: FormGroup) {
     const password = group.get('password').value;
     const passwordConfirm = group.get('passwordConfirm').value;
 
-    return password === passwordConfirm ? null : { notSame: true };
+    return password === passwordConfirm ? null : {notSame: true};
   }
 
-get email() {
+  get email() {
     return this.registerForm.get('email');
   }
-get password() {
+
+  get password() {
     return this.registerForm.get('password');
   }
-get firstName() {
+
+  get firstName() {
     return this.registerForm.get('firstName');
   }
-get lastName() {
+
+  get lastName() {
     return this.registerForm.get('lastName');
   }
-get phoneNumber() {
+
+  get phoneNumber() {
     return this.registerForm.get('phoneNumber');
   }
-get passwordConfirm() {
+
+  get passwordConfirm() {
     return this.registerForm.get('passwordConfirm');
   }
 }
