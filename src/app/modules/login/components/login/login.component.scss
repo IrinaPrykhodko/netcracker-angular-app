@@ -1,12 +1,19 @@
 .login {
-
   width: 300px;
   margin: 12% auto;
 
   .login-form {
+    position: relative;
+
     button {
       width: 100%;
       margin-top: 2%;
+    }
+  }
+
+  &__title {
+    h2 {
+      text-align: center;
     }
   }
 
@@ -17,11 +24,11 @@
     align-items: center;
   }
 
-  ::ng-deep .mat-form-field-label{
+  ::ng-deep .mat-form-field-label {
     color: #BDBDBD !important;
   }
 
-  ::ng-deep .mat-form-field-underline{
+  ::ng-deep .mat-form-field-underline {
     background-color: #BDBDBD !important;
   }
 

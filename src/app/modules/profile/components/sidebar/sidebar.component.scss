@@ -6,8 +6,8 @@
 *:before,
 *:after {
   box-sizing: inherit;
-  padding: 0%;
-  margin: 0%;
+  padding: 0;
+  margin: 0;
   letter-spacing: 1.2px;
 }
 
@@ -34,7 +34,7 @@
     animation: line 1.0s;
   }
 
-  &:hover a , .active {
+  &:hover a, .active {
     color: #db6974;
   }
 }

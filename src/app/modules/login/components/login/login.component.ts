@@ -3,7 +3,7 @@ import {User} from 'src/app/models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../services/auth.service';
 import {LoginResponseItem} from '../../../../models/loginResponseItem';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
