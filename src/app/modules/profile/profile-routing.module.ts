@@ -8,8 +8,6 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {PurchasesComponent} from './components/purchases/purchases.component';
 import {AllMedicinesComponent} from './components/all-medicines/all-medicines.component';
 import {AccountComponent} from './components/account/account.component';
-import {EditComponent} from './components/account/components/edit/edit.component';
-import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
 import {AuthGuard} from '../../helpers/auth-guard.service';
 import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
@@ -21,7 +19,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'medicine-kit',
+        redirectTo: 'account',
         pathMatch: 'full'
       },
       {
@@ -66,19 +64,7 @@ const routes: Routes = [
       {
         path: 'account',
         component: AccountComponent,
-        canActivate: [AuthGuard],
-        children: [
-          {
-            path: 'edit',
-            component: EditComponent,
-            canActivate: [AuthGuard]
-          },
-          {
-            path: 'change-password',
-            component: ChangePasswordComponent,
-            canActivate: [AuthGuard]
-          }
-        ]
+        canActivate: [AuthGuard]
       }
     ]
   }
