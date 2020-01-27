@@ -15,7 +15,7 @@ export class MedicineKitComponent implements OnInit {
   editForm: FormGroup;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
-    pageNumber: 1,
+    pageNumber: 0,
     size: 8
   };
   searchText: string;
@@ -42,7 +42,7 @@ export class MedicineKitComponent implements OnInit {
   }
 
   pageChange(p: number) {
-    this.paginationOptions.pageNumber = p;
+    this.paginationOptions.pageNumber = p - 1;
     console.log(this.paginationOptions.pageNumber);
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .pipe(map((data: MedicineInstance[]) => {

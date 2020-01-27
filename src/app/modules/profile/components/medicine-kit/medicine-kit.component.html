@@ -20,7 +20,7 @@
 <div class="kit">
   <ul class="medicine-instance">
     <li
-      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
       [ngClass]="{
             'selected': medicineInstance === selectedMedicineInstance,
             'expired': medicineInstance.isExpired
