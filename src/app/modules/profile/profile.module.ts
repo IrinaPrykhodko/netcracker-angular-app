@@ -20,6 +20,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
 import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -38,14 +39,15 @@ import {AddPrescriptionComponent} from './components/prescriptions/components/ad
     AddPurchaseComponent,
     AddPrescriptionComponent
   ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    SharedModule,
-    MatDialogModule,
-    NgxPaginationModule,
-    MatExpansionModule
-  ],
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        SharedModule,
+        MatDialogModule,
+        NgxPaginationModule,
+        MatExpansionModule,
+        MatCheckboxModule
+    ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
