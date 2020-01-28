@@ -26,8 +26,11 @@ export class PrescriptionService {
     return this.http.get(`${environment.apiUrl}/prescriptions/${prescriptionId}/items`);
   }
 
-  deletePrescription(prescription: Prescription) {
-    return this.http.delete('assets/prescriptions.json?id=' + prescription.id);
+  deletePrescription(id: number) {
+    const params = new HttpParams()
+      .set('id', id.toString());
+
+    return this.http.delete(`${environment.apiUrl}/prescriptions`, {params});
 
   }
 

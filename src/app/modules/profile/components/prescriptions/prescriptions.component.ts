@@ -40,14 +40,23 @@ export class PrescriptionsComponent implements OnInit {
     });
   }
 
+  deletePrescription(id: number) {
+    this.isLoading = true;
+
+    this.prescriptionsService.deletePrescription(id)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe(value => {
+        const index = this.prescriptionStruct.findIndex(element => element.prescription.id === id);
+
+        if (index) {
+          this.prescriptionStruct.splice(index, 1);
+        }
+      });
+  }
+
   ngOnInit() {
     this.getPrescriptions();
   }
-
-  onDelete(prescription: Prescription): void {
-    this.prescriptionsService.deletePrescription(prescription);
-  }
-
 
   changePage(p: number) {
     this.paginationOptions.pageNumber = p - 1;
