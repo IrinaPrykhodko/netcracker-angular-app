@@ -5,6 +5,7 @@ import {PrescriptionItem} from '../../../../models/prescriptionItem';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {finalize} from 'rxjs/operators';
 import {AddPrescriptionComponent} from './components/add-prescription/add-prescription.component';
+import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
 
 @Component({
   selector: 'app-prescriptions',
@@ -15,7 +16,8 @@ export class PrescriptionsComponent implements OnInit {
 
   selectedPrescription: Prescription;
   public isLoading;
-  public dialogRef: MatDialogRef<AddPrescriptionComponent>;
+  public addPrescriptionDialogRef: MatDialogRef<AddPrescriptionComponent>;
+  public addItemDialogRed: MatDialogRef<AddPrescriptionItemComponent>;
 
   prescriptionStruct: {
     prescription: Prescription,
@@ -31,12 +33,23 @@ export class PrescriptionsComponent implements OnInit {
               private dialog: MatDialog) {
   }
 
+  ngOnInit() {
+    this.getPrescriptions();
+  }
+
   addPrescription(): void {
-    this.dialogRef = this.dialog.open(AddPrescriptionComponent);
-    this.dialogRef.afterClosed().subscribe(value => {
+    this.addPrescriptionDialogRef = this.dialog.open(AddPrescriptionComponent);
+
+    this.addPrescriptionDialogRef.afterClosed().subscribe(value => {
       if (value) {
         this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
       }
+    });
+  }
+
+  addPrescriptionItem(prescription: Prescription) {
+    this.addItemDialogRed = this.dialog.open(AddPrescriptionItemComponent, {
+      data: {prescription}
     });
   }
 
@@ -52,10 +65,6 @@ export class PrescriptionsComponent implements OnInit {
           this.prescriptionStruct.splice(index, 1);
         }
       });
-  }
-
-  ngOnInit() {
-    this.getPrescriptions();
   }
 
   changePage(p: number) {

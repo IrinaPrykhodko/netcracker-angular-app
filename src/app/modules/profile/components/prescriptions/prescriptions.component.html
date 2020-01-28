@@ -25,8 +25,9 @@
               </div>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="prescriptions__list__delete-button">
-            <button mat-raised-button (click)="deletePrescription(element.prescription.id)">Delete</button>
+          <div class="prescriptions__list__buttons">
+            <button mat-raised-button (click)="addPrescriptionItem(element.prescription)">Add item</button>
+            <button mat-raised-button (click)="deletePrescription(element.prescription.id)">Delete prescription</button>
           </div>
           <div class="prescriptions__list__items">
             <ul>
@@ -36,7 +37,7 @@
                 <span>Taking time: {{prescriptionItem.takingTime}}</span>
                 <span>From {{prescriptionItem.startDate}} to {{prescriptionItem.endDate}}</span>
                 <span>Duration: {{prescriptionItem.takingDurationDays}} days</span>
-                <span>{{prescriptionItem.description}}</span>
+                <span>Description: {{prescriptionItem.description}}</span>
                 <mat-checkbox [checked]="prescriptionItem.isReminderEnabled">Reminder</mat-checkbox>
               </li>
             </ul>

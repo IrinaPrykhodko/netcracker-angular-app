@@ -14,6 +14,15 @@
     }
   }
 
+  &__list__buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    button + button {
+      margin-left: 0.5rem;
+    }
+  }
+
   &__add-button {
     display: flex;
     justify-content: flex-end;
