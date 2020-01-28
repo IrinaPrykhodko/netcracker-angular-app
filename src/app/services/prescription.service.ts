@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Prescription} from '../models/prescription';
 import {environment} from '../../environments/environment';
 import {AddPrescriptionRequest} from '../models/dto/add-prescription-request';
+import {PrescriptionItem} from '../models/prescriptionItem';
+import {AddPrescriptionItemRequest} from '../models/dto/add-prescription-item-request';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +33,6 @@ export class PrescriptionService {
       .set('id', id.toString());
 
     return this.http.delete(`${environment.apiUrl}/prescriptions`, {params});
-
   }
 
   addPrescription(prescription: Prescription) {
@@ -40,6 +41,23 @@ export class PrescriptionService {
       date: prescription.date,
       doctorId: this.defaultDoctorId
     };
+
     return this.http.post(`${environment.apiUrl}/prescriptions`, request);
+  }
+
+  addPrescriptionItem(prescriptionItem: PrescriptionItem) {
+    const request: AddPrescriptionItemRequest = {
+      prescriptionId: prescriptionItem.prescription.id,
+      medicineId: prescriptionItem.medicine.id,
+      startDate: prescriptionItem.startDate,
+      endDate: prescriptionItem.endDate,
+      takingDurationDays: prescriptionItem.takingDurationDays,
+      takingTime: prescriptionItem.takingTime,
+      description: prescriptionItem.description,
+      dosage: prescriptionItem.dosage,
+      isReminderEnabled: prescriptionItem.isReminderEnabled
+    };
+
+    return this.http.post(`${environment.apiUrl}/prescriptions/items`, request);
   }
 }
