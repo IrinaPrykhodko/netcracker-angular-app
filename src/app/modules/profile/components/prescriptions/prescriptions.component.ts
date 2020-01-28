@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Prescription} from '../../../../models/prescription';
-import {PrescriptionsService} from '../../../../services/prescriptions.service';
+import {PrescriptionService} from '../../../../services/prescription.service';
 import {PrescriptionItem} from '../../../../models/prescriptionItem';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {finalize} from 'rxjs/operators';
+import {AddPrescriptionComponent} from './components/add-prescription/add-prescription.component';
 
 @Component({
   selector: 'app-prescriptions',
@@ -14,6 +15,7 @@ export class PrescriptionsComponent implements OnInit {
 
   selectedPrescription: Prescription;
   public isLoading;
+  public dialogRef: MatDialogRef<AddPrescriptionComponent>;
 
   prescriptionStruct: {
     prescription: Prescription,
@@ -22,15 +24,20 @@ export class PrescriptionsComponent implements OnInit {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 20
   };
 
-  constructor(private prescriptionsService: PrescriptionsService,
-              public dialog: MatDialog) {
+  constructor(private prescriptionsService: PrescriptionService,
+              private dialog: MatDialog) {
   }
 
-  openDialog(): void {
-
+  addPrescription(): void {
+    this.dialogRef = this.dialog.open(AddPrescriptionComponent);
+    this.dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
+      }
+    });
   }
 
   ngOnInit() {
