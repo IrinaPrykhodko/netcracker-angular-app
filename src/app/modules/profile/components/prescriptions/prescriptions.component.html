@@ -3,9 +3,8 @@
   <div class="prescriptions__title">
     <h2>Prescriptions</h2>
   </div>
-  <div class="add">
-    <router-outlet></router-outlet>
-    <button (click)="openDialog()">Add prescription</button>
+  <div class="prescriptions__add-button">
+    <button mat-raised-button (click)="addPrescription()">Add prescription</button>
   </div>
 
   <div class="prescriptions__list">
