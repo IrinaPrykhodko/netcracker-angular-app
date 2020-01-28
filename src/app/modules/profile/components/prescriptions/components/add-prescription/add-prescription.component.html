@@ -1,31 +1,19 @@
-<h1 mat-dialog-title>Add prescription</h1>
-<div mat-dialog-content>
-  <p>Prescription name</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
-  <p>Medicine id</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.medicineId">
-  </mat-form-field>
-  <p>Taking duration days</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.takingDurationDays">
-  </mat-form-field>
-  <p>Taking time</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.takingTime">
-  </mat-form-field>
-  <p>Start date</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.startDate">
-  </mat-form-field>
-  <p>End date</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.endDate">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+<div class="add-prescription">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="add-prescription__title">
+    <h3>Add prescription</h3>
+  </div>
+  <div class="add-prescription__form">
+    <form [formGroup]="addPrescriptionForm">
+      <mat-form-field class="add-prescription__form__value">
+        <input matInput formControlName="name" placeholder="Enter prescription name"/>
+      </mat-form-field>
+      <mat-form-field class="add-prescription__form__value">
+        <input matInput [matDatepicker]="datepicker" formControlName="date" placeholder="Enter prescription date"/>
+        <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="addPrescriptionForm.invalid" (click)="submit()">Add</button>
+    </form>
+  </div>
 </div>

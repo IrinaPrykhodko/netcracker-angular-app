@@ -21,6 +21,8 @@ import {AddPurchaseComponent} from './components/purchases/components/add-purhas
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
 import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -39,15 +41,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AddPurchaseComponent,
     AddPrescriptionComponent
   ],
-    imports: [
-        CommonModule,
-        ProfileRoutingModule,
-        SharedModule,
-        MatDialogModule,
-        NgxPaginationModule,
-        MatExpansionModule,
-        MatCheckboxModule
-    ],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    SharedModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
