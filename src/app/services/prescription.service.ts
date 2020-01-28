@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Prescription} from '../models/prescription';
-import {AddPrescriptionData} from '../models/AddPrescriptionData';
 import {environment} from '../../environments/environment';
+import {AddPrescriptionRequest} from '../models/dto/add-prescription-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PrescriptionsService {
+export class PrescriptionService {
+
+  public defaultDoctorId = 4;
 
   constructor(private http: HttpClient) {
   }
@@ -29,7 +31,12 @@ export class PrescriptionsService {
 
   }
 
-  postPrescription(cred: AddPrescriptionData) {
-    return this.http.post('assets/prescriptions.json', cred);
+  addPrescription(prescription: Prescription) {
+    const request: AddPrescriptionRequest = {
+      name: prescription.name,
+      date: prescription.date,
+      doctorId: this.defaultDoctorId
+    };
+    return this.http.post(`${environment.apiUrl}/prescriptions`, request);
   }
 }
