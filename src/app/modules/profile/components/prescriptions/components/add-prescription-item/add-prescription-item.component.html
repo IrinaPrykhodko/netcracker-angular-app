@@ -1,0 +1,52 @@
+<div class="add__item">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="add__item__title">
+    <h3>Add purchase item</h3>
+  </div>
+  <form [formGroup]="addItemForm" class="add__item__form">
+    <mat-form-field>
+      <input matInput formControlName="medicineName" [matAutocomplete]="medicineAutocomplete"
+             placeholder="Enter medicine name"/>
+      <mat-autocomplete #medicineAutocomplete="matAutocomplete">
+        <mat-option *ngFor="let medicine of medicines" [value]="medicine.name"
+                    (onSelectionChange)="onOptionClick(medicine)">{{medicine.name}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+      <input [matDatepicker]="startDatePicker" matInput formControlName="startDate" placeholder="Enter start date"/>
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [matDatepicker]="endDatePicker" matInput formControlName="endDate" placeholder="Enter end date"/>
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="takingDurationDays" placeholder="Enter taking duration"/>
+      <mat-hint align="start">Days</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="takingTime" placeholder="Enter taking time"/>
+      <mat-hint align="start">Separate by comma (e.g. 12:00,18:00,21:30)</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="description" placeholder="Enter description"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="dosage" placeholder="Enter dosage"/>
+      <mat-hint align="start">Must be acceptable for selected medicine</mat-hint>
+    </mat-form-field>
+    <mat-slide-toggle formControlName="isReminderEnabled">Reminder</mat-slide-toggle>
+    <div class="add__item__form__submit-button">
+      <button mat-raised-button (click)="addPrescriptionItem()" [disabled]="addItemForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
