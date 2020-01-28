@@ -23,8 +23,8 @@ export class AddPrescriptionComponent implements OnInit {
 
   ngOnInit() {
     this.addPrescriptionForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      date: ['', [Validators.required]]
+      name: ['', Validators.required],
+      date: ['', Validators.required]
     });
   }
 

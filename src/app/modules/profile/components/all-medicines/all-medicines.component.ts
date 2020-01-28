@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Medicine} from '../../../../models/medicine';
-import {AllMedicinesService} from '../../../../services/all-medicines.service';
+import {MedicineService} from '../../../../services/medicine.service';
 import {PurchaseService} from '../../../../services/purchase.service';
 import {PurchaseItem} from '../../../../models/purchase-item';
 
@@ -21,7 +21,7 @@ export class AllMedicinesComponent implements OnInit {
     size: 4,
   };
 
-  constructor(private medicinesService: AllMedicinesService,
+  constructor(private medicinesService: MedicineService,
               private purchaseService: PurchaseService) {
   }
 

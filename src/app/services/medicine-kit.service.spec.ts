@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MedicineKitService } from './medicine-kit.service';
+import {MedicineKitService} from './medicine-kit.service';
 
 describe('MedicineKitService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -23,6 +23,9 @@ import {AddPrescriptionComponent} from './components/prescriptions/components/ad
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {AddPrescriptionItemComponent} from './components/prescriptions/components/add-prescription-item/add-prescription-item.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     ChangePasswordComponent,
     AddComponent,
     AddPurchaseComponent,
-    AddPrescriptionComponent
+    AddPrescriptionComponent,
+    AddPrescriptionItemComponent
   ],
   imports: [
     CommonModule,
@@ -50,13 +54,16 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatExpansionModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
     ChangePasswordComponent,
-    EditComponent
+    EditComponent,
+    AddPrescriptionItemComponent
   ]
 })
 export class ProfileModule {
