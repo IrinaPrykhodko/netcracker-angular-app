@@ -7,6 +7,7 @@ import {Medicine} from '../../../../../../models/medicine';
 import {MedicineService} from '../../../../../../services/medicine.service';
 import {delay, finalize} from 'rxjs/operators';
 import {PrescriptionService} from '../../../../../../services/prescription.service';
+import {SpinnerService} from '../../../../../../services/spinner.service';
 
 @Component({
   selector: 'app-add-prescription-item',
@@ -21,13 +22,13 @@ export class AddPrescriptionItemComponent implements OnInit {
   private canSearch = true;
   private medicines: Medicine[];
   private selectedMedicine: Medicine;
-  public isLoading;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { prescription: Prescription },
               private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<AddPrescriptionItemComponent>,
               private medicinesService: MedicineService,
-              private prescriptionService: PrescriptionService) {
+              private prescriptionService: PrescriptionService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -52,18 +53,18 @@ export class AddPrescriptionItemComponent implements OnInit {
 
     this.addItemForm.get('medicineName').valueChanges
       .pipe(
-        delay(1500)
+        delay(1000)
       )
       .subscribe((value: string) => {
         if (value && value.trim().length !== 0 && this.currentSearchText === value && this.canSearch) {
-          this.isLoading = true;
+          this.spinnerService.setIsLoading(true);
           this.canSearch = false;
           this.medicines = null;
 
           this.medicinesService.getMedicines(0, 8, value)
             .pipe(finalize(() => {
               this.canSearch = true;
-              this.isLoading = false;
+              this.spinnerService.setIsLoading(false);
             }))
             .subscribe(medicines => {
               this.medicines = medicines;
@@ -75,9 +76,9 @@ export class AddPrescriptionItemComponent implements OnInit {
   }
 
   addPrescriptionItem() {
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
 
-    if (this.medicines.filter(value => value.name === this.currentSearchText)) {
+    if (this.medicines.filter(value => value.name === this.currentSearchText).length !== 0) {
       this.prescriptionItem.medicine = this.selectedMedicine;
       this.prescriptionItem.startDate = this.addItemForm.get('startDate').value;
       this.prescriptionItem.endDate = this.addItemForm.get('endDate').value;
@@ -90,14 +91,16 @@ export class AddPrescriptionItemComponent implements OnInit {
       console.log(this.prescriptionItem);
 
       this.prescriptionService.addPrescriptionItem(this.prescriptionItem)
-        .pipe(finalize(() => this.isLoading = false))
+        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
         .subscribe(
           value => {
             console.log(value);
-            this.dialogRef.close();
+            this.dialogRef.close(value);
           },
           error => console.log(error)
         );
+    } else {
+      alert('Not matches');
     }
   }
 

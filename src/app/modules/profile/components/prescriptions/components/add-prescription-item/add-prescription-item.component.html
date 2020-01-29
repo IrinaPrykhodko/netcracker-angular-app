@@ -1,7 +1,6 @@
 <div class="add__item">
-  <app-spinner *ngIf="isLoading"></app-spinner>
-  <div class="add__item__title">
-    <h3>Add purchase item</h3>
+  <div class="add__item__title dialog__title">
+    <h3>Add prescription item</h3>
   </div>
   <form [formGroup]="addItemForm" class="add__item__form">
     <mat-form-field>
@@ -9,7 +8,9 @@
              placeholder="Enter medicine name"/>
       <mat-autocomplete #medicineAutocomplete="matAutocomplete">
         <mat-option *ngFor="let medicine of medicines" [value]="medicine.name"
-                    (onSelectionChange)="onOptionClick(medicine)">{{medicine.name}}</mat-option>
+                    (onSelectionChange)="onOptionClick(medicine)">{{medicine.name}}
+          <mat-hint align="start">({{medicine.manufacturer}})</mat-hint>
+        </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <mat-form-field>
