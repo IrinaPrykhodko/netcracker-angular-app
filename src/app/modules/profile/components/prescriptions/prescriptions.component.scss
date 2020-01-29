@@ -1,27 +1,6 @@
+@import "src/styles/classes/classes";
+
 .prescriptions {
-  position: relative;
-
-  ul {
-    list-style-type: none;
-  }
-
-  &__title {
-    margin-bottom: 1.5rem;
-    width: 100%;
-
-    h2 {
-      text-align: center;
-    }
-  }
-
-  &__list__buttons {
-    display: flex;
-    justify-content: flex-end;
-
-    button + button {
-      margin-left: 0.5rem;
-    }
-  }
 
   &__add-button {
     display: flex;
@@ -29,6 +8,25 @@
 
     button {
       margin: 0.5rem;
+    }
+  }
+
+  &__list {
+    margin: 0.5rem 0;
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+
+      button + button {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__items {
+      ul {
+        list-style-type: none;
+      }
     }
   }
 }

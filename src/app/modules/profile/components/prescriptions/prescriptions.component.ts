@@ -6,6 +6,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {finalize} from 'rxjs/operators';
 import {AddPrescriptionComponent} from './components/add-prescription/add-prescription.component';
 import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
+import {SpinnerService} from '../../../../services/spinner.service';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-prescriptions',
@@ -14,8 +16,6 @@ import {AddPrescriptionItemComponent} from './components/add-prescription-item/a
 })
 export class PrescriptionsComponent implements OnInit {
 
-  selectedPrescription: Prescription;
-  public isLoading;
   public addPrescriptionDialogRef: MatDialogRef<AddPrescriptionComponent>;
   public addItemDialogRed: MatDialogRef<AddPrescriptionItemComponent>;
 
@@ -26,11 +26,12 @@ export class PrescriptionsComponent implements OnInit {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 20
+    size: 8
   };
 
   constructor(private prescriptionsService: PrescriptionService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -51,13 +52,24 @@ export class PrescriptionsComponent implements OnInit {
     this.addItemDialogRed = this.dialog.open(AddPrescriptionItemComponent, {
       data: {prescription}
     });
+
+    this.addItemDialogRed.afterClosed()
+      .subscribe(value => {
+        if (value) {
+          const index = this.prescriptionStruct.findIndex(elem => elem.prescription.id === prescription.id);
+
+          if (isNotNullOrUndefined(index)) {
+            this.prescriptionStruct[index].prescriptionItems.push(value);
+          }
+        }
+      });
   }
 
   deletePrescription(id: number) {
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
 
     this.prescriptionsService.deletePrescription(id)
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe(value => {
         const index = this.prescriptionStruct.findIndex(element => element.prescription.id === id);
 
@@ -69,17 +81,22 @@ export class PrescriptionsComponent implements OnInit {
 
   changePage(p: number) {
     this.paginationOptions.pageNumber = p - 1;
-    this.getPrescriptions();
+    const requiredNumberOfPrescriptions = this.paginationOptions.pageNumber * this.paginationOptions.size;
+
+    if (requiredNumberOfPrescriptions >= this.prescriptionStruct.length - 1) {
+      this.prescriptionStruct.pop();
+      this.getPrescriptions();
+    }
   }
 
   getPrescriptionItems(id: number) {
     const index = this.prescriptionStruct.findIndex(value => value.prescription.id === id);
 
     if (!this.prescriptionStruct[index].prescriptionItems) {
-      this.isLoading = true;
+      this.spinnerService.setIsLoading(true);
 
       this.prescriptionsService.getPrescriptionItems(id)
-        .pipe(finalize(() => this.isLoading = false))
+        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
         .subscribe((data: PrescriptionItem[]) => {
           this.prescriptionStruct[index].prescriptionItems = data;
         });
@@ -87,10 +104,10 @@ export class PrescriptionsComponent implements OnInit {
   }
 
   getPrescriptions() {
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
 
     this.prescriptionsService.getPrescriptions(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe((data: Prescription[]) => {
         data.forEach(value => {
           this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
