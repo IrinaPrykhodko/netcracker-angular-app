@@ -13,7 +13,6 @@ import {ChangePasswordComponent} from './components/change-password/change-passw
 export class AccountComponent implements OnInit {
 
   patient: Patient;
-  public isLoading;
   public dialogRefEdit: MatDialogRef<EditComponent>;
   public dialogRefChange: MatDialogRef<ChangePasswordComponent>;
 
@@ -22,13 +21,9 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoading = true;
-
     this.patientService.user$
       .subscribe((data: Patient) => {
-        console.log(data);
         this.patient = data;
-        this.isLoading = false;
       });
   }
 

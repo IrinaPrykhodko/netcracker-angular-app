@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Prescription} from '../../../../../../models/prescription';
 import {PrescriptionService} from '../../../../../../services/prescription.service';
+import {SpinnerService} from '../../../../../../services/spinner.service';
 
 
 @Component({
@@ -14,11 +15,11 @@ export class AddPrescriptionComponent implements OnInit {
 
   addPrescriptionForm: FormGroup;
   private prescription: Prescription = new Prescription();
-  private isLoading;
 
   constructor(public dialogRef: MatDialogRef<AddPrescriptionComponent>,
               private formBuilder: FormBuilder,
-              private prescriptionService: PrescriptionService) {
+              private prescriptionService: PrescriptionService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -29,13 +30,13 @@ export class AddPrescriptionComponent implements OnInit {
   }
 
   submit() {
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
     this.prescription.date = this.addPrescriptionForm.value.date;
     this.prescription.name = this.addPrescriptionForm.value.name;
 
     this.prescriptionService.addPrescription(this.prescription)
       .subscribe(value => {
-        this.isLoading = false;
+        this.spinnerService.setIsLoading(false);
         this.dialogRef.close(value);
       }, error => {
         console.log(error);

@@ -3,6 +3,8 @@ import {Medicine} from '../../../../models/medicine';
 import {MedicineService} from '../../../../services/medicine.service';
 import {PurchaseService} from '../../../../services/purchase.service';
 import {PurchaseItem} from '../../../../models/purchase-item';
+import {SpinnerService} from '../../../../services/spinner.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-medicines',
@@ -22,10 +24,12 @@ export class AllMedicinesComponent implements OnInit {
   };
 
   constructor(private medicinesService: MedicineService,
-              private purchaseService: PurchaseService) {
+              private purchaseService: PurchaseService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
+    this.spinnerService.setIsLoading(true);
     this.getMedicines();
   }
 
@@ -37,9 +41,8 @@ export class AllMedicinesComponent implements OnInit {
     this.paginationOptions.pageNumber = p - 1;
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
-    console.log(`Page ${this.paginationOptions.pageNumber}`);
-
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
+      this.spinnerService.setIsLoading(true);
       this.medicineList.pop();
 
       this.getMedicines(this.searchText);
@@ -47,6 +50,7 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   findMedicines() {
+    this.spinnerService.setIsLoading(true);
     this.isSearching = true;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;
@@ -56,22 +60,22 @@ export class AllMedicinesComponent implements OnInit {
 
   private getMedicines(searchText?: string) {
     this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe((data: Medicine[]) => {
         this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
       });
   }
 
   addMedicineToPurchase(amount: number) {
-    console.log(this.selectedMedicine);
+    this.spinnerService.setIsLoading(true);
 
     const purchaseItem: PurchaseItem = {
       amount,
       medicine: this.selectedMedicine
     };
 
-    console.log(purchaseItem);
-
     this.purchaseService.addPurchaseItem(purchaseItem)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe(value => {
         console.log(value);
         alert('Purchase item created');
@@ -81,6 +85,7 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   clearSearchText() {
+    this.spinnerService.setIsLoading(false);
     this.searchText = undefined;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;
