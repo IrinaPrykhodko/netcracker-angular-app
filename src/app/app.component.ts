@@ -9,7 +9,7 @@ import {SpinnerService} from './services/spinner.service';
 export class AppComponent implements OnInit {
   title = 'netcracker-angular-app';
 
-  private isLoading;
+  public isLoading;
 
   constructor(private spinnerService: SpinnerService) {
   }

@@ -16,11 +16,11 @@ import {SpinnerService} from '../../../../../../services/spinner.service';
 })
 export class AddPrescriptionItemComponent implements OnInit {
 
-  private addItemForm: FormGroup;
+  public addItemForm: FormGroup;
   private prescriptionItem: PrescriptionItem = new PrescriptionItem();
   private currentSearchText: string;
   private canSearch = true;
-  private medicines: Medicine[];
+  public medicines: Medicine[];
   private selectedMedicine: Medicine;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { prescription: Prescription },
