@@ -6,7 +6,7 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {AddComponent} from '../medicine-kit/components/add/add.component';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {finalize} from 'rxjs/operators';
-import {MedicineService} from "../../../../services/medicine.service";
+import {MedicineService} from '../../../../services/medicine.service';
 
 @Component({
   selector: 'app-all-medicines',
