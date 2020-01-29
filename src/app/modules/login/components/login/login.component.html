@@ -1,10 +1,8 @@
 <div class="login">
-  <div class="login__title">
+  <div class="component__title">
     <h2>Login</h2>
   </div>
   <form [formGroup]="loginForm" class="login-form">
-    <app-spinner *ngIf="isLoading"></app-spinner>
-
     <mat-form-field color="primary">
 
       <input

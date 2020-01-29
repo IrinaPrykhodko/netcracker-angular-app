@@ -23,7 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
     NgxIntlTelInputModule,
     HttpClientModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   exports: [
     MatButtonModule,

@@ -1,10 +1,36 @@
-.prescriptions {
-  margin: 5em 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
+@import "src/styles/classes/classes";
 
+.prescriptions {
+
+  &__add-button {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 0.5rem;
+    }
+  }
+
+  &__list {
+    margin: 0.5rem 0;
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+
+      button + button {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__items {
+      ul {
+        list-style-type: none;
+      }
+    }
+  }
 }
+
 .prescriptions li {
   cursor: pointer;
   position: relative;
@@ -15,22 +41,26 @@
   border-radius: 4px;
   color: #757575;
 
-  ::ng-deep .mat-raised-button{
+  ::ng-deep .mat-raised-button {
     background: #757575;
   }
-  span{
+
+  span {
     margin-right: 40px;
   }
 }
+
 .prescriptions li:hover {
   color: #607D8B;
   background-color: #DDD;
   left: .1em;
 }
+
 .prescriptions li.selected {
   background-color: #CFD8DC;
   color: white;
 }
+
 .prescriptions li.selected:hover {
   background-color: #BBD8DC;
   color: white;
@@ -38,43 +68,49 @@
 
 ::ng-deep .ngx-pagination {
   margin-top: 2em;
+
   .current {
     background: #757575 !important;
   }
 }
 
-.prescriptionItem{
+.prescriptionItem {
   border-top: 1px solid #757575;
   margin: 0 0.5em;
-  h2{
+
+  h2 {
     margin-top: 1em;
   }
-  span{
+
+  span {
     display: flex;
     flex-direction: column;
     padding: 0.3em 0;
   }
 }
 
-::ng-deep .mat-form-field-label{
+::ng-deep .mat-form-field-label {
   color: #BDBDBD !important;
 }
 
-::ng-deep .mat-form-field-underline{
+::ng-deep .mat-form-field-underline {
   background-color: #BDBDBD !important;
 }
 
-.add{
+.add {
   display: inline-block;
   position: absolute;
   right: 1.5em;
-  button{
+
+  button {
     margin-left: 0.5em;
   }
-  ::ng-deep .mat-button{
+
+  ::ng-deep .mat-button {
     background: #EDEDED;
   }
-  ::ng-deep .mat-button:hover{
+
+  ::ng-deep .mat-button:hover {
     background: #757575;
     color: white;
   }

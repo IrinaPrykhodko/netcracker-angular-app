@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Prescription} from '../../../../models/prescription';
-import {PrescriptionsService} from '../../../../services/prescriptions.service';
+import {PrescriptionService} from '../../../../services/prescription.service';
 import {PrescriptionItem} from '../../../../models/prescriptionItem';
-import {User} from '../../../../models/user';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {finalize} from 'rxjs/operators';
 import {AddPrescriptionComponent} from './components/add-prescription/add-prescription.component';
-import {AddPrescriptionData} from '../../../../models/AddPrescriptionData';
+import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
+import {SpinnerService} from '../../../../services/spinner.service';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-prescriptions',
@@ -14,61 +16,102 @@ import {AddPrescriptionData} from '../../../../models/AddPrescriptionData';
 })
 export class PrescriptionsComponent implements OnInit {
 
-  prescriptions: Prescription[];
-  user = User;
-  selectedPrescription: Prescription;
-  prescriptionItems: PrescriptionItem[];
+  public addPrescriptionDialogRef: MatDialogRef<AddPrescriptionComponent>;
+  public addItemDialogRed: MatDialogRef<AddPrescriptionItemComponent>;
+
+  prescriptionStruct: {
+    prescription: Prescription,
+    prescriptionItems: PrescriptionItem[];
+  }[] = [];
+
   paginationOptions = {
     pageNumber: 0,
     size: 8
   };
-  addPrescriptionData: AddPrescriptionData;
 
-
-  constructor(private prescriptionsService: PrescriptionsService, public dialog: MatDialog) {
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddPrescriptionComponent, {
-      width: '400px',
-      // tslint:disable-next-line:max-line-length
-      // data: { name: this.addPrescriptionData.name, medicineId: this.addPrescriptionData.medicineId, takingDurationDays: this.addPrescriptionData.takingDurationDays, takingTime: this.addPrescriptionData.takingTime, startDate: this.addPrescriptionData.startDate, endDate: this.addPrescriptionData.endDate }
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      this.addPrescriptionData.name = res.name;
-      this.addPrescriptionData.medicineId = res.medicineId;
-      this.addPrescriptionData.takingDurationDays = res.takingDurationDays;
-      this.addPrescriptionData.takingTime = res.takingTime;
-      this.addPrescriptionData.startDate = res.startDate;
-      this.addPrescriptionData.endDate = res.endDate;
-
-      this.prescriptionsService.postPrescription(this.addPrescriptionData);
-    });
+  constructor(private prescriptionsService: PrescriptionService,
+              private dialog: MatDialog,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
+    this.getPrescriptions();
+  }
+
+  addPrescription(): void {
+    this.addPrescriptionDialogRef = this.dialog.open(AddPrescriptionComponent);
+
+    this.addPrescriptionDialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
+      }
+    });
+  }
+
+  addPrescriptionItem(prescription: Prescription) {
+    this.addItemDialogRed = this.dialog.open(AddPrescriptionItemComponent, {
+      data: {prescription}
+    });
+
+    this.addItemDialogRed.afterClosed()
+      .subscribe(value => {
+        if (value) {
+          const index = this.prescriptionStruct.findIndex(elem => elem.prescription.id === prescription.id);
+
+          if (isNotNullOrUndefined(index)) {
+            this.prescriptionStruct[index].prescriptionItems.push(value);
+          }
+        }
+      });
+  }
+
+  deletePrescription(id: number) {
+    this.spinnerService.setIsLoading(true);
+
+    this.prescriptionsService.deletePrescription(id)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe(value => {
+        const index = this.prescriptionStruct.findIndex(element => element.prescription.id === id);
+
+        if (index) {
+          this.prescriptionStruct.splice(index, 1);
+        }
+      });
+  }
+
+  changePage(p: number) {
+    this.paginationOptions.pageNumber = p - 1;
+    const requiredNumberOfPrescriptions = this.paginationOptions.pageNumber * this.paginationOptions.size;
+
+    if (requiredNumberOfPrescriptions >= this.prescriptionStruct.length - 1) {
+      this.prescriptionStruct.pop();
+      this.getPrescriptions();
+    }
+  }
+
+  getPrescriptionItems(id: number) {
+    const index = this.prescriptionStruct.findIndex(value => value.prescription.id === id);
+
+    if (!this.prescriptionStruct[index].prescriptionItems) {
+      this.spinnerService.setIsLoading(true);
+
+      this.prescriptionsService.getPrescriptionItems(id)
+        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+        .subscribe((data: PrescriptionItem[]) => {
+          this.prescriptionStruct[index].prescriptionItems = data;
+        });
+    }
+  }
+
+  getPrescriptions() {
+    this.spinnerService.setIsLoading(true);
+
     this.prescriptionsService.getPrescriptions(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Prescription[]) => this.prescriptions = data);
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe((data: Prescription[]) => {
+        data.forEach(value => {
+          this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
+        });
+      });
   }
-
-  onSelected(prescription: Prescription): void {
-    this.selectedPrescription = prescription;
-    // tslint:disable-next-line:max-line-length
-    this.prescriptionsService.getPrescriptionItems(this.paginationOptions.pageNumber, this.paginationOptions.size, this.selectedPrescription.id)
-      .subscribe((data: PrescriptionItem[]) => this.prescriptionItems = data);
-  }
-
-  onDelete(prescription: Prescription): void {
-    this.prescriptionsService.deletePrescription(prescription);
-  }
-
-
-  pageChange(p: number) {
-    this.paginationOptions.pageNumber = p;
-    console.log(this.paginationOptions.pageNumber);
-    this.prescriptionsService.getPrescriptions(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .subscribe((data: Prescription[]) => this.prescriptions = data);
-  }
-
 }

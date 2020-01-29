@@ -26,9 +26,7 @@
   </li>
 </ul>
 
-<pagination-controls (pageChange)="changePage($event)"
-                     maxSize="">
-</pagination-controls>
+<pagination-controls (pageChange)="changePage($event)" maxSize=""></pagination-controls>
 
 <div class="medicine-information" *ngIf="selectedMedicine">
   <h2>{{selectedMedicine.name}} | Information</h2>

@@ -9,7 +9,6 @@ import {PurchasesComponent} from './components/purchases/purchases.component';
 import {AllMedicinesComponent} from './components/all-medicines/all-medicines.component';
 import {AccountComponent} from './components/account/account.component';
 import {AuthGuard} from '../../helpers/auth-guard.service';
-import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
 
 const routes: Routes = [
@@ -52,10 +51,6 @@ const routes: Routes = [
         path: 'purchases',
         component: PurchasesComponent,
         canActivate: [AuthGuard]
-      },
-      {
-        path: 'purchases/add',
-        component: AddPurchaseComponent
       },
       {
         path: 'all-medicines',

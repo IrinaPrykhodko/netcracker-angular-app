@@ -1,50 +1,45 @@
-<div>
-
-  <div class="add">
-    <button mat-button routerLink="../all-medicines" routerLinkActive="active">Add</button>
-    <button mat-button (click)="buyPurchaseItems()">Buy everything!</button>
+<div class="purchases">
+  <div class="component__title">
+    <h2>Purchases</h2>
   </div>
 
-  <div class="search">
-    <mat-form-field>
-      <input matInput #searchText type="search" placeholder="Search"/>
-    </mat-form-field>
-    <button mat-button (click)="onSearch(searchText.value)">Search</button>
+  <div class="purchases__buttons">
+    <button mat-raised-button routerLink="../all-medicines" routerLinkActive="active">Add</button>
+    <button mat-raised-button (click)="buyPurchaseItems()">Buy everything!</button>
   </div>
-  <div class="purchase">
-    <ul class="purchase-items">
-      <li
-        *ngFor="let purchaseItem of purchaseItems | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+
+  <div class="purchases__list">
+    <mat-accordion>
+      <mat-expansion-panel
+        class="purchases__list__item"
+        *ngFor="let purchaseItem of purchaseItems | paginate: {
+        itemsPerPage: paginationOptions.size,
+        currentPage: paginationOptions.pageNumber + 1}"
         [class.selected]="purchaseItem === selectedPurchaseItem"
         (click)="onSelected(purchaseItem)">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <span>{{purchaseItem.medicine.name}}</span>
-              </mat-panel-title>
-              <mat-panel-description>
-                <span>{{purchaseItem.medicine.manufacturer}}</span>
-                <span>{{purchaseItem.amount}}</span>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span>{{purchaseItem.medicine.name}}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span>{{purchaseItem.medicine.manufacturer}}</span>
+            <span>{{purchaseItem.amount}}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-            <mat-form-field>
-              <input matInput #medicineAmount type="number" value="{{purchaseItem.amount}}">
-            </mat-form-field>
+        <mat-form-field>
+          <input matInput #medicineAmount type="number" value="{{purchaseItem.amount}}">
+        </mat-form-field>
 
-            <button
-              mat-raised-button (click)="editPurchaseItem(medicineAmount.valueAsNumber)">Confirm
-            </button>
+        <button
+          mat-raised-button (click)="editPurchaseItem(medicineAmount.valueAsNumber)">Confirm
+        </button>
 
-            <button
-              mat-raised-button (click)="deletePurchaseItem(purchaseItem.id)">Delete
-            </button>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </li>
-    </ul>
-
-    <pagination-controls (pageChange)="changePage($event)"></pagination-controls>
+        <button
+          mat-raised-button (click)="deletePurchaseItem(purchaseItem.id)">Delete
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
+  <pagination-controls (pageChange)="changePage($event)" maxSize=""></pagination-controls>
 </div>
