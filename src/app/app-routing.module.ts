@@ -18,6 +18,14 @@ const appRoutes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
   }
 ];
 

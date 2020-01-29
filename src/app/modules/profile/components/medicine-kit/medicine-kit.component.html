@@ -2,10 +2,6 @@
   <router-outlet></router-outlet>
 </div>
 
-<div class="add">
-  <button mat-button routerLink="add" routerLinkActive="active">Add</button>
-</div>
-
 <div class="search">
   <mat-form-field>
     <input matInput
@@ -20,7 +16,7 @@
 <div class="kit">
   <ul class="medicine-instance">
     <li
-      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}"
+      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
       [ngClass]="{
             'selected': medicineInstance === selectedMedicineInstance,
             'expired': medicineInstance.isExpired
@@ -30,10 +26,10 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <span>{{medicineInstance.name}}</span>
+              <span>{{medicineInstance.medicine.name}}</span>
             </mat-panel-title>
             <mat-panel-description>
-              <span>{{medicineInstance.manufacturer}}</span>
+              <span>{{medicineInstance.medicine.manufacturer}}</span>
               <span>{{medicineInstance.selfLife}}</span>
               <span>{{medicineInstance.amount}}</span>
             </mat-panel-description>
@@ -42,8 +38,8 @@
           <ng-container *ngIf="!medicineInstance.isExpired; else expired">
             <mat-form-field>
               <input
+                #selfLife
                 matInput
-                [(ngModel)]="medicineInstance.selfLife"
                 type="Date"
                 value="{{medicineInstance.selfLife}}"
                 placeholder="Self life">
@@ -51,8 +47,8 @@
 
             <mat-form-field>
               <input
+                #amount
                 matInput
-                [(ngModel)]="medicineInstance.amount"
                 type="number"
                 value="{{medicineInstance.amount}}"
                 pattern="[0-9]{4}"
@@ -60,12 +56,15 @@
             </mat-form-field>
 
             <button
-              mat-raised-button (click)="submit()">Confirm
+              mat-raised-button (click)="submit(selfLife.valueAsDate, amount.valueAsNumber)">Confirm
             </button>
 
             <button
               mat-raised-button (click)="delete(medicineInstance.id)">Delete
             </button>
+
+
+
           </ng-container>
           <ng-template #expired>
             <button

@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
 import {map} from 'rxjs/operators';
+import {AddComponent} from './components/add/add.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-medicine-kit',
@@ -12,16 +14,18 @@ import {map} from 'rxjs/operators';
 export class MedicineKitComponent implements OnInit {
 
   medicineKit: MedicineInstance[];
-  editForm: FormGroup;
+  public editForm: FormGroup ;
+  public dialogRefEdit: MatDialogRef<AddComponent>;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
-    pageNumber: 1,
+    pageNumber: 0,
     size: 8
   };
   searchText: string;
 
   constructor(private medicineKitService: MedicineKitService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -42,7 +46,7 @@ export class MedicineKitComponent implements OnInit {
   }
 
   pageChange(p: number) {
-    this.paginationOptions.pageNumber = p;
+    this.paginationOptions.pageNumber = p - 1;
     console.log(this.paginationOptions.pageNumber);
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .pipe(map((data: MedicineInstance[]) => {
@@ -69,9 +73,11 @@ export class MedicineKitComponent implements OnInit {
     console.log(this.searchText);
   }
 
-  submit() {
+  submit(selfLife: Date, amount: number) {
     console.log(this.editForm.value);
-    this.medicineKitService.editMedicineInstance(this.editForm.value)
+    this.selectedMedicineInstance.amount = amount;
+    this.selectedMedicineInstance.selfLife = selfLife;
+    this.medicineKitService.editMedicineInstance(this.selectedMedicineInstance)
       .subscribe((userData) => {
         console.log(userData);
       }, (error => {

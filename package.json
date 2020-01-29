@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "preinstall": "npm install -g angular-cli",
+    "preinstall": "npm install -g @angular/cli",
     "heroku-postbuild": "ng build --prod"
   },
   "private": true,
@@ -38,7 +38,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.17",
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular/cli": "~8.3.17",
     "@angular/compiler-cli": "~8.2.13",
     "@angular/language-service": "~8.2.13",

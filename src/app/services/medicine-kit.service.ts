@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {MedicineInstance} from '../models/medicineInstance';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +11,22 @@ export class MedicineKitService {
 
   constructor(private http: HttpClient) { }
 
-  getMedicineInstances(page: number, size: number) {
-    return this.http.get('assets/medicine-kit.json?page=' + page + '&size=' + size);
+  getMedicineInstances(page: number, size: number): Observable<MedicineInstance[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get<MedicineInstance[]>(`${environment.apiUrl}/medicine-kit`, {params});
   }
 
   addMedicineInstance(cred: MedicineInstance) {
-    return this.http.post('https://med-kit.herokuapp.com/profile/medicine-kit/add', cred);
+    return this.http.post(`${environment.apiUrl}/medicine-kit`, cred);
   }
   deleteMedicineInstance(id: number) {
-    return this.http.put('https://med-kit.herokuapp.com/profile/medicine-kit', id);
+    const params = new HttpParams()
+      .set('id', id.toString());
+    return this.http.delete(`${environment.apiUrl}/medicine-kit`, {params});
   }
 
   editMedicineInstance(cred: MedicineInstance) {
-    return this.http.put('https://med-kit.herokuapp.com/profile/medicine-kit', cred);  }
+    return this.http.put(`${environment.apiUrl}/medicine-kit`, cred);  }
 }
