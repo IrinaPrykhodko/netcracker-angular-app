@@ -3,6 +3,10 @@ import {Medicine} from '../../../../models/medicine';
 import {AllMedicinesService} from '../../../../services/all-medicines.service';
 import {PurchaseService} from '../../../../services/purchase.service';
 import {PurchaseItem} from '../../../../models/purchase-item';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {AddComponent} from '../medicine-kit/components/add/add.component';
+import {MedicineInstance} from '../../../../models/medicineInstance';
 
 @Component({
   selector: 'app-all-medicines',
@@ -15,14 +19,15 @@ export class AllMedicinesComponent implements OnInit {
   selectedMedicine: Medicine;
   searchText: string;
   isSearching = false;
-
+  public dialogRefEdit: MatDialogRef<AddComponent>;
   paginationOptions = {
     pageNumber: 0,
     size: 4,
   };
 
   constructor(private medicinesService: AllMedicinesService,
-              private purchaseService: PurchaseService) {
+              private purchaseService: PurchaseService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -59,6 +64,12 @@ export class AllMedicinesComponent implements OnInit {
       .subscribe((data: Medicine[]) => {
         this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
       });
+  }
+  addMedicineToKit() {
+    console.log(this.selectedMedicine);
+    this.dialogRefEdit = this.dialog.open(AddComponent, {
+      data: {medicine: this.selectedMedicine},
+    });
   }
 
   addMedicineToPurchase(amount: number) {

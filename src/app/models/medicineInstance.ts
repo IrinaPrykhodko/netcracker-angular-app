@@ -1,6 +1,9 @@
 import {Medicine} from './medicine';
 
-export class MedicineInstance extends Medicine {
+export class MedicineInstance {
+  id: number;
+  medicine: Medicine;
   selfLife: any;
   amount: number;
+  isExpired?: boolean;
 }

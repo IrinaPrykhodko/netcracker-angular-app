@@ -8,5 +8,4 @@ export class Medicine {
   packageContent: string;
   takingMethod: string;
   description: string;
-  isExpired?: boolean;
 }
