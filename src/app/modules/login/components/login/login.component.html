@@ -12,7 +12,7 @@
         formControlName="email"
         value="{{registerUserEmail}}"
         placeholder="Enter your email" required
-        pattern="[a-zA-Z_0-9]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"
+        pattern="[a-zA-Z_0-9.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"
       />
 
     </mat-form-field>
@@ -39,7 +39,7 @@
 
   <div class="buttons">
     <button mat-button routerLink="/register">Sign up</button>
-    <button mat-button routerLink="">Forgot password</button>
+    <button mat-button routerLink="/forgot-password">Forgot password</button>
   </div>
 
 </div>
