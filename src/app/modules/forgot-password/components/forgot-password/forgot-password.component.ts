@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {User} from "../../../../models/user";
-import {finalize} from "rxjs/operators";
-import {LoginResponseItem} from "../../../../models/loginResponseItem";
-import {ForgotPasswordService} from "../../../../services/forgot-password.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {finalize} from 'rxjs/operators';
+import {ForgotPasswordService} from '../../../../services/forgot-password.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -34,10 +32,10 @@ export class ForgotPasswordComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe(value => {
-        alert("Message with link for reset password was send to your email " + this.email.value + ". Please, check your email. " +
-          "Link will be active 30 minutes");
+        alert('Message with link for reset password was send to your email ' + this.email.value + '. Please, check your email. ' +
+          'Link will be active 30 minutes');
       }, error => {
-        alert("User with email " + this.email.value + " not found");
+        alert('User with email ' + this.email.value + ' not found');
       });
 
   }
