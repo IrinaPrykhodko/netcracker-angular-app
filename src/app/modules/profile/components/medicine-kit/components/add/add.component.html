@@ -2,28 +2,11 @@
 
   <form [formGroup]="addForm" class="add-form">
 
-    <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="name"
-        placeholder="Enter medicine name" required/>
-    </mat-form-field>
-    <p class="error-massage" [hidden]="name.untouched || name.valid">* Medicine name is required</p>
-
-    <mat-form-field color="primary">
-      <input
-        matInput
-        formControlName="manufacturer"
-        placeholder="Enter manufacturer" required
-      />
-    </mat-form-field>
-    <p class="error-massage" [hidden]="manufacturer.untouched || manufacturer.valid">* Manufacturer is required</p>
-
-    <mat-form-field color="primary">
+      <mat-form-field color="primary" class="mat-date">
       <input
         matInput
         formControlName="selfLife"
-        placeholder="Enter self life" required
+        type = "Date"
       />
     </mat-form-field>
     <p class="error-massage" [hidden]="selfLife.untouched || selfLife.valid">* Self life is required</p>
