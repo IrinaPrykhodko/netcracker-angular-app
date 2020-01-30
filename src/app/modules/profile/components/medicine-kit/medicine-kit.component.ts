@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
-import {map} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {AddComponent} from './components/add/add.component';
 import {MatDialog, MatDialogRef} from '@angular/material';
+import {SpinnerService} from '../../../../services/spinner.service';
 
 @Component({
   selector: 'app-medicine-kit',
@@ -19,12 +20,13 @@ export class MedicineKitComponent implements OnInit {
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 4,
   };
   searchText: string;
 
   constructor(private medicineKitService: MedicineKitService,
               private formBuilder: FormBuilder,
+              private spinnerService: SpinnerService,
               private dialog: MatDialog) {
   }
 
@@ -47,12 +49,21 @@ export class MedicineKitComponent implements OnInit {
 
   pageChange(p: number) {
     this.paginationOptions.pageNumber = p - 1;
-    console.log(this.paginationOptions.pageNumber);
-    this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .pipe(map((data: MedicineInstance[]) => {
-        return data.map(item => this.checkDate(item));
-      }))
-      .subscribe((data: MedicineInstance[]) => this.medicineKit = data);
+    const requiredNumberOfMI = this.paginationOptions.pageNumber * this.paginationOptions.size;
+
+    if(requiredNumberOfMI >= this.medicineKit.length - 1){
+      this.spinnerService.setIsLoading(true);
+      this.medicineKit.pop();
+      this.getMedicineInstances(this.searchText);
+    }
+  }
+
+  private  getMedicineInstances(searchText?: string){
+    this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe((data: MedicineInstance[]) =>{
+        this.medicineKit = this.medicineKit ? this.medicineKit.concat(data) : data;
+      });
   }
 
   checkDate(item: any) {

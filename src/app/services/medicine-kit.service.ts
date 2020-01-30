@@ -11,10 +11,14 @@ export class MedicineKitService {
 
   constructor(private http: HttpClient) { }
 
-  getMedicineInstances(page: number, size: number): Observable<MedicineInstance[]> {
-    const params = new HttpParams()
+  getMedicineInstances(page: number, size: number, searchText?: string): Observable<MedicineInstance[]> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (searchText) {
+      params = params.set('query', searchText);
+    }
     return this.http.get<MedicineInstance[]>(`${environment.apiUrl}/medicine-kit`, {params});
   }
 
