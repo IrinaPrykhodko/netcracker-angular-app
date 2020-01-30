@@ -9,6 +9,9 @@ import {FooterComponent} from './components/footer/footer.component';
 import {RouterModule} from '@angular/router';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {ToastrModule} from 'ngx-toastr';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import {MatMenuModule} from '@angular/material/menu';
     NgxIntlTelInputModule,
     HttpClientModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
+    ToastrModule.forRoot(),
+    MatIconModule,
+    MatBadgeModule
   ],
   exports: [
     MatButtonModule,
@@ -36,7 +42,8 @@ import {MatMenuModule} from '@angular/material/menu';
     HeaderComponent,
     FooterComponent,
     SpinnerComponent,
-    MatMenuModule
+    MatMenuModule,
+    ToastrModule
   ]
 })
 export class SharedModule {
