@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PatientService} from '../../../../../../services/patient.service';
 import {finalize} from 'rxjs/operators';
 import {MatDialogRef} from '@angular/material/dialog';
+import {SpinnerService} from '../../../../../../services/spinner.service';
 
 @Component({
   selector: 'app-change-password',
@@ -11,19 +12,19 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  public isLoading;
   public changeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
-              public dialogRef: MatDialogRef<ChangePasswordComponent>) {
+              public dialogRef: MatDialogRef<ChangePasswordComponent>,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
     this.changeForm = this.formBuilder.group({
       password: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
-      newPasswordConfirm: ['', [Validators.required]]
+      newPassword: ['', [Validators.required, Validators.minLength(3)]],
+      newPasswordConfirm: ['', [Validators.required, Validators.minLength(3)]]
     }, {validator: this.checkPasswords});
   }
 
@@ -47,12 +48,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.changeForm.value);
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
+
     this.patientService.changePassword(this.changeForm.value)
       .pipe(
         finalize(() => {
-          this.isLoading = false;
+          this.spinnerService.setIsLoading(false);
           this.dialogRef.close();
         })
       )

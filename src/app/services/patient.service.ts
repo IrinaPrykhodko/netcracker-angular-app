@@ -29,7 +29,7 @@ export class PatientService {
   }
 
   changePassword(cred: Patient) {
-    return this.http.put(`${environment.apiUrl}/account/change-password`, cred);
+    return this.http.put(`${environment.apiUrl}/account/password`, cred);
   }
 }
 

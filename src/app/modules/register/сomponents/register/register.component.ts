@@ -6,6 +6,7 @@ import {MyErrorStateMatcher} from '../../../../models/MyErrorStateMatcher';
 import {CountryISO, SearchCountryField, TooltipLabel} from 'ngx-intl-tel-input';
 import {PhoneNumberUtil} from 'google-libphonenumber';
 import {finalize} from 'rxjs/operators';
+import {SpinnerService} from '../../../../services/spinner.service';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class RegisterComponent implements OnInit {
   preferredCountries: CountryISO[] = [CountryISO.Ukraine];
 
   constructor(private formBuilder: FormBuilder,
-              private registerService: RegisterService
-  ) {
+              private registerService: RegisterService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -42,8 +43,8 @@ export class RegisterComponent implements OnInit {
       location: [this.patient.location],
       email: [this.patient.email, [Validators.required, Validators.email]],
       phoneNumber: [this.patient.phoneNumber, [Validators.required], PhoneNumberUtil.getInsta],
-      password: [this.patient.password, [Validators.required]],
-      passwordConfirm: ['', [Validators.required]]
+      password: [this.patient.password, [Validators.required, Validators.minLength(3)]],
+      passwordConfirm: ['', [Validators.required, Validators.minLength(3)]]
     }, {validator: this.checkPasswords});
   }
 
@@ -64,11 +65,10 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLoading = true;
-    console.log(this.clearForm(this.registerForm));
+    this.spinnerService.setIsLoading(true);
     this.registerService.register(this.clearForm(this.registerForm))
       .pipe(
-        finalize(() => this.isLoading = false)
+        finalize(() => this.spinnerService.setIsLoading(false))
       )
       .subscribe((userData) => {
         console.log(userData);
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
         window.location.href = 'login';
       }, (error => {
         console.log(error);
-        window.alert('Error');
+        alert('Error');
       }));
   }
 

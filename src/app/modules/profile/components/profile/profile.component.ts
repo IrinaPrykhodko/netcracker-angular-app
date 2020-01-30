@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../../../services/patient.service';
 import {finalize} from 'rxjs/operators';
+import {SpinnerService} from '../../../../services/spinner.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,17 +10,16 @@ import {finalize} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-  public isLoading;
-
-  constructor(private patientService: PatientService) {
+  constructor(private patientService: PatientService,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
-    this.isLoading = true;
+    this.spinnerService.setIsLoading(true);
 
     this.patientService.getPatient()
       .pipe(
-        finalize(() => this.isLoading = false)
+        finalize(() => this.spinnerService.setIsLoading(false))
       )
       .subscribe();
   }
