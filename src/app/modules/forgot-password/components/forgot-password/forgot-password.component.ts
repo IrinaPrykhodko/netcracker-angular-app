@@ -34,8 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe(value => {
-        this.toastr.success('Message with link for reset password was send to your email ' + this.email.value + '. Please, check your email. ' +
-          'Link will be active 30 minutes', 'Success');
+        this.toastr.success('Please, check your email. ' + this.email.value + '. Link will be active 30 minutes', 'Success');
       }, error => {
         this.toastr.error('User with email ' + this.email.value + ' not found', 'Error');
       });

@@ -11,7 +11,6 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   getNotifications(): Observable<Notification[]> {
-    //return this.http.get<Notification[]>(`${environment.apiUrl}/notification`);
     return this.http.get<Notification[]>('assets/notification.json');
   }
 }

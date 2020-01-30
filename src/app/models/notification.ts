@@ -1,5 +1,5 @@
-import {Medicine} from "./medicine";
-import {PrescriptionItem} from "./prescriptionItem";
+import {Medicine} from './medicine';
+import {PrescriptionItem} from './prescriptionItem';
 
 export class Notification{
   id: number;
