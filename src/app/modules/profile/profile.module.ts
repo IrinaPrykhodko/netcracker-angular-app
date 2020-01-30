@@ -52,7 +52,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDialogModule,
     NgxPaginationModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
