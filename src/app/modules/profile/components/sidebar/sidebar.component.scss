@@ -1,3 +1,5 @@
+@import "src/styles/variables/variables";
+
 .sidebar {
 
 }
@@ -35,7 +37,7 @@
   }
 
   &:hover a, .active {
-    color: #db6974;
+    color: $main-color;
   }
 }
 
