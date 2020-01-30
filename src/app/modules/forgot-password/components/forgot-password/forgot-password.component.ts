@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {ForgotPasswordService} from '../../../../services/forgot-password.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +16,8 @@ export class ForgotPasswordComponent implements OnInit {
   public isLoading;
 
   constructor(private formBuilder: FormBuilder,
-              private forgotPasswordService: ForgotPasswordService) { }
+              private forgotPasswordService: ForgotPasswordService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.emailForm = this.formBuilder.group({
@@ -32,10 +34,9 @@ export class ForgotPasswordComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe(value => {
-        alert('Message with link for reset password was send to your email ' + this.email.value + '. Please, check your email. ' +
-          'Link will be active 30 minutes');
+        this.toastr.success('Please, check your email. ' + this.email.value + '. Link will be active 30 minutes', 'Success');
       }, error => {
-        alert('User with email ' + this.email.value + ' not found');
+        this.toastr.error('User with email ' + this.email.value + ' not found', 'Error');
       });
 
   }

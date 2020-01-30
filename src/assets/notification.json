@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "type": "NOTIFICATION",
+    "remindTime": "13:00",
+    "medicineInstanceId": 13,
+    "prescriptionItemId": 15,
+    "message": "Message from notification"
+  },
+  {
+    "id": 2,
+    "type": "REMINDER",
+    "remindTime": "14:00",
+    "medicineInstanceId": 13,
+    "prescriptionItemId": 15,
+    "message": "Message from reminder"
+  }
+]
