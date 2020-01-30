@@ -4,6 +4,7 @@ import {PatientService} from '../../../../../../services/patient.service';
 import {Patient} from '../../../../../../models/patient';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {finalize} from 'rxjs/operators';
+import {SpinnerService} from '../../../../../../services/spinner.service';
 
 @Component({
   selector: 'app-edit',
@@ -14,12 +15,12 @@ export class EditComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public editForm: FormGroup;
-  public isLoading;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { patient: Patient },
               private formBuilder: FormBuilder,
               private patientService: PatientService,
-              public dialogRef: MatDialogRef<EditComponent>) {
+              public dialogRef: MatDialogRef<EditComponent>,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -56,15 +57,14 @@ export class EditComponent implements OnInit {
   }
 
   submit() {
-    this.isLoading = true;
-    console.log(this.editForm.value);
+    this.spinnerService.setIsLoading(true);
 
     this.patientService.editPatient(this.editForm.value)
       .subscribe((userData) => {
         this.patientService.getPatient()
           .pipe(
             finalize(() => {
-              this.isLoading = false;
+              this.spinnerService.setIsLoading(false);
               this.dialogRef.close(userData);
             })
           )

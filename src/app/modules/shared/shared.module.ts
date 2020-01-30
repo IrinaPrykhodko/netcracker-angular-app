@@ -30,6 +30,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     ToastrModule.forRoot(),
     MatIconModule,
     MatBadgeModule
+
   ],
   exports: [
     MatButtonModule,

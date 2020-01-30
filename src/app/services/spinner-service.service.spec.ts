@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AllMedicinesService } from './all-medicines.service';
+import { SpinnerService } from './spinner.service';
 
-describe('AllMedicinesService', () => {
+describe('SpinnerServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AllMedicinesService = TestBed.get(AllMedicinesService);
+    const service: SpinnerService = TestBed.get(SpinnerService);
     expect(service).toBeTruthy();
   });
 });

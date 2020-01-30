@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://med-kit.herokuapp.com',
+  apiUrl: 'http://localhost:8080',
   purchaseApiUrl: 'https://e-pharmacy.herokuapp.com'
 };
 

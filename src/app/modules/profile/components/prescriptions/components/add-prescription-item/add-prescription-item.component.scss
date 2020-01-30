@@ -1,0 +1,21 @@
+@import "src/styles/classes/classes";
+
+.add__item {
+  width: 500px;
+
+  &__form {
+    mat-form-field {
+      width: 100%;
+      padding-top: 0.5rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    mat-slide-toggle {
+      margin: 1rem 0;
+    }
+  }
+}

@@ -17,10 +17,15 @@ import {EditComponent} from './components/account/components/edit/edit.component
 import {ChangePasswordComponent} from './components/account/components/change-password/change-password.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {AddPurchaseComponent} from './components/purchases/components/add-purhase/add-purchase.component';
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
 import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {AddPrescriptionItemComponent} from './components/prescriptions/components/add-prescription-item/add-prescription-item.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -36,23 +41,30 @@ import {MatCardModule} from '@angular/material/card';
     EditComponent,
     ChangePasswordComponent,
     AddComponent,
-    AddPurchaseComponent,
-    AddPrescriptionComponent
+    AddPrescriptionComponent,
+    AddPrescriptionItemComponent
   ],
-    imports: [
-        CommonModule,
-        ProfileRoutingModule,
-        SharedModule,
-        MatDialogModule,
-        NgxPaginationModule,
-        MatExpansionModule,
-        MatCardModule
-    ],
+
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    SharedModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatCardModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule
+  ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
     ChangePasswordComponent,
-    EditComponent
+    EditComponent,
+    AddPrescriptionItemComponent
   ]
 })
 export class ProfileModule {
