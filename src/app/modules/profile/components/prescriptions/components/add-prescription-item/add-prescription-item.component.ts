@@ -96,13 +96,12 @@ export class AddPrescriptionItemComponent implements OnInit {
         .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
         .subscribe(
           value => {
-            console.log(value);
             this.dialogRef.close(value);
           },
           error => console.log(error)
         );
     } else {
-      alert('Not matches');
+      alert('Invalid medicine name');
     }
   }
 
