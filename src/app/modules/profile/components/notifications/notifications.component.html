@@ -4,7 +4,7 @@
     <h4 class="reminder__list__title">Prescription notifications</h4>
 
     <mat-grid-list cols="2" rowHeight="4:1" >
-      <mat-grid-tile *ngFor="let reminder of reminderList">
+      <mat-grid-tile *ngFor="let reminder of reminderList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}">
         <mat-card class="reminder__list__card">
           <mat-card-content>{{reminder.message}}</mat-card-content>
 
@@ -22,7 +22,7 @@
     <h4 class="notification__list__title">Medicine Kit notifications</h4>
 
     <mat-grid-list cols="2" rowHeight="4:1" >
-      <mat-grid-tile *ngFor="let notification of notificationList">
+      <mat-grid-tile *ngFor="let notification of notificationList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}">
         <mat-card class="notification__list__card">
           <mat-card-content>{{notification.message}}</mat-card-content>
 
@@ -34,6 +34,10 @@
       </mat-grid-tile>
     </mat-grid-list>
 
+  </div>
+
+  <div class="notification-page__pagination">
+    <pagination-controls (pageChange)="paginationOptions.pageNumber = $event" maxSize=""></pagination-controls>
   </div>
 
 </div>

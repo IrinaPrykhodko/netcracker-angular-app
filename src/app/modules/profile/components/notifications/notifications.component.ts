@@ -14,6 +14,11 @@ export class NotificationsComponent implements OnInit {
   notificationList: Notification[];
   reminderList: Notification[];
 
+  paginationOptions = {
+    pageNumber: 0,
+    size: 4,
+  };
+
   constructor(private notificationService: NotificationService,
               private spinnerService: SpinnerService) { }
 
