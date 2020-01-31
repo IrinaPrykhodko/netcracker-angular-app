@@ -5,7 +5,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {LoginResponseItem} from '../../../../models/loginResponseItem';
 import {finalize} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
