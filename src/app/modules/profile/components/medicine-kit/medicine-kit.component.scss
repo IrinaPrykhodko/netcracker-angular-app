@@ -1,3 +1,5 @@
+@import "src/styles/variables/variables";
+
 .add-modal {
   position: absolute;
   width: 80%;
@@ -17,10 +19,6 @@
     position: relative;
     margin: 4px;
 
-    .mat-expansion-panel {
-      background: #EDEDED;
-    }
-
     &.expired ::ng-deep .mat-expansion-panel {
       background: #bd6d6d;
     }
@@ -32,18 +30,6 @@
     span {
       margin-right: 20%;
     }
-  }
-
-  .mat-expansion-panel-header {
-    background-color: #EDEDED;
-  }
-
-  .mat-accordion {
-    background-color: white;
-  }
-
-  .mat-accordion:hover {
-    background-color: #EDEDED;
   }
 
   ::ng-deep .ngx-pagination {
@@ -65,12 +51,12 @@
 }
 
 button {
-  background: #757575;
+  background: $main-color;
   color:#EDEDED;
 }
 
 button:hover {
-  background: #757575;
+  background: $second-color;
   color: white;
 }
 

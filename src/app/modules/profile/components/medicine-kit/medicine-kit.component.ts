@@ -31,6 +31,7 @@ export class MedicineKitComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinnerService.setIsLoading(true);
     this.getMedicineInstances();
   }
 
@@ -59,7 +60,7 @@ export class MedicineKitComponent implements OnInit {
       .pipe(finalize(() => {
         map((data: MedicineInstance[]) => {
           return data.map(item => this.checkDate(item));
-        })
+        });
           this.spinnerService.setIsLoading(false)
         })
       )
@@ -84,12 +85,13 @@ export class MedicineKitComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchText);
+    this.spinnerService.setIsLoading(true);
     this.medicineKit = null;
     this.paginationOptions.pageNumber = 0;
     this.getMedicineInstances(this.searchText);
   }
 
-  submit(selfLife: Date, amount: number) {
+    submit(selfLife: Date, amount: number) {
     console.log(this.editForm.value);
     this.selectedMedicineInstance.amount = amount;
     this.selectedMedicineInstance.selfLife = selfLife;
