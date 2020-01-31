@@ -1,25 +1,41 @@
 @import "src/styles/variables/variables";
 
-.notification{
+.notification-page{
+  padding: 0;
+  margin: 0;
 
-  &__title{
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: $main-color;
+  &__pagination{
+    padding: 1rem 0;
   }
+}
 
-  &__card {
-    margin-bottom: 1rem;
-    border: 0.75px solid $second-color;
-  }
+.reminder, .notification {
 
-  &__buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
+  &__list {
 
-    button + button {
-      margin-left: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $second-color;
+
+    &__title {
+      color: $main-color;
+      text-align: center;
+      padding: 2rem 0 0.5rem 0;
+    }
+
+    &__card {
+      height: 95%;
+      width: 95%;
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+
+      button + button {
+        margin-left: 1rem;
+      }
     }
   }
+
 }
