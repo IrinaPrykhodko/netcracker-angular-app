@@ -15,7 +15,7 @@ import {SpinnerService} from '../../../../services/spinner.service';
 export class MedicineKitComponent implements OnInit {
 
   medicineKit: MedicineInstance[];
-  public editForm: FormGroup ;
+  public editForm: FormGroup;
   public dialogRefEdit: MatDialogRef<AddComponent>;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
@@ -31,11 +31,7 @@ export class MedicineKitComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size)
-      .pipe(map((data: MedicineInstance[]) => {
-        return data.map(item => this.checkDate(item));
-      }))
-      .subscribe((data: MedicineInstance[]) => this.medicineKit = data);
+    this.getMedicineInstances();
   }
 
   onSelected(medicineInstance: MedicineInstance): void {
@@ -51,17 +47,23 @@ export class MedicineKitComponent implements OnInit {
     this.paginationOptions.pageNumber = p - 1;
     const requiredNumberOfMI = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
-    if(requiredNumberOfMI >= this.medicineKit.length - 1){
+    if (requiredNumberOfMI >= this.medicineKit.length - 1) {
       this.spinnerService.setIsLoading(true);
       this.medicineKit.pop();
       this.getMedicineInstances(this.searchText);
     }
   }
 
-  private  getMedicineInstances(searchText?: string){
+  private getMedicineInstances(searchText?: string) {
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-      .subscribe((data: MedicineInstance[]) =>{
+      .pipe(finalize(() => {
+        map((data: MedicineInstance[]) => {
+          return data.map(item => this.checkDate(item));
+        })
+          this.spinnerService.setIsLoading(false)
+        })
+      )
+      .subscribe((data: MedicineInstance[]) => {
         this.medicineKit = this.medicineKit ? this.medicineKit.concat(data) : data;
       });
   }
@@ -82,6 +84,9 @@ export class MedicineKitComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchText);
+    this.medicineKit = null;
+    this.paginationOptions.pageNumber = 0;
+    this.getMedicineInstances(this.searchText);
   }
 
   submit(selfLife: Date, amount: number) {

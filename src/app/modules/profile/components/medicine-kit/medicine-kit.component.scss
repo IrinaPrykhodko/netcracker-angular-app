@@ -18,7 +18,7 @@
     margin: 4px;
 
     .mat-expansion-panel {
-      background: #757575;
+      background: #EDEDED;
     }
 
     &.expired ::ng-deep .mat-expansion-panel {
@@ -35,15 +35,15 @@
   }
 
   .mat-expansion-panel-header {
-    background-color: #777;
+    background-color: #EDEDED;
   }
 
   .mat-accordion {
-    background-color: #777;
+    background-color: white;
   }
 
   .mat-accordion:hover {
-    background-color: #777;
+    background-color: #EDEDED;
   }
 
   ::ng-deep .ngx-pagination {
@@ -51,7 +51,7 @@
     position: relative;
 
     .current {
-      background: #757575 !important;
+      background: #EDEDED !important;
     }
   }
 
@@ -65,8 +65,8 @@
 }
 
 button {
-  background: #EDEDED;
-  color: #757575;
+  background: #757575;
+  color:#EDEDED;
 }
 
 button:hover {
