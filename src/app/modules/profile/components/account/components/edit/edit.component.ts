@@ -15,6 +15,7 @@ export class EditComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public editForm: FormGroup;
+  maxBirthDate = new Date();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { patient: Patient },
               private formBuilder: FormBuilder,
@@ -67,17 +68,9 @@ export class EditComponent implements OnInit {
     this.spinnerService.setIsLoading(true);
 
     this.patientService.editPatient(this.editForm.value)
-      .subscribe((userData) => {
-        this.patientService.getPatient()
-          .pipe(
-            finalize(() => {
-              this.spinnerService.setIsLoading(false);
-              this.dialogRef.close(userData);
-            })
-          )
-          .subscribe();
-      }, (error => {
-        console.log(error);
-      }));
+      .pipe(finalize(() => {
+        this.spinnerService.setIsLoading(false);
+      }))
+      .subscribe(value => this.dialogRef.close());
   }
 }
