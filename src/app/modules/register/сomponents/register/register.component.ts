@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RegisterService} from '../../../../services/register.service';
 import {Patient} from '../../../../models/patient';
-import {MyErrorStateMatcher} from '../../../../models/MyErrorStateMatcher';
+import {PasswordStateMatcher} from '../../../../models/PasswordStateMatcher';
 import {CountryISO, SearchCountryField, TooltipLabel} from 'ngx-intl-tel-input';
 import {PhoneNumberUtil} from 'google-libphonenumber';
 import {finalize} from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public registerForm: FormGroup;
-  public matcher = new MyErrorStateMatcher();
+  public matcher = new PasswordStateMatcher();
   public isLoading;
 
   separateDialCode = true;

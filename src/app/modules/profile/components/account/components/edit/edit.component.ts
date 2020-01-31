@@ -25,8 +25,8 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       dateOfBirth: [''],
       height: ['', Validators.min(0)],
       weight: ['', Validators.min(0)],
@@ -36,7 +36,6 @@ export class EditComponent implements OnInit {
     });
 
     this.patient = this.data.patient;
-
     this.editForm.patchValue({...this.patient});
   }
 

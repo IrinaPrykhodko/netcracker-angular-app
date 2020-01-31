@@ -29,13 +29,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height"/>
-      <mat-error *ngIf="height.invalid">Height must be positive</mat-error>
+      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height" />
+      <mat-error *ngIf="height.getError('min')">Height must be positive</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput formControlName="weight" type="number" min="0" placeholder="Enter your weight"/>
-      <mat-error *ngIf="weight.invalid">Weight must be positive</mat-error>
+      <mat-error *ngIf="weight.getError('min')">Weight must be positive</mat-error>
     </mat-form-field>
 
     <mat-form-field>
