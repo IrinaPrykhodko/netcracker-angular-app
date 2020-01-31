@@ -1,43 +1,38 @@
 <div class="login">
+
   <div class="component__title">
     <h2>Login</h2>
   </div>
+
   <form [formGroup]="loginForm" class="login-form">
-    <mat-form-field color="primary">
+    <mat-form-field>
+      <input matInput formControlName="email" type="email" value="{{registerUserEmail}}"
+             placeholder="Enter your email"/>
 
-      <input
-        matInput
-        formControlName="email"
-        value="{{registerUserEmail}}"
-        placeholder="Enter your email" required
-        pattern="[a-zA-Z_0-9.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"
-      />
+      <mat-error *ngIf="email.hasError('required') && (email.dirty || email.touched)">
+        Email is required
+      </mat-error>
 
+      <mat-error *ngIf="email.hasError('email') && (email.dirty || email.touched)">
+        Email is invalid
+      </mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="email.valid || email.untouched">* Email is incorrect</p>
+    <mat-form-field>
+      <input matInput formControlName="password" type="password" placeholder="Enter your password"/>
 
-    <mat-form-field color="primary">
-
-      <input
-        matInput
-        formControlName="password"
-        type="password"
-        placeholder="Enter your password" required/>
-
+      <mat-error *ngIf="password.hasError('required') && (password.dirty || password.touched)">
+        Password is required
+      </mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
-
-    <button [disabled]="email.invalid || password.invalid"
-            mat-raised-button (click)="submitForm()">Log in
+    <button mat-raised-button [disabled]="email.invalid || password.invalid"  (click)="submitForm()">
+      Log in
     </button>
-
   </form>
 
   <div class="buttons">
     <button mat-button routerLink="/register">Sign up</button>
     <button mat-button routerLink="/forgot-password">Forgot password</button>
   </div>
-
 </div>
