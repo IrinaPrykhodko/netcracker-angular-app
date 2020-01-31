@@ -28,16 +28,24 @@ export class EditComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       dateOfBirth: [''],
-      height: [''],
-      weight: [''],
+      height: ['', Validators.min(0)],
+      weight: ['', Validators.min(0)],
       location: [''],
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('[+][0-9]{12}')]],
       email: ['', [Validators.email, Validators.required]],
     });
 
     this.patient = this.data.patient;
 
     this.editForm.patchValue({...this.patient});
+  }
+
+  get height() {
+    return this.editForm.get('height');
+  }
+
+  get weight() {
+    return this.editForm.get('weight');
   }
 
   get email() {

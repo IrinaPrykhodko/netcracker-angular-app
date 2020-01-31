@@ -1,100 +1,64 @@
 <div class="edit">
+
   <div class="edit__title">
     <h3>Edit user</h3>
   </div>
+
   <form [formGroup]="editForm" class="edit-form">
-
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="firstName"
-          placeholder="Enter your first name">
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="firstName" placeholder="* Enter your first name">
+      <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.untouched)">First name is required
+      </mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
-
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="lastName"
-          placeholder="Enter your last name">
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="lastName" placeholder="* Enter your last name">
+      <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.untouched)">Last name is required
+      </mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
-
-    <p class="p-date">Enter your date of birth</p>
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="dateOfBirth"
-          type="Date"
-        />
-      </label>
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="datepicker"
+             formControlName="dateOfBirth"
+             placeholder="Enter your date of birth"
+             readonly
+             (click)="datepicker.open()"/>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="height"
-          type="number"
-          placeholder="Enter your height"/>
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height"/>
+      <mat-error *ngIf="height.invalid">Height must be positive</mat-error>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="weight"
-          type="number"
-          placeholder="Enter your weight"/>
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="weight" type="number" min="0" placeholder="Enter your weight"/>
+      <mat-error *ngIf="weight.invalid">Weight must be positive</mat-error>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="location"
-          type="location"
-          placeholder="Enter your location"/>
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="location" type="location" placeholder="Enter your location"/>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="phoneNumber"
-          type="email"
-          pattern="[+][0-9]{12}"
-          placeholder="Enter your phone number">
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="phoneNumber"
+             placeholder="* Enter your phone number">
+      <mat-error *ngIf="phoneNumber.getError('required')">Phone number is required</mat-error>
+      <mat-error *ngIf="phoneNumber.getError('pattern')">
+        Phone number is invalid (should start with '+' and contain 12 numbers)
+      </mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="phoneNumber.untouched || phoneNumber.valid">* Phone number is required</p>
-
-    <mat-form-field color="primary">
-      <label>
-        <input
-          matInput
-          formControlName="email"
-          type="email"
-          placeholder="Enter your email">
-      </label>
+    <mat-form-field>
+      <input matInput formControlName="email" type="email" placeholder="* Enter your email">
+      <mat-error *ngIf="email.getError('required')">Email is required</mat-error>
+      <mat-error *ngIf="email.getError('email')">Email is invalid</mat-error>
     </mat-form-field>
 
-    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is required</p>
-
-    <button [disabled]="editForm.invalid"
-            mat-raised-button (click)="submit()">Confirm
+    <button [disabled]="editForm.invalid" mat-raised-button (click)="submit()">
+      Confirm
     </button>
-
   </form>
 </div>
