@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {finalize} from 'rxjs/operators';
 import {ResetPasswordService} from '../../../../services/reset-password.service';
 import {ActivatedRoute} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +19,8 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private resetPasswordService: ResetPasswordService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toastMessage: ToastrService) {
   }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
       }, error => {
         console.log(error);
         this.isTokenValid = false;
-        alert('Link was expired');
+        this.toastMessage.error('Link was expired', 'Error');
         window.location.href = 'forgot-password';
       });
 
@@ -73,10 +75,10 @@ export class ResetPasswordComponent implements OnInit {
         })
       )
       .subscribe(value => {
-        alert('Your password was changed');
+        this.toastMessage.success('Your password was changed', 'Success');
         window.location.href = 'login';
       }, error => {
-        alert('Please, try again');
+        this.toastMessage.error('Please, try again', 'Error');
       });
   }
 

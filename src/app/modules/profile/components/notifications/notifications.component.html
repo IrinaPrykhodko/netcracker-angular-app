@@ -1,1 +1,14 @@
-<p>notifications works!</p>
+<div class="notification">
+  <h2 class="notification__title">My notifications</h2>
+
+  <div *ngFor="let notification of notificationList">
+    <mat-card class="notification__card">
+      <mat-card-content>{{notification.message}}</mat-card-content>
+      <div class="notification__buttons">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button>Ok</button>
+      </div>
+    </mat-card>
+  </div>
+
+</div>

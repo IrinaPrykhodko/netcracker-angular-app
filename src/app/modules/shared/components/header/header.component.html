@@ -9,6 +9,9 @@
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="user">{{user.firstName}}</button>
+      <button mat-icon-button routerLink="profile/notifications" routerLinkActive="active" *ngIf="user">
+        <mat-icon aria-hidden="false" aria-label="Notifications" matBadge="22" matBadgePosition="above after" matBadgeColor="primary">notifications</mat-icon>
+      </button>
     </menu>
   </div>
 </div>

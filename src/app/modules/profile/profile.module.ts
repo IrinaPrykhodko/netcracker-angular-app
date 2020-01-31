@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {AddComponent} from './components/medicine-kit/components/add/add.component';
 import {AddPrescriptionComponent} from './components/prescriptions/components/add-prescription/add-prescription.component';
+import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -43,6 +44,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     AddPrescriptionComponent,
     AddPrescriptionItemComponent
   ],
+
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -50,6 +52,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDialogModule,
     NgxPaginationModule,
     MatExpansionModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,

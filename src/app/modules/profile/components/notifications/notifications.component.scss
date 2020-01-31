@@ -1,0 +1,25 @@
+@import "src/styles/variables/variables";
+
+.notification{
+
+  &__title{
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: $main-color;
+  }
+
+  &__card {
+    margin-bottom: 1rem;
+    border: 0.75px solid $second-color;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+
+    button + button {
+      margin-left: 1rem;
+    }
+  }
+}
