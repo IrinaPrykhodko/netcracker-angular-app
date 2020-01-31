@@ -1,17 +1,29 @@
 <div class="add-prescription">
+
   <div class="add-prescription__title dialog__title">
     <h3>Add prescription</h3>
   </div>
+
   <div class="add-prescription__form">
     <form [formGroup]="addPrescriptionForm">
       <mat-form-field class="add-prescription__form__value">
-        <input matInput formControlName="name" placeholder="Enter prescription name"/>
+        <input matInput formControlName="name" placeholder="* Enter prescription name"/>
+        <mat-error *ngIf="name.hasError('required') && (name.dirty || name.touched)">
+          Prescription name is required
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field class="add-prescription__form__value">
-        <input matInput [matDatepicker]="datepicker" formControlName="date" placeholder="Enter prescription date"/>
+        <input matInput [matDatepicker]="datepicker" formControlName="date" placeholder="Enter prescription date"
+               readonly (click)="datepicker.open()"/>
         <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #datepicker></mat-datepicker>
+
+        <mat-error *ngIf="date.hasError('required') && (date.dirty || date.touched)">
+          Prescription date is required
+        </mat-error>
       </mat-form-field>
+
       <button mat-raised-button [disabled]="addPrescriptionForm.invalid" (click)="submit()">Add</button>
     </form>
   </div>
