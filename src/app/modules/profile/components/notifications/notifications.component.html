@@ -7,10 +7,12 @@
       <mat-grid-tile *ngFor="let reminder of reminderList">
         <mat-card class="reminder__list__card">
           <mat-card-content>{{reminder.message}}</mat-card-content>
+
           <div class="reminder__list__buttons">
             <button mat-raised-button>Ok</button>
             <button mat-raised-button>Cancel</button>
           </div>
+
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
@@ -18,16 +20,20 @@
 
   <div class="notification__list">
     <h4 class="notification__list__title">Medicine Kit notifications</h4>
+
     <mat-grid-list cols="2" rowHeight="4:1" >
       <mat-grid-tile *ngFor="let notification of notificationList">
         <mat-card class="notification__list__card">
           <mat-card-content>{{notification.message}}</mat-card-content>
+
           <div class="notification__list__buttons">
             <button mat-raised-button>Ok</button>
           </div>
+
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
+
   </div>
 
 </div>
