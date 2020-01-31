@@ -1,14 +1,43 @@
-<div class="notification">
-  <h2 class="notification__title">My notifications</h2>
+<div class="notification-page">
 
-  <div *ngFor="let notification of notificationList">
-    <mat-card class="notification__card">
-      <mat-card-content>{{notification.message}}</mat-card-content>
-      <div class="notification__buttons">
-        <button mat-raised-button>Cancel</button>
-        <button mat-raised-button>Ok</button>
-      </div>
-    </mat-card>
+  <div class="reminder__list">
+    <h4 class="reminder__list__title">Prescription notifications</h4>
+
+    <mat-grid-list cols="2" rowHeight="4:1" >
+      <mat-grid-tile *ngFor="let reminder of reminderList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}">
+        <mat-card class="reminder__list__card">
+          <mat-card-content>{{reminder.message}}</mat-card-content>
+
+          <div class="reminder__list__buttons">
+            <button mat-raised-button>Ok</button>
+            <button mat-raised-button>Cancel</button>
+          </div>
+
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div class="notification__list">
+    <h4 class="notification__list__title">Medicine Kit notifications</h4>
+
+    <mat-grid-list cols="2" rowHeight="4:1" >
+      <mat-grid-tile *ngFor="let notification of notificationList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber}">
+        <mat-card class="notification__list__card">
+          <mat-card-content>{{notification.message}}</mat-card-content>
+
+          <div class="notification__list__buttons">
+            <button mat-raised-button>Ok</button>
+          </div>
+
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
+  <div class="notification-page__pagination">
+    <pagination-controls (pageChange)="paginationOptions.pageNumber = $event" maxSize=""></pagination-controls>
   </div>
 
 </div>
