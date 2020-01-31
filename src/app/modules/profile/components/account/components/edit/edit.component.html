@@ -20,6 +20,7 @@
     <mat-form-field>
       <input matInput
              [matDatepicker]="datepicker"
+             [max]="maxBirthDate"
              formControlName="dateOfBirth"
              placeholder="Enter your date of birth"
              readonly
@@ -29,7 +30,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height" />
+      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height"/>
       <mat-error *ngIf="height.getError('min')">Height must be positive</mat-error>
     </mat-form-field>
 
