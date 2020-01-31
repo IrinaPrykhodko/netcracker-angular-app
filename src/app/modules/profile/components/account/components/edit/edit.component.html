@@ -7,13 +7,25 @@
   <form [formGroup]="editForm" class="edit-form">
     <mat-form-field>
       <input matInput formControlName="firstName" placeholder="* Enter your first name">
-      <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.untouched)">First name is required
+
+      <mat-error *ngIf="firstName.hasError('required') && (firstName.dirty || firstName.untouched)">
+        First name is required
+      </mat-error>
+
+      <mat-error *ngIf="firstName.hasError('pattern') && (firstName.dirty || firstName.untouched)">
+        First name must contain only letters
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput formControlName="lastName" placeholder="* Enter your last name">
-      <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.untouched)">Last name is required
+
+      <mat-error *ngIf="lastName.hasError('required') && (lastName.dirty || lastName.untouched)">
+        Last name is required
+      </mat-error>
+
+      <mat-error *ngIf="lastName.hasError('pattern') && (lastName.dirty || lastName.untouched)">
+        Last name must contain only letters
       </mat-error>
     </mat-form-field>
 
@@ -25,17 +37,20 @@
              placeholder="Enter your date of birth"
              readonly
              (click)="datepicker.open()"/>
+
       <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
       <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height"/>
+
       <mat-error *ngIf="height.getError('min')">Height must be positive</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput formControlName="weight" type="number" min="0" placeholder="Enter your weight"/>
+
       <mat-error *ngIf="weight.getError('min')">Weight must be positive</mat-error>
     </mat-form-field>
 
@@ -46,7 +61,11 @@
     <mat-form-field>
       <input matInput formControlName="phoneNumber"
              placeholder="* Enter your phone number">
-      <mat-error *ngIf="phoneNumber.getError('required')">Phone number is required</mat-error>
+
+      <mat-error *ngIf="phoneNumber.getError('required')">
+        Phone number is required
+      </mat-error>
+
       <mat-error *ngIf="phoneNumber.getError('pattern')">
         Phone number is invalid (should start with '+' and contain 12 numbers)
       </mat-error>
@@ -54,6 +73,7 @@
 
     <mat-form-field>
       <input matInput formControlName="email" type="email" placeholder="* Enter your email">
+
       <mat-error *ngIf="email.getError('required')">Email is required</mat-error>
       <mat-error *ngIf="email.getError('email')">Email is invalid</mat-error>
     </mat-form-field>
