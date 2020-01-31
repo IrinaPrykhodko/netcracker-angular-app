@@ -62,7 +62,7 @@ export class MedicineKitComponent implements OnInit {
           return data.map(item => this.checkDate(item));
         }),
         finalize(() => {
-          this.spinnerService.setIsLoading(false)
+          this.spinnerService.setIsLoading(false);
         })
       )
       .subscribe((data: MedicineInstance[]) => {
