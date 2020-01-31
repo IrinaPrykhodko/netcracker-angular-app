@@ -20,7 +20,7 @@ export class MedicineKitComponent implements OnInit {
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
     pageNumber: 0,
-    size: 4,
+    size: 10,
   };
   searchText: string;
 
@@ -57,10 +57,11 @@ export class MedicineKitComponent implements OnInit {
 
   private getMedicineInstances(searchText?: string) {
     this.medicineKitService.getMedicineInstances(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
-      .pipe(finalize(() => {
+      .pipe(
         map((data: MedicineInstance[]) => {
           return data.map(item => this.checkDate(item));
-        });
+        }),
+        finalize(() => {
           this.spinnerService.setIsLoading(false)
         })
       )
