@@ -51,7 +51,6 @@ export class PrescriptionService {
       medicineId: prescriptionItem.medicine.id,
       startDate: prescriptionItem.startDate,
       endDate: prescriptionItem.endDate,
-      takingDurationDays: prescriptionItem.takingDurationDays,
       takingTime: prescriptionItem.takingTime,
       description: prescriptionItem.description,
       dosage: prescriptionItem.dosage,
