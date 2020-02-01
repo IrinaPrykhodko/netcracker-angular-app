@@ -46,21 +46,21 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AddPrescriptionItemComponent
   ],
 
-    imports: [
-        CommonModule,
-        ProfileRoutingModule,
-        SharedModule,
-        MatDialogModule,
-        NgxPaginationModule,
-        MatExpansionModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSlideToggleModule,
-        MatAutocompleteModule,
-        MatGridListModule
-    ],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    SharedModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule,
+    MatGridListModule
+  ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
