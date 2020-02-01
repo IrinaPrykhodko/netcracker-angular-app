@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {LoginGuardService} from './helpers/login-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -9,10 +10,12 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuardService],
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'register',
+    canActivate: [LoginGuardService],
     loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule)
   },
   {
@@ -21,6 +24,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'forgot-password',
+    canActivate: [LoginGuardService],
     loadChildren: () => import('./modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
   },
   {
