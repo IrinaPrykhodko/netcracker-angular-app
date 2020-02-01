@@ -3,7 +3,15 @@
       <li><a routerLink="account" routerLinkActive="active">My account</a></li>
       <li><a routerLink="medicine-kit" routerLinkActive="active">Medicine kit</a></li>
       <li><a routerLink="prescriptions" routerLinkActive="active">My prescriptions</a></li>
-      <li><a routerLink="notifications" routerLinkActive="active">My notifications</a></li>
+      <li>
+        <a routerLink="notifications" routerLinkActive="active">My notifications
+          <span *ngIf="notificationsAndRemindersCount"
+            matBadge="{{notificationsAndRemindersCount}}"
+            matBadgeOverlap="false"
+            class="badge__color">
+          </span>
+        </a>
+      </li>
       <li><a routerLink="purchases" routerLinkActive="active">Purchases</a></li>
       <li><a routerLink="all-medicines" routerLinkActive="active">All medicines</a></li>
     </ul>

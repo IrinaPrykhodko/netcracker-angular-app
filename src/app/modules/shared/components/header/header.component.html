@@ -8,10 +8,15 @@
         <button mat-menu-item routerLink="profile">Profile</button>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="user">{{user.firstName}}</button>
       <button mat-icon-button routerLink="profile/notifications" routerLinkActive="active" *ngIf="user">
-        <mat-icon aria-hidden="false" aria-label="Notifications" matBadge="22" matBadgePosition="above after" matBadgeColor="primary">notifications</mat-icon>
+        <mat-icon class="notification-icon" aria-hidden="false" aria-label="Notifications">notifications</mat-icon>
+        <span *ngIf="notificationsAndRemindersCount"
+              matBadge="{{notificationsAndRemindersCount}}"
+              matBadgePosition="above after"
+              class="badge__color">
+        </span>
       </button>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="user">{{user.firstName}}</button>
     </menu>
   </div>
 </div>
