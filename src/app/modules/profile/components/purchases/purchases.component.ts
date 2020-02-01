@@ -87,28 +87,38 @@ export class PurchasesComponent implements OnInit {
   }
 
   buyPurchaseItems() {
-    this.spinnerService.setIsLoading(true);
-    const idList = this.purchaseItems.map(value => value.id);
+    if (this.purchaseItems.length > 0) {
+      this.spinnerService.setIsLoading(true);
+      const idList = this.purchaseItems.map(value => value.id);
 
-    this.purchaseService.buyPurchaseItems(idList)
-      .subscribe(approvedPurchaseIdList => {
-        this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
-          .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-          .subscribe(value => {
-            this.purchaseItems = this.purchaseItems.filter(item => {
-              return !approvedPurchaseIdList.includes(item.id);
-            });
+      this.purchaseService.buyPurchaseItems(idList)
+        .subscribe(approvedPurchaseIdList => {
+          if (approvedPurchaseIdList.length > 0) {
+            this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
+              .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+              .subscribe(value => {
+                this.purchaseItems = this.purchaseItems.filter(item => {
+                  return !approvedPurchaseIdList.includes(item.id);
+                });
 
-            this.toast.success('Purchase items successfully bought!', 'Buy purchase items');
-          }, error => {
-            this.toast.error('Could not remove bought purchase items, please try again', 'Buy purchase items');
-            console.log(error);
-          });
-      }, error => {
-        this.spinnerService.setIsLoading(false);
-        this.toast.error('Could not buy purchase items, please try again', 'Buy purchase items');
-        console.log(error);
-      });
+                this.toast.success('Purchase items successfully bought!');
+
+              }, error => {
+                this.toast.error('Service is currently unavailable. Please contact administrator or try again later');
+                console.log(error);
+              });
+          } else {
+            this.spinnerService.setIsLoading(false);
+            this.toast.info('Purchase service is currently unavailable, please try again later');
+          }
+        }, error => {
+          this.spinnerService.setIsLoading(false);
+          this.toast.error('Purchase service is currently unavailable, please try again later');
+          console.log(error);
+        });
+    } else {
+      this.toast.info('Nothing to buy! Please add some medicines to purchase and try again');
+    }
   }
 
   private getPurchaseItems() {
