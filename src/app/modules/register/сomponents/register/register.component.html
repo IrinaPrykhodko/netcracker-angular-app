@@ -3,78 +3,78 @@
     <h2>Register</h2>
   </div>
   <form [formGroup]="registerForm" class="register-form">
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="firstName"
-          type = "firstName"
-          placeholder="Enter your first name" required/>
+    <mat-form-field>
+      <input matInput formControlName="firstName" type="text" placeholder="* Enter your first name"/>
+
+      <mat-error *ngIf="firstName.hasError('required') && (firstName.dirty || firstName.touched)">
+        First name is required
+      </mat-error>
+
+      <mat-error *ngIf="firstName.hasError('pattern') && (firstName.dirty || firstName.touched)">
+        First name must contain only characters
+      </mat-error>
     </mat-form-field>
-    <p class="error-massage" [hidden]="firstName.untouched || firstName.valid">* First name is required</p>
 
     <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="lastName"
-          type = "lastName"
-          placeholder="Enter your last name" required/>
-    </mat-form-field>
-    <p class="error-massage" [hidden]="lastName.untouched || lastName.valid">* Last name is required</p>
+      <input matInput formControlName="lastName" placeholder="* Enter your last name"/>
 
-    <p class="p-date">Enter your date of birth</p>
+      <mat-error *ngIf="lastName.hasError('required') && (lastName.dirty || lastName.touched)">
+        Last name is required
+      </mat-error>
+
+      <mat-error *ngIf="lastName.hasError('pattern') && (lastName.dirty || lastName.touched)">
+        Last name must contain only characters
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field color="primary" class="mat-date">
-        <input
-          matInput
-          formControlName="dateOfBirth"
-          type = "Date"/>
+      <input matInput [matDatepicker]="birthday" [max]="maxBirthDayDate" formControlName="dateOfBirth"
+             placeholder="* Enter your date of birth" readonly (click)="birthday.open()"/>
+
+      <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+      <mat-datepicker #birthday></mat-datepicker>
     </mat-form-field>
 
-    <div class="radio-sex">
-    <label>
-      <input type="radio" value="MALE" formControlName="gender">
-      <span>male</span>
-    </label>
-    <label>
-      <input type="radio" value="FEMALE" formControlName="gender">
-      <span>female</span>
-    </label>
-    </div>
-
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="height"
-          type = "number"
-          placeholder="Enter your height" />
+    <mat-form-field>
+      <mat-select formControlName="gender" placeholder="Enter your gender">
+        <mat-option *ngFor="let gender of genders" [value]="gender">{{gender}}</mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="weight"
-          type = "number"
-          placeholder="Enter your weight" />
+    <mat-form-field>
+      <input matInput formControlName="height" min="0" type="number" placeholder="Enter your height"/>
+
+      <mat-error *ngIf="height.hasError('min') && (height.dirty || height.touched)">
+        Height must be positive
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="location"
-          type = "location"
-          placeholder="Enter your location" />
+    <mat-form-field>
+      <input matInput formControlName="weight" min="0" type="number" placeholder="Enter your weight"/>
+
+      <mat-error *ngIf="weight.hasError('min') && (weight.dirty || weight.touched)">
+        Weight must be positive
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="email"
-          type = "email"
-          pattern="[a-zA-Z_0-9]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"
-          placeholder="Enter your email" required/>
+    <mat-form-field>
+      <input matInput formControlName="location" type="location" placeholder="Enter your location"/>
     </mat-form-field>
-    <p class="error-massage" [hidden]="email.untouched || email.valid">* Email is incorrect</p>
 
-    <p class="p-phone-number">Enter your phone number *</p>
+    <mat-form-field>
+      <input matInput formControlName="email" type="email"
+             placeholder="* Enter your email" required/>
+
+      <mat-error *ngIf="email.hasError('required') && (email.dirty || email.touched)">
+        Email is required
+      </mat-error>
+
+      <mat-error *ngIf="email.hasError('email') && (email.dirty || email.touched)">
+        Email is invalid
+      </mat-error>
+    </mat-form-field>
+
+    <p class="p-phone-number">* Enter your phone number</p>
     <div class="phone">
       <ngx-intl-tel-input
         [preferredCountries]="preferredCountries"
@@ -84,7 +84,7 @@
         [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
         [selectFirstCountry]="false"
         [selectedCountryISO]="CountryISO.Ukraine"
-        [maxLength]= '11'
+        [maxLength]='11'
         [tooltipField]="TooltipLabel.Name"
         [phoneValidation]="true"
         [separateDialCode]="separateDialCode"
@@ -95,28 +95,35 @@
       <p class="error-massage" [hidden]="phoneNumber.untouched || phoneNumber.valid">* Phone number is required</p>
     </div>
 
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="password"
-          type = "password"
-          placeholder="Enter your password" required/>
-    </mat-form-field>
-    <p class="error-massage" [hidden]="password.untouched || password.valid">* Password is required</p>
+    <mat-form-field>
+      <input matInput formControlName="password" type="password" placeholder="* Enter your password"/>
 
-    <mat-form-field color="primary">
-        <input
-          matInput
-          formControlName="passwordConfirm"
-          type = "password"
-          placeholder="Confirm your password" required
-          />
-    </mat-form-field>
-    <p class="error-massage" [hidden]="passwordConfirm.untouched || passwordConfirm.valid">* Confirm password is required</p>
+      <mat-error *ngIf="password.hasError('required') && (password.dirty || password.touched)">
+        Password is required
+      </mat-error>
 
-    <button [disabled]="registerForm.invalid"
-            mat-raised-button (click)="submitForm()">Sign up
+      <mat-error *ngIf="password.hasError('minlength') && (password.dirty || password.touched)">
+        Password is too short
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="passwordConfirm" type="password" placeholder="* Confirm your password"
+             [errorStateMatcher]="passwordStateMatcher"/>
+
+      <mat-error *ngIf="passwordConfirm.hasError('required') && (passwordConfirm.dirty || passwordConfirm.touched)">
+        Please confirm password
+      </mat-error>
+
+      <mat-error *ngIf="registerForm.hasError('confirmedPasswordNotMatch') &&
+      (passwordConfirm.dirty || passwordConfirm.touched) &&
+      passwordConfirm.value">
+        Passwords don't match
+      </mat-error>
+    </mat-form-field>
+
+    <button [disabled]="registerForm.invalid" mat-raised-button (click)="submitForm()">
+      Sign up
     </button>
-
   </form>
 </div>

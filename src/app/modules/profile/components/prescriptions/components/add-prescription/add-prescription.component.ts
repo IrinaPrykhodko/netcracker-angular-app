@@ -29,6 +29,14 @@ export class AddPrescriptionComponent implements OnInit {
     });
   }
 
+  get name() {
+    return this.addPrescriptionForm.get('name');
+  }
+
+  get date() {
+    return this.addPrescriptionForm.get('date');
+  }
+
   submit() {
     this.spinnerService.setIsLoading(true);
     this.prescription.date = this.addPrescriptionForm.value.date;

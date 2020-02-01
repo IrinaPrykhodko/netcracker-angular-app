@@ -15,6 +15,7 @@ export class EditComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public editForm: FormGroup;
+  maxBirthDate = new Date();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { patient: Patient },
               private formBuilder: FormBuilder,
@@ -25,19 +26,26 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
       dateOfBirth: [''],
-      height: [''],
-      weight: [''],
+      height: ['', Validators.min(0)],
+      weight: ['', Validators.min(0)],
       location: [''],
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('[+][0-9]{12}')]],
       email: ['', [Validators.email, Validators.required]],
     });
 
     this.patient = this.data.patient;
-
     this.editForm.patchValue({...this.patient});
+  }
+
+  get height() {
+    return this.editForm.get('height');
+  }
+
+  get weight() {
+    return this.editForm.get('weight');
   }
 
   get email() {
@@ -60,17 +68,9 @@ export class EditComponent implements OnInit {
     this.spinnerService.setIsLoading(true);
 
     this.patientService.editPatient(this.editForm.value)
-      .subscribe((userData) => {
-        this.patientService.getPatient()
-          .pipe(
-            finalize(() => {
-              this.spinnerService.setIsLoading(false);
-              this.dialogRef.close(userData);
-            })
-          )
-          .subscribe();
-      }, (error => {
-        console.log(error);
-      }));
+      .pipe(finalize(() => {
+        this.spinnerService.setIsLoading(false);
+      }))
+      .subscribe(value => this.dialogRef.close());
   }
 }
