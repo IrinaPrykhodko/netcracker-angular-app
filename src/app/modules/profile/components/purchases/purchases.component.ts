@@ -4,6 +4,7 @@ import {PurchaseItem} from '../../../../models/purchase-item';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-purchases',
@@ -15,7 +16,6 @@ export class PurchasesComponent implements OnInit {
   purchaseItems: PurchaseItem[];
   selectedPurchaseItem: PurchaseItem;
   editForm: FormGroup;
-  isAmountInvalid: boolean;
 
   paginationOptions = {
     pageNumber: 0,
@@ -24,7 +24,8 @@ export class PurchasesComponent implements OnInit {
 
   constructor(private purchaseService: PurchaseService,
               private formBuilder: FormBuilder,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toast: ToastrService) {
   }
 
   ngOnInit() {
@@ -55,22 +56,20 @@ export class PurchasesComponent implements OnInit {
   }
 
   editPurchaseItem(amount: number) {
-    if (amount === undefined || amount < 0) {
-      this.isAmountInvalid = true;
-    } else {
-      this.spinnerService.setIsLoading(true);
-      this.selectedPurchaseItem.amount = amount;
+    this.spinnerService.setIsLoading(true);
+    this.selectedPurchaseItem.amount = amount;
 
-      this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
-        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-        .subscribe(editedPurchaseItem => {
-          console.log(editedPurchaseItem);
+    this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe((editedPurchaseItem: PurchaseItem) => {
+        console.log(editedPurchaseItem);
 
-          this.ngOnInit();
-        }, (error => {
-          console.log(error);
-        }));
-    }
+        this.purchaseItems = this.purchaseItems.map(value => {
+          return value.id === editedPurchaseItem.id ? editedPurchaseItem : value;
+        });
+      }, (error => {
+        console.log(error);
+      }));
   }
 
   deletePurchaseItem(id: number) {
@@ -81,7 +80,7 @@ export class PurchasesComponent implements OnInit {
       .subscribe(deletedPurchaseItem => {
         console.log(deletedPurchaseItem);
 
-        this.ngOnInit();
+        this.purchaseItems = this.purchaseItems.filter(item => item.id !== id);
       }, (error => {
         console.log(error);
       }));
@@ -92,20 +91,22 @@ export class PurchasesComponent implements OnInit {
     const idList = this.purchaseItems.map(value => value.id);
 
     this.purchaseService.buyPurchaseItems(idList)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe(approvedPurchaseIdList => {
-        this.spinnerService.setIsLoading(true);
         this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
           .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
           .subscribe(value => {
-            alert('Purchase items successfully bought!');
-            this.ngOnInit();
+            this.purchaseItems = this.purchaseItems.filter(item => {
+              return !approvedPurchaseIdList.includes(item.id);
+            });
+
+            this.toast.success('Purchase items successfully bought!', 'Buy purchase items');
           }, error => {
-            alert('Could not remove bought purchase items. Try again');
+            this.toast.error('Could not remove bought purchase items, please try again', 'Buy purchase items');
             console.log(error);
           });
       }, error => {
-        alert('Could not buy purchase items. Try again');
+        this.spinnerService.setIsLoading(false);
+        this.toast.error('Could not buy purchase items, please try again', 'Buy purchase items');
         console.log(error);
       });
   }
