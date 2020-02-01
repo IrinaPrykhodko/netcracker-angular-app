@@ -8,4 +8,5 @@ export class Medicine {
   packageContent: string;
   takingMethod: string;
   description: string;
+  dosage: string;
 }

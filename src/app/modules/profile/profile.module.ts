@@ -26,7 +26,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {AddPrescriptionItemComponent} from './components/prescriptions/components/add-prescription-item/add-prescription-item.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatGridListModule} from '@angular/material/grid-list';
+import {TooltipModule} from 'ngx-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
         MatNativeDateModule,
         MatSlideToggleModule,
         MatAutocompleteModule,
-        MatGridListModule
+        TooltipModule
     ],
   entryComponents: [
     PrescriptionsComponent,
