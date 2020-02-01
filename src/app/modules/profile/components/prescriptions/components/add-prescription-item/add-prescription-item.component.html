@@ -8,7 +8,8 @@
              placeholder="Enter medicine name"/>
       <mat-autocomplete #medicineAutocomplete="matAutocomplete">
         <mat-option *ngFor="let medicine of medicines" [value]="medicine.name"
-                    (onSelectionChange)="onOptionClick(medicine)">{{medicine.name}}
+                    (onSelectionChange)="onOptionClick(medicine)"
+                    [tooltip]="medicine.dosage" placement="right">{{medicine.name}}
           <mat-hint align="start">({{medicine.manufacturer}})</mat-hint>
         </mat-option>
       </mat-autocomplete>
