@@ -9,46 +9,43 @@ import {map} from 'rxjs/operators';
 })
 export class NotificationService {
 
-  private notificationList = new BehaviorSubject(null);
+  private notificationList = new BehaviorSubject([]);
   public notificationList$ = this.notificationList.asObservable();
 
-  private reminderList = new BehaviorSubject(null);
+  private reminderList = new BehaviorSubject([]);
   public reminderList$ = this.reminderList.asObservable();
+
+  private reminderAndNotificationCount = new BehaviorSubject(0);
+  public reminderAndNotificationCount$ = this.reminderAndNotificationCount.asObservable();
 
   constructor(private http: HttpClient) { }
 
-// getNotifications(page: number, size: number, searchText?: string): Observable<Notification[]> {
-//   let params = new HttpParams()
-//     .set('page', page.toString())
-//     .set('size', size.toString());
-//
-//   if (searchText) {
-//     params = params.set('query', searchText);
-//   }
-//
-//   return this.http.get<Notification[]>(`${environment.apiUrl}/notification`, {params})
-//     .pipe(map(notificationList => {
-//       this.notificationList.next(notificationList);
-//       return notificationList;
-//     }));
-// }
+  getNotifications(page: number, size: number): Observable<Notification[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
 
-//with file
-  getNotifications(): Observable<Notification[]> {
-
-      return this.http.get<Notification[]>('assets/notification.json')
+    return this.http.get<Notification[]>(`assets/notification.json`, {params})
       .pipe(map(notificationList => {
         this.notificationList.next(notificationList);
         return notificationList;
       }));
   }
 
-  getReminders(): Observable<Notification[]> {
-    return this.http.get<Notification[]>('assets/reminder.json')
+  getReminders(page: number, size: number): Observable<Notification[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
+    return this.http.get<Notification[]>(`assets/reminder.json`, {params})
       .pipe(map(reminderList => {
         this.reminderList.next(reminderList);
         return reminderList;
       }));
+  }
+
+  setCounter(count: number) {
+    this.reminderAndNotificationCount.next(count);
   }
 
 }

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../../../services/patient.service';
-import {finalize} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {NotificationService} from '../../../../services/notification.service';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,8 +11,6 @@ import {NotificationService} from '../../../../services/notification.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
-  searchText: string;
 
   paginationOptions = {
     pageNumber: 0,
@@ -29,12 +28,14 @@ export class ProfileComponent implements OnInit {
     this.patientService.getPatient()
       .subscribe();
 
-    //this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size)
-    this.notificationService.getNotifications()
-      .subscribe();
-    this.notificationService.getReminders()
+    combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+      this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
       .pipe(
-        finalize(() => this.spinnerService.setIsLoading(false))
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        map(([notifications, reminders]) => {
+          this.notificationService.setCounter(notifications.length + reminders.length);
+          return [notifications, reminders];
+        })
       )
       .subscribe();
   }
