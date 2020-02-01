@@ -40,7 +40,10 @@
             <span>From {{prescriptionItem.startDate}} to {{prescriptionItem.endDate}}</span>
             <span>Duration: {{prescriptionItem.takingDurationDays}} days</span>
             <span>Description: {{prescriptionItem.description}}</span>
-            <mat-checkbox [checked]="prescriptionItem.isReminderEnabled">Reminder</mat-checkbox>
+            <mat-checkbox [disabled]="isPrescriptionItemEndDateInPast(prescriptionItem)"
+                          [indeterminate]="isPrescriptionItemEndDateInPast(prescriptionItem)"
+                          [checked]="prescriptionItem.isReminderEnabled">Reminder
+            </mat-checkbox>
             <button class="prescriptions__list__items__delete-button" mat-raised-button
                     (click)="deletePrescriptionItem(element.prescription.id, prescriptionItem.id)">
               Delete
