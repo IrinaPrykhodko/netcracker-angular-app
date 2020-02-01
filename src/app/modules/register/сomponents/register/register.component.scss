@@ -1,4 +1,5 @@
 @import "src/styles/classes/classes";
+@import "src/styles/variables/variables";
 
 .register {
 
@@ -34,6 +35,16 @@
 
   input {
     margin-top: 2%;
+  }
+
+  button {
+    background: $main-color;
+    color:#EDEDED;
+  }
+
+  button:hover {
+    background: $second-color;
+    color: white;
   }
 
   button:disabled,

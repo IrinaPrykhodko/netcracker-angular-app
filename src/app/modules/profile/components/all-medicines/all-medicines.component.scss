@@ -1,9 +1,22 @@
+@import "src/styles/variables/variables";
+
 .medicines {
   margin: 5em 0 2em 0;
   list-style-type: none;
   padding: 0;
   width: 100%;
+
+  button {
+    background: $main-color !important;
+    color: #EDEDED;
+  }
+
+  button:hover {
+    background: $second-color !important;
+    color: white;
+  }
 }
+
 
 .medicines li {
   cursor: pointer;
@@ -91,12 +104,25 @@
     margin-left: 0.5em;
   }
 
-  ::ng-deep .mat-button {
-    background: #EDEDED;
+  button {
+    background: $main-color !important;
+    color: #EDEDED;
   }
 
-  ::ng-deep .mat-button:hover {
-    background: #757575;
+  button:hover {
+    background: $second-color !important;
+    color: white;
+  }
+}
+
+.searchResultHeader{
+  button {
+    background: $main-color !important;
+    color: #EDEDED;
+  }
+
+  button:hover {
+    background: $second-color !important;
     color: white;
   }
 }
