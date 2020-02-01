@@ -8,6 +8,7 @@ import {AddPrescriptionComponent} from './components/add-prescription/add-prescr
 import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-prescriptions',
@@ -135,5 +136,12 @@ export class PrescriptionsComponent implements OnInit {
           }
         }
       });
+  }
+
+  isPrescriptionItemEndDateInPast(prescriptionItem: PrescriptionItem) {
+    const prescriptionItemEndDate = moment(prescriptionItem.endDate).startOf('day');
+    const todayDate = moment().startOf('day');
+
+    return prescriptionItemEndDate.isBefore(todayDate);
   }
 }
