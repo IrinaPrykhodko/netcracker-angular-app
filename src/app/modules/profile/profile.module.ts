@@ -47,22 +47,22 @@ import {TooltipModule} from 'ngx-bootstrap';
     AddPrescriptionItemComponent
   ],
 
-    imports: [
-        CommonModule,
-        ProfileRoutingModule,
-        SharedModule,
-        MatDialogModule,
-        NgxPaginationModule,
-        MatExpansionModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSlideToggleModule,
-        MatAutocompleteModule,
-        MatGridListModule,
-        TooltipModule
-    ],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    SharedModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule,
+    MatGridListModule,
+    TooltipModule
+  ],
   entryComponents: [
     PrescriptionsComponent,
     AddPrescriptionComponent,
