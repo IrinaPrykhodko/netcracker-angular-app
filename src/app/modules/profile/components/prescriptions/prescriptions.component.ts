@@ -71,9 +71,9 @@ export class PrescriptionsComponent implements OnInit {
     this.prescriptionsService.deletePrescription(id)
       .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe(value => {
-        const index = this.prescriptionStruct.findIndex(element => element.prescription.id === id);
+        const index = this.prescriptionStruct.findIndex(elem => elem.prescription.id === id);
 
-        if (index) {
+        if (isNotNullOrUndefined(index)) {
           this.prescriptionStruct.splice(index, 1);
         }
       });
@@ -112,6 +112,28 @@ export class PrescriptionsComponent implements OnInit {
         data.forEach(value => {
           this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
         });
+      });
+  }
+
+  deletePrescriptionItem(prescriptionId: number, prescriptionItemId: number) {
+    this.spinnerService.setIsLoading(true);
+
+    this.prescriptionsService.deletePrescriptionItem(prescriptionItemId)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe(value => {
+        const prescriptionIndex = this.prescriptionStruct.findIndex(elem => {
+          return elem.prescription.id === prescriptionId;
+        });
+
+        if (isNotNullOrUndefined(prescriptionIndex)) {
+          const prescriptionItemIndex = this.prescriptionStruct[prescriptionIndex].prescriptionItems.findIndex(elem => {
+            return elem.id === prescriptionItemId;
+          });
+
+          if (isNotNullOrUndefined(prescriptionItemIndex)) {
+            this.prescriptionStruct[prescriptionIndex].prescriptionItems.splice(prescriptionItemIndex, 1);
+          }
+        }
       });
   }
 }
