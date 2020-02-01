@@ -13,10 +13,27 @@ export class NotificationService {
   public notificationList$ = this.notificationList.asObservable();
 
   private reminderList = new BehaviorSubject(null);
-  public reminderList$ = this.notificationList.asObservable();
+  public reminderList$ = this.reminderList.asObservable();
 
   constructor(private http: HttpClient) { }
 
+// getNotifications(page: number, size: number, searchText?: string): Observable<Notification[]> {
+//   let params = new HttpParams()
+//     .set('page', page.toString())
+//     .set('size', size.toString());
+//
+//   if (searchText) {
+//     params = params.set('query', searchText);
+//   }
+//
+//   return this.http.get<Notification[]>(`${environment.apiUrl}/notification`, {params})
+//     .pipe(map(notificationList => {
+//       this.notificationList.next(notificationList);
+//       return notificationList;
+//     }));
+// }
+
+//with file
   getNotifications(): Observable<Notification[]> {
 
       return this.http.get<Notification[]>('assets/notification.json')
