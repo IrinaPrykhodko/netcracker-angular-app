@@ -48,16 +48,6 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="number" formControlName="takingDurationDays" placeholder="* Enter taking duration"/>
-      <mat-hint align="start">Days</mat-hint>
-
-      <mat-error
-        *ngIf="takingDurationDays.hasError('required') && (takingDurationDays.dirty || takingDurationDays.touched)">
-        Taking duration is required
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
       <input matInput formControlName="takingTime" placeholder="* Enter taking time"/>
       <mat-hint align="start">Separate by comma (e.g. 12:00,18:00,21:30)</mat-hint>
 

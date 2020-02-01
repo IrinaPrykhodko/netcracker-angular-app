@@ -3,7 +3,6 @@ export class AddPrescriptionItemRequest {
   medicineId: number;
   startDate: Date;
   endDate: Date;
-  takingDurationDays: number;
   takingTime: string;
   description: string;
   isReminderEnabled: boolean;

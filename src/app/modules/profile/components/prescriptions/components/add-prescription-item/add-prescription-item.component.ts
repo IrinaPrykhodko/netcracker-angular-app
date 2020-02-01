@@ -38,7 +38,6 @@ export class AddPrescriptionItemComponent implements OnInit {
       medicineName: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      takingDurationDays: ['', Validators.required],
       takingTime: ['', Validators.required],
       description: [''],
       dosage: ['', [Validators.required, Validators.min(0)]],
@@ -84,7 +83,6 @@ export class AddPrescriptionItemComponent implements OnInit {
       this.prescriptionItem.medicine = this.selectedMedicine;
       this.prescriptionItem.startDate = this.startDate.value;
       this.prescriptionItem.endDate = this.endDate.value;
-      this.prescriptionItem.takingDurationDays = this.takingDurationDays.value;
       this.prescriptionItem.takingTime = this.takingTime.value;
       this.prescriptionItem.description = this.description.value;
       this.prescriptionItem.dosage = this.dosage.value;
@@ -120,10 +118,6 @@ export class AddPrescriptionItemComponent implements OnInit {
 
   get endDate() {
     return this.addItemForm.get('endDate');
-  }
-
-  get takingDurationDays() {
-    return this.addItemForm.get('takingDurationDays');
   }
 
   get takingTime() {
