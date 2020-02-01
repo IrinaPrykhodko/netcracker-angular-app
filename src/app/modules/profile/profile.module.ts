@@ -28,6 +28,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TooltipModule} from 'ngx-bootstrap';
 
+
 @NgModule({
   declarations: [
     SidebarComponent,

@@ -44,7 +44,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     FooterComponent,
     SpinnerComponent,
     MatMenuModule,
-    ToastrModule
+    ToastrModule,
+    MatBadgeModule
   ]
 })
 export class SharedModule {

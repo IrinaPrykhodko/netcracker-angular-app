@@ -5,6 +5,7 @@ import {AuthService} from '../../../../services/auth.service';
 import {LoginResponseItem} from '../../../../models/loginResponseItem';
 import {finalize} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +19,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
     console.log(JSON.parse(sessionStorage.getItem('registerUser')));
     this.loginForm = this.formBuilder.group({
-      email: [this.user.email, [Validators.required, Validators.email]],
-      password: [this.user.password, [Validators.required]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
         this.authService.setUserToken(loginResponseItem.token);
       }, (error => {
         console.log(error);
+        this.toastr.error('Incorrect email or password', 'Error');
       }));
 
   }
