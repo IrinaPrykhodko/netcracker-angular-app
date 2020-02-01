@@ -8,7 +8,7 @@ import {AddPrescriptionComponent} from './components/add-prescription/add-prescr
 import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import * as moment from "moment";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-prescriptions',
