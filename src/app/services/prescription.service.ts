@@ -60,4 +60,8 @@ export class PrescriptionService {
 
     return this.http.post(`${environment.apiUrl}/prescriptions/items`, request);
   }
+
+  deletePrescriptionItem(prescriptionItemId: number) {
+    return this.http.delete(`${environment.apiUrl}/prescriptions/items/${prescriptionItemId}`);
+  }
 }
