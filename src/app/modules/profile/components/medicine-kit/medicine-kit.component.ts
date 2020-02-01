@@ -92,9 +92,9 @@ export class MedicineKitComponent implements OnInit {
     this.getMedicineInstances(this.searchText);
   }
 
-    submit(selfLife: Date, amount: number) {
-      this.spinnerService.setIsLoading(true);
-      this.selectedMedicineInstance.amount = amount;
+  submit(selfLife: Date, amount: number) {
+    this.spinnerService.setIsLoading(true);
+    this.selectedMedicineInstance.amount = amount;
     this.selectedMedicineInstance.selfLife = selfLife;
     console.log(this.selectedMedicineInstance);
     this.medicineKitService.editMedicineInstance(this.selectedMedicineInstance)
@@ -109,7 +109,7 @@ export class MedicineKitComponent implements OnInit {
       }));
   }
 
-  refresh(){
+  refresh() {
     this.medicineKit = null;
     this.paginationOptions.pageNumber = 0;
     this.getMedicineInstances();
