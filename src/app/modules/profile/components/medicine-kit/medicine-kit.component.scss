@@ -1,3 +1,5 @@
+@import "src/styles/variables/variables";
+
 .add-modal {
   position: absolute;
   width: 80%;
@@ -17,16 +19,12 @@
     position: relative;
     margin: 4px;
 
-    .mat-expansion-panel {
-      background: #757575;
-    }
-
     &.expired ::ng-deep .mat-expansion-panel {
-      background: #bd6d6d;
+      background: #ffe3e3;
     }
 
     &.expired ::ng-deep .mat-expansion-panel-header {
-      background: #bd6d6d;
+      background: #ffe3e3;
     }
 
     span {
@@ -34,24 +32,12 @@
     }
   }
 
-  .mat-expansion-panel-header {
-    background-color: #777;
-  }
-
-  .mat-accordion {
-    background-color: #777;
-  }
-
-  .mat-accordion:hover {
-    background-color: #777;
-  }
-
   ::ng-deep .ngx-pagination {
     margin-top: 2em;
     position: relative;
 
     .current {
-      background: #757575 !important;
+      background: #EDEDED !important;
     }
   }
 
@@ -65,12 +51,12 @@
 }
 
 button {
-  background: #EDEDED;
-  color: #757575;
+  background: $main-color;
+  color:#EDEDED;
 }
 
 button:hover {
-  background: #757575;
+  background: $second-color;
   color: white;
 }
 

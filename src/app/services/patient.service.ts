@@ -25,7 +25,11 @@ export class PatientService {
   }
 
   editPatient(cred: Patient) {
-    return this.http.put(`${environment.apiUrl}/account`, cred);
+    return this.http.put(`${environment.apiUrl}/account`, cred)
+      .pipe(map(user => {
+        this.user.next(user);
+        return user;
+      }));
   }
 
   changePassword(cred: Patient) {

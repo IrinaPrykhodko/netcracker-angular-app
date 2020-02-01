@@ -21,6 +21,6 @@ export class MedicineService {
       params = params.set('query', searchText);
     }
 
-    return this.http.get<Medicine[]>(`${environment.apiUrl}/all-medicines`, {params});
+    return this.http.get<Medicine[]>(`${environment.apiUrl}/all-medicines/search-by-params`, {params});
   }
 }

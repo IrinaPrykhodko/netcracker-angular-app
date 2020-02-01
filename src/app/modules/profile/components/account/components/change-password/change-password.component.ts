@@ -4,6 +4,7 @@ import {PatientService} from '../../../../../../services/patient.service';
 import {finalize} from 'rxjs/operators';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
+import {PasswordStateMatcher} from '../../../../../../models/PasswordStateMatcher';
 
 @Component({
   selector: 'app-change-password',
@@ -13,6 +14,7 @@ import {SpinnerService} from '../../../../../../services/spinner.service';
 export class ChangePasswordComponent implements OnInit {
 
   public changeForm: FormGroup;
+  passwordMatcher = new PasswordStateMatcher();
 
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
@@ -24,15 +26,15 @@ export class ChangePasswordComponent implements OnInit {
     this.changeForm = this.formBuilder.group({
       password: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.minLength(3)]],
-      newPasswordConfirm: ['', [Validators.required, Validators.minLength(3)]]
-    }, {validator: this.checkPasswords});
+      newPasswordConfirm: ['', [Validators.required]]
+    }, {validator: this.passwordMatchValidator});
   }
 
-  checkPasswords(group: FormGroup) {
+  passwordMatchValidator(group: FormGroup) {
     const password = group.get('newPassword').value;
     const passwordConfirm = group.get('newPasswordConfirm').value;
 
-    return password === passwordConfirm ? null : {notSame: true};
+    return password === passwordConfirm ? null : {confirmedPasswordNotMatch: true};
   }
 
   get password() {

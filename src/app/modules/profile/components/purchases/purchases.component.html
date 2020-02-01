@@ -28,15 +28,20 @@
         </mat-expansion-panel-header>
 
         <mat-form-field>
-          <input matInput #medicineAmount type="number" value="{{purchaseItem.amount}}">
+          <input matInput #medicineAmount type="number" min="0" value="{{purchaseItem.amount}}" placeholder="Amount">
+          <mat-hint class="amount-error" [hidden]="!editButton.disabled">
+            Amount must be positive
+          </mat-hint>
         </mat-form-field>
 
-        <button
-          mat-raised-button (click)="editPurchaseItem(medicineAmount.valueAsNumber)">Confirm
+        <button #editButton mat-raised-button
+                [disabled]="medicineAmount.value === '' || medicineAmount.valueAsNumber < 0"
+                (click)="editPurchaseItem(medicineAmount.valueAsNumber)">
+          Confirm
         </button>
 
-        <button
-          mat-raised-button (click)="deletePurchaseItem(purchaseItem.id)">Delete
+        <button mat-raised-button (click)="deletePurchaseItem(purchaseItem.id)">
+          Delete
         </button>
       </mat-expansion-panel>
     </mat-accordion>

@@ -1,44 +1,79 @@
 <div class="add__item">
+
   <div class="add__item__title dialog__title">
     <h3>Add prescription item</h3>
   </div>
+
   <form [formGroup]="addItemForm" class="add__item__form">
     <mat-form-field>
       <input matInput formControlName="medicineName" [matAutocomplete]="medicineAutocomplete"
-             placeholder="Enter medicine name"/>
+             placeholder="* Enter medicine name"/>
+
       <mat-autocomplete #medicineAutocomplete="matAutocomplete">
         <mat-option *ngFor="let medicine of medicines" [value]="medicine.name"
-                    (onSelectionChange)="onOptionClick(medicine)">{{medicine.name}}
+                    (onSelectionChange)="onOptionClick(medicine)"
+                    [tooltip]="medicine.dosage" placement="right">{{medicine.name}}
           <mat-hint align="start">({{medicine.manufacturer}})</mat-hint>
         </mat-option>
       </mat-autocomplete>
+
+      <mat-error *ngIf="medicineName.hasError('required') && (medicineName.dirty || medicineName.touched)">
+        Medicine is required
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input [matDatepicker]="startDatePicker" matInput formControlName="startDate" placeholder="Enter start date"/>
+      <input matInput [max]="endDate.value" [matDatepicker]="startDatePicker" formControlName="startDate"
+             placeholder="* Enter start date"
+             readonly (click)="startDatePicker.open()"/>
       <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #startDatePicker></mat-datepicker>
+
+      <mat-error *ngIf="startDate.hasError('required') && (startDate.dirty || startDate.touched)">
+        Start date is required
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input [matDatepicker]="endDatePicker" matInput formControlName="endDate" placeholder="Enter end date"/>
+      <input matInput
+             [min]="startDate.value ? startDate.value < defaultMinDate ? defaultMinDate : startDate.value : defaultMinDate"
+             [matDatepicker]="endDatePicker" formControlName="endDate"
+             placeholder="* Enter end date" readonly (click)="endDatePicker.open()"/>
       <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #endDatePicker></mat-datepicker>
+
+      <mat-error *ngIf="endDate.hasError('required') && (endDate.dirty || endDate.touched)">
+        End date is required
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input matInput type="number" formControlName="takingDurationDays" placeholder="Enter taking duration"/>
-      <mat-hint align="start">Days</mat-hint>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput formControlName="takingTime" placeholder="Enter taking time"/>
+      <input matInput formControlName="takingTime" placeholder="* Enter taking time"/>
       <mat-hint align="start">Separate by comma (e.g. 12:00,18:00,21:30)</mat-hint>
+
+      <mat-error *ngIf="takingTime.hasError('required') && (takingTime.dirty || takingTime.touched)">
+        Taking time is required
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <input matInput formControlName="description" placeholder="Enter description"/>
     </mat-form-field>
+
     <mat-form-field>
-      <input matInput type="number" formControlName="dosage" placeholder="Enter dosage"/>
+      <input matInput type="number" formControlName="dosage" placeholder="* Enter dosage"/>
       <mat-hint align="start">Must be acceptable for selected medicine</mat-hint>
+
+      <mat-error *ngIf="dosage.hasError('required') && (dosage.dirty || dosage.touched)">
+        Dosage is required
+      </mat-error>
+      <mat-error *ngIf="dosage.hasError('min') && (dosage.dirty || dosage.touched)">
+        Dosage must be positive
+      </mat-error>
     </mat-form-field>
+
     <mat-slide-toggle formControlName="isReminderEnabled">Reminder</mat-slide-toggle>
+
     <div class="add__item__form__submit-button">
       <button mat-raised-button (click)="addPrescriptionItem()" [disabled]="addItemForm.invalid">Submit</button>
     </div>

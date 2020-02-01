@@ -95,7 +95,7 @@ export class AllMedicinesComponent implements OnInit {
   }
 
   clearSearchText() {
-    this.spinnerService.setIsLoading(false);
+    this.spinnerService.setIsLoading(true);
     this.searchText = undefined;
     this.medicineList.length = 0;
     this.paginationOptions.pageNumber = 0;

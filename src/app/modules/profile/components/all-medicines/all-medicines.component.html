@@ -21,7 +21,6 @@
     <button mat-raised-button class="addToPurchaseButton"
             (click)="addMedicineToPurchase(medicineAmount.valueAsNumber)">Add to purchase
     </button>
-    <button mat-raised-button class="addPrescriptionButton">Add to prescription</button>
     <button mat-raised-button class="addInstanceButton" (click)="addMedicineToKit()">Add to MedKit</button>
   </li>
 </ul>
@@ -36,6 +35,7 @@
   <span>Package contents: {{selectedMedicine.packageContent}}</span>
   <span>Method of admission: {{selectedMedicine.takingMethod}}</span>
   <span>Description: {{selectedMedicine.description}}</span>
+  <span>Dosage: {{selectedMedicine.dosage}}</span>
 </div>
 
 

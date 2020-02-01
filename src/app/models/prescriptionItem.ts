@@ -6,7 +6,6 @@ export class PrescriptionItem {
   medicine: Medicine;
   startDate: Date;
   endDate: Date;
-  takingDurationDays: number;
   takingTime: string;
   description: string;
   prescription: Prescription;
