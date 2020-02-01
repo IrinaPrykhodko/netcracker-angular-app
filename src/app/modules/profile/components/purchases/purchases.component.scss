@@ -16,6 +16,9 @@
     &__item {
       margin: 0.5rem 0;
 
+      .amount-error {
+        color: #ff230f;
+      }
       button {
         margin-left: 0.5rem;
       }

@@ -15,6 +15,7 @@ export class PurchasesComponent implements OnInit {
   purchaseItems: PurchaseItem[];
   selectedPurchaseItem: PurchaseItem;
   editForm: FormGroup;
+  isAmountInvalid: boolean;
 
   paginationOptions = {
     pageNumber: 0,
@@ -54,18 +55,22 @@ export class PurchasesComponent implements OnInit {
   }
 
   editPurchaseItem(amount: number) {
-    this.spinnerService.setIsLoading(true);
-    this.selectedPurchaseItem.amount = amount;
+    if (amount === undefined || amount < 0) {
+      this.isAmountInvalid = true;
+    } else {
+      this.spinnerService.setIsLoading(true);
+      this.selectedPurchaseItem.amount = amount;
 
-    this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-      .subscribe(editedPurchaseItem => {
-        console.log(editedPurchaseItem);
+      this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
+        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+        .subscribe(editedPurchaseItem => {
+          console.log(editedPurchaseItem);
 
-        this.ngOnInit();
-      }, (error => {
-        console.log(error);
-      }));
+          this.ngOnInit();
+        }, (error => {
+          console.log(error);
+        }));
+    }
   }
 
   deletePurchaseItem(id: number) {
