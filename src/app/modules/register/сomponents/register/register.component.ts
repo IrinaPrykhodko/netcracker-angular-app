@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   public patient: Patient = new Patient();
   public registerForm: FormGroup;
-  public matcher = new PasswordStateMatcher();
+  public passwordStateMatcher = new PasswordStateMatcher();
   public isLoading;
 
   separateDialCode = true;
@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   preferredCountries: CountryISO[] = [CountryISO.Ukraine];
+  maxBirthDayDate = new Date();
+  genders = ['Male', 'Female'];
 
   constructor(private formBuilder: FormBuilder,
               private registerService: RegisterService,
@@ -34,18 +36,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: [this.patient.firstName, [Validators.required]],
-      lastName: [this.patient.lastName, [Validators.required]],
-      dateOfBirth: [this.patient.dateOfBirth],
-      gender: [this.patient.gender],
-      height: [this.patient.height],
-      weight: [this.patient.weight],
-      location: [this.patient.location],
-      email: [this.patient.email, [Validators.required, Validators.email]],
-      phoneNumber: [this.patient.phoneNumber, [Validators.required], PhoneNumberUtil.getInsta],
-      password: [this.patient.password, [Validators.required, Validators.minLength(3)]],
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      dateOfBirth: [''],
+      gender: [''],
+      height: ['', Validators.min(0)],
+      weight: ['', Validators.min(0)],
+      location: [''],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', [Validators.required], PhoneNumberUtil.getInsta],
+      password: ['', [Validators.required, Validators.minLength(3)]],
       passwordConfirm: ['', [Validators.required, Validators.minLength(3)]]
-    }, {validator: this.checkPasswords});
+    }, {validator: this.passwordMatchValidator});
   }
 
   clearForm(registerForm: FormGroup) {
@@ -53,7 +55,7 @@ export class RegisterComponent implements OnInit {
       firstName: this.registerForm.value.firstName,
       lastName: this.registerForm.value.lastName,
       dateOfBirth: this.registerForm.value.dateOfBirth,
-      gender: this.registerForm.value.gender,
+      gender: this.registerForm.value.gender.toUpperCase(),
       height: this.registerForm.value.height,
       weight: this.registerForm.value.weight,
       location: this.registerForm.value.location,
@@ -80,11 +82,12 @@ export class RegisterComponent implements OnInit {
       }));
   }
 
-  checkPasswords(group: FormGroup) {
+  passwordMatchValidator(group: FormGroup) {
     const password = group.get('password').value;
     const passwordConfirm = group.get('passwordConfirm').value;
 
-    return password === passwordConfirm ? null : {notSame: true};
+    return password === passwordConfirm ? null : {confirmedPasswordNotMatch: true};
+
   }
 
   get email() {
@@ -101,6 +104,14 @@ export class RegisterComponent implements OnInit {
 
   get lastName() {
     return this.registerForm.get('lastName');
+  }
+
+  get height() {
+    return this.registerForm.get('height');
+  }
+
+  get weight() {
+    return this.registerForm.get('weight');
   }
 
   get phoneNumber() {

@@ -44,7 +44,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log(this.getCurrentUserToken());
     localStorage.removeItem(this.tokenSessionStorageKey);
     this.router.navigate(['/login']);
   }
