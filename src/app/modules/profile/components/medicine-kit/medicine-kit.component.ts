@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
@@ -93,20 +93,35 @@ export class MedicineKitComponent implements OnInit {
   }
 
     submit(selfLife: Date, amount: number) {
-    console.log(this.editForm.value);
-    this.selectedMedicineInstance.amount = amount;
+      this.spinnerService.setIsLoading(true);
+      this.selectedMedicineInstance.amount = amount;
     this.selectedMedicineInstance.selfLife = selfLife;
+    console.log(this.selectedMedicineInstance);
     this.medicineKitService.editMedicineInstance(this.selectedMedicineInstance)
+      .pipe(finalize(() => {
+        this.refresh();
+      }))
       .subscribe((userData) => {
         console.log(userData);
+
       }, (error => {
         console.log(error);
       }));
   }
 
+  refresh(){
+    this.medicineKit = null;
+    this.paginationOptions.pageNumber = 0;
+    this.getMedicineInstances();
+  }
+
   delete(id: number) {
+    this.spinnerService.setIsLoading(true);
     console.log(id);
     this.medicineKitService.deleteMedicineInstance(id)
+      .pipe(finalize(() => {
+        this.refresh();
+      }))
       .subscribe((userData) => {
         console.log(userData);
       }, (error => {
