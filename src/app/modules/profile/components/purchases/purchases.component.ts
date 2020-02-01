@@ -4,6 +4,7 @@ import {PurchaseItem} from '../../../../models/purchase-item';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-purchases',
@@ -23,7 +24,8 @@ export class PurchasesComponent implements OnInit {
 
   constructor(private purchaseService: PurchaseService,
               private formBuilder: FormBuilder,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toast: ToastrService) {
   }
 
   ngOnInit() {
@@ -59,10 +61,12 @@ export class PurchasesComponent implements OnInit {
 
     this.purchaseService.editPurchaseItem(this.selectedPurchaseItem)
       .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-      .subscribe(editedPurchaseItem => {
+      .subscribe((editedPurchaseItem: PurchaseItem) => {
         console.log(editedPurchaseItem);
 
-        this.ngOnInit();
+        this.purchaseItems = this.purchaseItems.map(value => {
+          return value.id === editedPurchaseItem.id ? editedPurchaseItem : value;
+        });
       }, (error => {
         console.log(error);
       }));
@@ -76,33 +80,45 @@ export class PurchasesComponent implements OnInit {
       .subscribe(deletedPurchaseItem => {
         console.log(deletedPurchaseItem);
 
-        this.ngOnInit();
+        this.purchaseItems = this.purchaseItems.filter(item => item.id !== id);
       }, (error => {
         console.log(error);
       }));
   }
 
   buyPurchaseItems() {
-    this.spinnerService.setIsLoading(true);
-    const idList = this.purchaseItems.map(value => value.id);
+    if (this.purchaseItems.length > 0) {
+      this.spinnerService.setIsLoading(true);
+      const idList = this.purchaseItems.map(value => value.id);
 
-    this.purchaseService.buyPurchaseItems(idList)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-      .subscribe(approvedPurchaseIdList => {
-        this.spinnerService.setIsLoading(true);
-        this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
-          .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-          .subscribe(value => {
-            alert('Purchase items successfully bought!');
-            this.ngOnInit();
-          }, error => {
-            alert('Could not remove bought purchase items. Try again');
-            console.log(error);
-          });
-      }, error => {
-        alert('Could not buy purchase items. Try again');
-        console.log(error);
-      });
+      this.purchaseService.buyPurchaseItems(idList)
+        .subscribe(approvedPurchaseIdList => {
+          if (approvedPurchaseIdList.length > 0) {
+            this.purchaseService.deletePurchaseItems(approvedPurchaseIdList)
+              .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+              .subscribe(value => {
+                this.purchaseItems = this.purchaseItems.filter(item => {
+                  return !approvedPurchaseIdList.includes(item.id);
+                });
+
+                this.toast.success('Purchase items successfully bought!');
+
+              }, error => {
+                this.toast.error('Service is currently unavailable. Please contact administrator or try again later');
+                console.log(error);
+              });
+          } else {
+            this.spinnerService.setIsLoading(false);
+            this.toast.info('Purchase service is currently unavailable, please try again later');
+          }
+        }, error => {
+          this.spinnerService.setIsLoading(false);
+          this.toast.error('Purchase service is currently unavailable, please try again later');
+          console.log(error);
+        });
+    } else {
+      this.toast.info('Nothing to buy! Please add some medicines to purchase and try again');
+    }
   }
 
   private getPurchaseItems() {

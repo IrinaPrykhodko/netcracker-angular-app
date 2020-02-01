@@ -24,6 +24,11 @@
     }
 
     &__items {
+
+      &__delete-button {
+        display: flex;
+        justify-content: flex-end;
+      }
       ul {
         list-style-type: none;
       }

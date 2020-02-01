@@ -23,6 +23,8 @@ export class AddPrescriptionItemComponent implements OnInit {
   public medicines: Medicine[];
   private selectedMedicine: Medicine;
 
+  defaultMinDate = new Date();
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: { prescription: Prescription },
               private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<AddPrescriptionItemComponent>,
@@ -36,14 +38,13 @@ export class AddPrescriptionItemComponent implements OnInit {
       medicineName: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      takingDurationDays: ['', Validators.required],
       takingTime: ['', Validators.required],
-      description: ['', Validators.required],
-      dosage: ['', Validators.required],
+      description: [''],
+      dosage: ['', [Validators.required, Validators.min(0)]],
       isReminderEnabled: [true, Validators.required]
     });
 
-    this.addItemForm.get('medicineName').valueChanges
+    this.medicineName.valueChanges
       .subscribe(value => {
         if (this.medicines && !this.medicines.find(medicine => medicine.name === value)) {
           this.canSearch = true;
@@ -51,7 +52,7 @@ export class AddPrescriptionItemComponent implements OnInit {
         this.currentSearchText = value;
       });
 
-    this.addItemForm.get('medicineName').valueChanges
+    this.medicineName.valueChanges
       .pipe(
         delay(1000)
       )
@@ -80,13 +81,12 @@ export class AddPrescriptionItemComponent implements OnInit {
 
     if (this.medicines.filter(value => value.name === this.currentSearchText).length !== 0) {
       this.prescriptionItem.medicine = this.selectedMedicine;
-      this.prescriptionItem.startDate = this.addItemForm.get('startDate').value;
-      this.prescriptionItem.endDate = this.addItemForm.get('endDate').value;
-      this.prescriptionItem.takingDurationDays = this.addItemForm.get('takingDurationDays').value;
-      this.prescriptionItem.takingTime = this.addItemForm.get('takingTime').value;
-      this.prescriptionItem.description = this.addItemForm.get('description').value;
-      this.prescriptionItem.dosage = this.addItemForm.get('dosage').value;
-      this.prescriptionItem.isReminderEnabled = this.addItemForm.get('isReminderEnabled').value;
+      this.prescriptionItem.startDate = this.startDate.value;
+      this.prescriptionItem.endDate = this.endDate.value;
+      this.prescriptionItem.takingTime = this.takingTime.value;
+      this.prescriptionItem.description = this.description.value;
+      this.prescriptionItem.dosage = this.dosage.value;
+      this.prescriptionItem.isReminderEnabled = this.isReminderEnabled.value;
 
       console.log(this.prescriptionItem);
 
@@ -94,18 +94,45 @@ export class AddPrescriptionItemComponent implements OnInit {
         .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
         .subscribe(
           value => {
-            console.log(value);
             this.dialogRef.close(value);
           },
           error => console.log(error)
         );
     } else {
-      alert('Not matches');
+      alert('Invalid medicine name');
     }
   }
 
   onOptionClick(medicine: Medicine) {
     this.selectedMedicine = medicine;
     this.canSearch = false;
+  }
+
+  get medicineName() {
+    return this.addItemForm.get('medicineName');
+  }
+
+  get startDate() {
+    return this.addItemForm.get('startDate');
+  }
+
+  get endDate() {
+    return this.addItemForm.get('endDate');
+  }
+
+  get takingTime() {
+    return this.addItemForm.get('takingTime');
+  }
+
+  get description() {
+    return this.addItemForm.get('description');
+  }
+
+  get dosage() {
+    return this.addItemForm.get('dosage');
+  }
+
+  get isReminderEnabled() {
+    return this.addItemForm.get('isReminderEnabled');
   }
 }

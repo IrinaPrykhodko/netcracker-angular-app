@@ -51,7 +51,6 @@ export class PrescriptionService {
       medicineId: prescriptionItem.medicine.id,
       startDate: prescriptionItem.startDate,
       endDate: prescriptionItem.endDate,
-      takingDurationDays: prescriptionItem.takingDurationDays,
       takingTime: prescriptionItem.takingTime,
       description: prescriptionItem.description,
       dosage: prescriptionItem.dosage,
@@ -59,5 +58,9 @@ export class PrescriptionService {
     };
 
     return this.http.post(`${environment.apiUrl}/prescriptions/items`, request);
+  }
+
+  deletePrescriptionItem(prescriptionItemId: number) {
+    return this.http.delete(`${environment.apiUrl}/prescriptions/items/${prescriptionItemId}`);
   }
 }
