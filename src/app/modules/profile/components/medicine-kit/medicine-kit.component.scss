@@ -18,7 +18,8 @@
   .medicine-instance li {
     cursor: pointer;
     position: relative;
-    margin: 4px;
+
+    margin-top: 4rem;
 
     &.expired ::ng-deep .mat-expansion-panel {
       background: #ffe3e3;
@@ -91,11 +92,11 @@ button:hover {
   }
 
 }
-
-.add {
-  margin-top: 0.5em;
-  display: inline;
+.add{
+  display: block;
+  margin-top: 3.5rem;
   position: absolute;
-  left: 17.2em;
+  right: 0.3em;
 }
+
 
