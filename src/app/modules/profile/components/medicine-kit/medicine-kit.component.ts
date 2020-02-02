@@ -16,6 +16,7 @@ export class MedicineKitComponent implements OnInit {
 
   medicineKit: MedicineInstance[];
   public editForm: FormGroup;
+  isSearching = false;
   public dialogRefEdit: MatDialogRef<AddComponent>;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
@@ -87,6 +88,7 @@ export class MedicineKitComponent implements OnInit {
   onSearch() {
     console.log(this.searchText);
     this.spinnerService.setIsLoading(true);
+    this.isSearching = true;
     this.medicineKit = null;
     this.paginationOptions.pageNumber = 0;
     this.getMedicineInstances(this.searchText);
@@ -127,6 +129,16 @@ export class MedicineKitComponent implements OnInit {
       }, (error => {
         console.log(error);
       }));
+  }
+
+  clearSearchText() {
+    this.spinnerService.setIsLoading(true);
+    this.searchText = undefined;
+    this.medicineKit.length = 0;
+    this.paginationOptions.pageNumber = 0;
+    this.isSearching = false;
+
+    this.getMedicineInstances();
   }
 
 }

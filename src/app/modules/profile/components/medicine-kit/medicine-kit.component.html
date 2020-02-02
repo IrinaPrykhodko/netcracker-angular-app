@@ -13,6 +13,11 @@
   <button mat-button (click)="onSearch()">Search</button>
 </div>
 
+<div class="searchResultHeader" *ngIf="isSearching">
+  <h4>Search result for {{searchText}}</h4>
+  <button mat-raised-button (click)="clearSearchText()">Clear</button>
+</div>
+
 <div class="kit">
   <ul class="medicine-instance">
     <li>
