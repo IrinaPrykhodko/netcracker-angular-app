@@ -1,3 +1,4 @@
+@import "src/styles/classes/classes";
 @import "src/styles/variables/variables";
 
 .add-modal {
@@ -17,7 +18,8 @@
   .medicine-instance li {
     cursor: pointer;
     position: relative;
-    margin: 4px;
+
+    margin-top: 4rem;
 
     &.expired ::ng-deep .mat-expansion-panel {
       background: #ffe3e3;
@@ -27,8 +29,18 @@
       background: #ffe3e3;
     }
 
-    span {
-      margin-right: 20%;
+    .name{
+     position: absolute;
+    }
+    .manufactory {
+      position: absolute;
+      margin-left: 3rem;
+    }
+    .self-life{
+      margin-left: 23rem;
+    }
+    .amount{
+      margin-left: 6rem;
     }
   }
 
@@ -80,11 +92,11 @@ button:hover {
   }
 
 }
-
-.add {
-  margin-top: 0.5em;
-  display: inline;
+.add{
+  display: block;
+  margin-top: 3.5rem;
   position: absolute;
-  left: 17.2em;
+  right: 0.3em;
 }
+
 

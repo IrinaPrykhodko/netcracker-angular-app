@@ -1,5 +1,10 @@
+<div class="medicine-kit">
 <div class="add-modal">
   <router-outlet></router-outlet>
+</div>
+
+<div class="component__title">
+  <h2>Medicine kit</h2>
 </div>
 
 <div class="search">
@@ -13,25 +18,33 @@
   <button mat-button (click)="onSearch()">Search</button>
 </div>
 
+<div class="searchResultHeader" *ngIf="isSearching">
+  <h4>Search result for {{searchText}}</h4>
+  <button mat-raised-button (click)="clearSearchText()">Clear</button>
+</div>
+
+<div class="add">
+    <button mat-raised-button routerLink="/profile/all-medicines">Add medicine</button>
+</div>
+
 <div class="kit">
   <ul class="medicine-instance">
-    <li
-      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
-      [ngClass]="{
-            'selected': medicineInstance === selectedMedicineInstance,
-            'expired': medicineInstance.isExpired
-          }"
-      (click)="onSelected(medicineInstance)">
+    <li>
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
+        [ngClass]="{
+        'selected': medicineInstance === selectedMedicineInstance,
+        'expired': medicineInstance.isExpired
+        }"
+        (click)="onSelected(medicineInstance)">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <span>{{medicineInstance.medicine.name}}</span>
+              <span class="name">{{medicineInstance.medicine.name}}</span>
             </mat-panel-title>
             <mat-panel-description>
-              <span>{{medicineInstance.medicine.manufacturer}}</span>
-              <span>{{medicineInstance.selfLife}}</span>
-              <span>{{medicineInstance.amount}}</span>
+              <span class="manufactory">{{medicineInstance.medicine.manufacturer}}</span>
+              <span class="self-life">{{medicineInstance.selfLife}}</span>
+              <span class="amount">{{medicineInstance.amount}}</span>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
@@ -78,4 +91,4 @@
 
   <pagination-controls (pageChange)=" pageChange($event)" maxSize=""></pagination-controls>
 </div>
-
+</div>
