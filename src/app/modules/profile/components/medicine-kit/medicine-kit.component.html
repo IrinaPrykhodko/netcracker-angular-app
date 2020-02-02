@@ -15,15 +15,14 @@
 
 <div class="kit">
   <ul class="medicine-instance">
-    <li
-      *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
-      [ngClass]="{
-            'selected': medicineInstance === selectedMedicineInstance,
-            'expired': medicineInstance.isExpired
-          }"
-      (click)="onSelected(medicineInstance)">
+    <li>
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
+        [ngClass]="{
+        'selected': medicineInstance === selectedMedicineInstance,
+        'expired': medicineInstance.isExpired
+        }"
+        (click)="onSelected(medicineInstance)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <span>{{medicineInstance.medicine.name}}</span>
