@@ -6,7 +6,19 @@
   list-style-type: none;
   padding: 0;
   width: 100%;
+}
 
+.medicine-information{
+  .amountInput{
+    display: inline;
+    position: static;
+  }
+  button{
+    display: inline-block;
+    position: static;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+  }
   button {
     background: $main-color !important;
     color: #EDEDED;
@@ -17,7 +29,6 @@
     color: white;
   }
 }
-
 
 .medicines li {
   cursor: pointer;
