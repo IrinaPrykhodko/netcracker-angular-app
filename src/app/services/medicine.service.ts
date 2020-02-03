@@ -21,6 +21,18 @@ export class MedicineService {
       params = params.set('query', searchText);
     }
 
+    return this.http.get<Medicine[]>(`${environment.apiUrl}/all-medicines`, {params});
+  }
+
+  getMedicinesByParams(page: number, size: number, searchText?: string): Observable<Medicine[]> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
+    if (searchText) {
+      params = params.set('query', searchText);
+    }
+
     return this.http.get<Medicine[]>(`${environment.apiUrl}/all-medicines/search-by-params`, {params});
   }
 }

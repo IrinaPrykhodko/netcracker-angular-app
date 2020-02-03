@@ -62,7 +62,7 @@ export class AddPrescriptionItemComponent implements OnInit {
           this.canSearch = false;
           this.medicines = null;
 
-          this.medicinesService.getMedicines(0, 8, value)
+          this.medicinesService.getMedicinesByParams(0, 8, value)
             .pipe(finalize(() => {
               this.canSearch = true;
               this.spinnerService.setIsLoading(false);
