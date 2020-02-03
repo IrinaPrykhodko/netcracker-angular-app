@@ -23,7 +23,8 @@
   cursor: pointer;
   position: relative;
   left: 0;
-  background-color: #EDEDED;
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
   margin: 8px;
   padding: 10px;
   border-radius: 4px;
@@ -50,19 +51,19 @@
 }
 
 .medicines li:hover {
-  color: #607D8B;
-  background-color: #DDD;
+  color: gray;
+  background-color: #ededed;
   left: .1em;
 }
 
 .medicines li.selected {
-  background-color: #CFD8DC;
-  color: white;
+  background-color: white;
+  color: gray;
 }
 
 .medicines li.selected:hover {
-  background-color: #BBD8DC;
-  color: white;
+  background-color: #ededed;
+  color: gray;
 }
 
 ::ng-deep .ngx-pagination {
