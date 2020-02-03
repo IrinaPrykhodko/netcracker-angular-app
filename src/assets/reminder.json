@@ -2,7 +2,7 @@
   {
     "id": 2,
     "type": "REMINDER",
-    "remindTime": "14:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": null,
     "prescriptionItemId": 15,
     "message": "Message from reminder"
@@ -10,7 +10,7 @@
   {
     "id": 3,
     "type": "REMINDER",
-    "remindTime": "14:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": null,
     "prescriptionItemId": 15,
     "message": "Message from reminder"
@@ -18,7 +18,7 @@
   {
     "id": 7,
     "type": "REMINDER",
-    "remindTime": "14:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": null,
     "prescriptionItemId": 15,
     "message": "Message from reminder"
@@ -26,7 +26,7 @@
   {
     "id": 8,
     "type": "REMINDER",
-    "remindTime": "14:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": null,
     "prescriptionItemId": 15,
     "message": "Message from reminder"
@@ -34,7 +34,7 @@
   {
     "id": 9,
     "type": "REMINDER",
-    "remindTime": "14:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": null,
     "prescriptionItemId": 15,
     "message": "Message from reminder"

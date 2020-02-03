@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private resetPasswordService: ResetPasswordService,
               private route: ActivatedRoute,
-              private toastMessage: ToastrService) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
       }, error => {
         console.log(error);
         this.isTokenValid = false;
-        this.toastMessage.error('Link was expired', 'Error');
+        this.toastr.error('Link was expired', 'Error');
         window.location.href = 'forgot-password';
       });
 
@@ -75,10 +75,10 @@ export class ResetPasswordComponent implements OnInit {
         })
       )
       .subscribe(value => {
-        this.toastMessage.success('Your password was changed', 'Success');
+        this.toastr.success('Your password was changed', 'Success');
         window.location.href = 'login';
       }, error => {
-        this.toastMessage.error('Please, try again', 'Error');
+        this.toastr.error('Please, try again', 'Error');
       });
   }
 

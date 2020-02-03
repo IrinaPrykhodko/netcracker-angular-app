@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 4,
+    size: 10,
   };
 
   constructor(private patientService: PatientService,

@@ -1,0 +1,11 @@
+.notification-delete-dialog{
+  &__buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+
+    button + button {
+      margin-left: 1rem;
+    }
+  }
+}
