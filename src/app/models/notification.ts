@@ -1,11 +1,11 @@
 import {Medicine} from './medicine';
-import {PrescriptionItem} from './prescriptionItem';
 
 export class Notification {
   id: number;
+  userId: number;
   type: string;
-  remindTime: string;
+  remindTime: Date;
   medicineInstanceId: Medicine;
-  prescriptionItemId: PrescriptionItem;
+  prescriptionItemId: number;
   message: string;
 }
