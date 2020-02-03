@@ -12,7 +12,7 @@ import {finalize} from 'rxjs/operators';
 })
 export class NotificationDeleteDialogComponent implements OnInit {
 
-  private notificationId: number;
+  public notificationId: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {notificationId: number},
               private dialogRef: MatDialogRef<NotificationDeleteDialogComponent>,
