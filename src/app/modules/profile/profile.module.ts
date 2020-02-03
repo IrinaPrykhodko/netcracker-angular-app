@@ -27,7 +27,10 @@ import {AddPrescriptionItemComponent} from './components/prescriptions/component
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ReminderButtonOkComponent } from './components/notifications/components/reminder-button-ok/reminder-button-ok.component';
 import {TooltipModule} from 'ngx-bootstrap';
+// tslint:disable-next-line:max-line-length
+import {NotificationDeleteDialogComponent} from './components/notifications/components/notification-delete-dialog/notification-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import {TooltipModule} from 'ngx-bootstrap';
     ChangePasswordComponent,
     AddComponent,
     AddPrescriptionComponent,
-    AddPrescriptionItemComponent
+    AddPrescriptionItemComponent,
+    ReminderButtonOkComponent,
+    NotificationDeleteDialogComponent,
   ],
 
   imports: [
@@ -68,7 +73,9 @@ import {TooltipModule} from 'ngx-bootstrap';
     AddPrescriptionComponent,
     ChangePasswordComponent,
     EditComponent,
-    AddPrescriptionItemComponent
+    AddPrescriptionItemComponent,
+    ReminderButtonOkComponent,
+    NotificationDeleteDialogComponent
   ]
 })
 export class ProfileModule {

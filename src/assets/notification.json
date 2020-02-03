@@ -2,7 +2,7 @@
   {
     "id": 1,
     "type": "NOTIFICATION",
-    "remindTime": "13:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": 13,
     "prescriptionItemId": null,
     "message": "Message from notification"
@@ -11,7 +11,7 @@
     "id": 4,
     "userId": 17,
     "type": "NOTIFICATION",
-    "remindTime": "12:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": 41,
     "prescriptionItemId": null,
     "message": "Message from notification"
@@ -20,7 +20,7 @@
     "id": 5,
     "userId": 17,
     "type": "NOTIFICATION",
-    "remindTime": "12:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": 41,
     "prescriptionItemId": null,
     "message": "Message from notification"
@@ -29,7 +29,7 @@
     "id": 6,
     "userId": 17,
     "type": "NOTIFICATION",
-    "remindTime": "12:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": 41,
     "prescriptionItemId": null,
     "message": "Message from notification"
@@ -38,7 +38,7 @@
     "id": 10,
     "userId": 17,
     "type": "NOTIFICATION",
-    "remindTime": "12:00",
+    "remindTime": "2020-02-01T10:30:00",
     "medicineInstanceId": 41,
     "prescriptionItemId": null,
     "message": "Message from notification"

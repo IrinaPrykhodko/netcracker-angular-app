@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../../../services/patient.service';
-import {finalize} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
+import {NotificationService} from '../../../../services/notification.service';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,16 +12,30 @@ import {SpinnerService} from '../../../../services/spinner.service';
 })
 export class ProfileComponent implements OnInit {
 
+  paginationOptions = {
+    pageNumber: 0,
+    size: 10,
+  };
+
   constructor(private patientService: PatientService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
     this.spinnerService.setIsLoading(true);
 
     this.patientService.getPatient()
+      .subscribe();
+
+    combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+      this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
       .pipe(
-        finalize(() => this.spinnerService.setIsLoading(false))
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        map(([notifications, reminders]) => {
+          this.notificationService.setCounter(notifications.length + reminders.length);
+          return [notifications, reminders];
+        })
       )
       .subscribe();
   }

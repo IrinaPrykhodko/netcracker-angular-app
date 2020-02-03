@@ -14,6 +14,17 @@
 
   &__list {
 
+    &-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    &-item {
+      margin-bottom: 1rem;
+      width: calc(50% - 0.5rem);
+    }
+
     padding-bottom: 0.5rem;
     border-bottom: 1px solid $second-color;
 
@@ -24,8 +35,7 @@
     }
 
     &__card {
-      height: 95%;
-      width: 95%;
+
     }
 
     &__buttons {
