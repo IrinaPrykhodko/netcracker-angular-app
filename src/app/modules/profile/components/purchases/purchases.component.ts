@@ -19,7 +19,7 @@ export class PurchasesComponent implements OnInit {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 8
+    size: 10
   };
 
   constructor(private purchaseService: PurchaseService,
