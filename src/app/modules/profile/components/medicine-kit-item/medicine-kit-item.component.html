@@ -4,9 +4,11 @@
       <mat-form-field>
         <input
           matInput
-          type="Date"
+          [matDatepicker]="myDatepicker"
           formControlName="selfLife"
-          placeholder="Self life">
+          placeholder="Self life" >
+        <mat-datepicker #myDatepicker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
       </mat-form-field>
 
       <mat-form-field>
