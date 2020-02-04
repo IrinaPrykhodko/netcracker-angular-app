@@ -30,6 +30,7 @@ export class NotificationService {
     return this.http.get<Notification[]>(`${environment.apiUrl}/notification`, {params})
       .pipe(map(notificationList => {
         this.notificationList.next(notificationList);
+        this.reminderAndNotificationCount.next(notificationList.length + this.reminderList.value.length);
         return notificationList;
       }));
   }
@@ -42,6 +43,7 @@ export class NotificationService {
     return this.http.get<Notification[]>(`${environment.apiUrl}/reminder`, {params})
       .pipe(map(reminderList => {
         this.reminderList.next(reminderList);
+        this.reminderAndNotificationCount.next(reminderList.length + this.notificationList.value.length);
         return reminderList;
       }));
   }
@@ -58,7 +60,7 @@ export class NotificationService {
       userId: reminder.userId,
       type: reminder.type,
       remindTime: reminder.remindTime,
-      medicineInstanceId: null,
+      medicineInstanceId: reminder.medicineInstanceId,
       prescriptionItemId: reminder.prescriptionItemId,
       message: reminder.message,
     };

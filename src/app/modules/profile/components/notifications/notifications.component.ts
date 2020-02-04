@@ -55,7 +55,7 @@ export class NotificationsComponent implements OnInit {
     });
 
     this.reminderButtonOkRef.afterClosed()
-      .subscribe(() => {
+      .subscribe(result => {
         this.notificationList = null;
         this.reminderList = null;
         this.getAllNotifications();
@@ -68,10 +68,12 @@ export class NotificationsComponent implements OnInit {
     });
 
     this.notificationDeleteRef.afterClosed()
-      .subscribe(() => {
-        this.notificationList = null;
-        this.reminderList = null;
-        this.getAllNotifications();
+      .subscribe(result => {
+        if (result) {
+          this.notificationList = null;
+          this.reminderList = null;
+          this.getAllNotifications();
+        }
       });
   }
 }
