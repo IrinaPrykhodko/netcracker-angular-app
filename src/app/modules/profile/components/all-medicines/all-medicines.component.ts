@@ -73,7 +73,12 @@ export class AllMedicinesComponent implements OnInit {
     console.log(this.selectedMedicine);
     this.dialogRefEdit = this.dialog.open(AddComponent, {
       data: {medicine: this.selectedMedicine},
-    });
+    })
+    // this.dialogRefEdit.beforeClosed()
+    //   .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+    //   .subscribe((data: Medicine[]) => {
+    //     this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
+    //   });
   }
 
   addMedicineToPurchase(amount: number) {

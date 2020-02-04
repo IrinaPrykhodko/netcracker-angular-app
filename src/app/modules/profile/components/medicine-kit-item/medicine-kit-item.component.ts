@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicineInstance} from "../../../../models/medicineInstance";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MedicineInstance} from '../../../../models/medicineInstance';
 
 @Component({
   selector: 'app-medicine-kit-item',
