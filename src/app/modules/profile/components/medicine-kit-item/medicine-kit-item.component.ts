@@ -20,17 +20,18 @@ export class MedicineKitItemComponent implements OnInit {
     this.medicineKitItemForm = this.formBuilder.group({
       selfLife: ['', [Validators.required]],
       amount: ['', [Validators.required]]
-    })
-    if(this.medicineInstance){
+    });
+
+    if (this.medicineInstance) {
       this.medicineKitItemForm.patchValue({
         selfLife: this.medicineInstance.selfLife,
         amount: this.medicineInstance.amount
-      })
+      });
     }
   }
 
-  deleteItem(id: number){
-    this.onItemDelete.emit(id)
+  deleteItem (id: number) {
+    this.onItemDelete.emit(id);
   }
 
   submit(){

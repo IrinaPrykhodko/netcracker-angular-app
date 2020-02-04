@@ -5,7 +5,7 @@ import {MedicineKitService} from '../../../../../../services/medicine-kit.servic
 import {Medicine} from '../../../../../../models/medicine';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Patient} from '../../../../../../models/patient';
-import {MedicineService} from "../../../../../../services/medicine.service";
+import {MedicineService} from '../../../../../../services/medicine.service';
 
 @Component({
   selector: 'app-add',
