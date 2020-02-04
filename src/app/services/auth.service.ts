@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {PatientService} from './patient.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthService {
   public redirectRoute = '/profile';
 
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private patientService: PatientService) {
   }
 
   getCurrentUserToken(): string {
@@ -23,12 +25,12 @@ export class AuthService {
 
   login(cred: User) {
     return this.http.post(`${environment.apiUrl}/login`, cred)
-      .pipe(map(value => {
+      .pipe(map((value: {token: string}) => {
         console.log(this.redirectRoute);
 
-        if (this.redirectRoute) {
+        if (value.token) {
+          this.setUserToken(value.token);
           this.router.navigate([this.redirectRoute]);
-          this.redirectRoute = null;
         }
 
         return value;
@@ -45,6 +47,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenSessionStorageKey);
+    this.patientService.setPatient(null);
     this.router.navigate(['/login']);
   }
 }

@@ -30,11 +30,11 @@ export class NotificationDeleteDialogComponent implements OnInit {
       .pipe(finalize(() => {
       this.spinnerService.setIsLoading(false);
     }))
-      .subscribe(value => this.dialogRef.close());
+      .subscribe(value => this.dialogRef.close(true));
   }
 
   cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
 }
