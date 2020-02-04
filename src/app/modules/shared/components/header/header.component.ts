@@ -3,8 +3,8 @@ import {Patient} from '../../../../models/patient';
 import {PatientService} from '../../../../services/patient.service';
 import {AuthService} from '../../../../services/auth.service';
 import {NotificationService} from '../../../../services/notification.service';
-import {Subject} from "rxjs";
-import {finalize, takeUntil} from "rxjs/operators";
+import {Subject} from 'rxjs';
+import {finalize, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
