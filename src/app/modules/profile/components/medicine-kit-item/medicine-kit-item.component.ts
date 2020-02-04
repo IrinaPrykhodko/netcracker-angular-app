@@ -30,11 +30,11 @@ export class MedicineKitItemComponent implements OnInit {
     }
   }
 
-  deleteItem (id: number) {
+  deleteItem(id: number) {
     this.onItemDelete.emit(id);
   }
 
-  submit(){
+  submit() {
     this.onMedicineKitItemFormSubmitted.emit(this.medicineKitItemForm.value);
   }
 

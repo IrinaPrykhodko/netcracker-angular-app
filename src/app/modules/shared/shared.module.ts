@@ -12,7 +12,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {ToastrModule} from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
-import {NgxMaskModule} from "ngx-mask";
+import {NgxMaskModule} from 'ngx-mask';
 
 
 @NgModule({
