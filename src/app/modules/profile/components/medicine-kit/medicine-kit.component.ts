@@ -38,11 +38,6 @@ export class MedicineKitComponent implements OnInit {
 
   onSelected(medicineInstance: MedicineInstance): void {
     this.selectedMedicineInstance = medicineInstance;
-    this.editForm = this.formBuilder.group({
-      id: [this.selectedMedicineInstance.id],
-      selfLife: [this.selectedMedicineInstance.selfLife, [Validators.required]],
-      amount: [this.selectedMedicineInstance.amount, [Validators.required]]
-    });
   }
 
   pageChange(p: number) {
@@ -94,12 +89,14 @@ export class MedicineKitComponent implements OnInit {
     this.getMedicineInstances(this.searchText);
   }
 
-  submit(selfLife: Date, amount: number) {
+  submit(medicineInstance: MedicineInstance) {
     this.spinnerService.setIsLoading(true);
-    this.selectedMedicineInstance.amount = amount;
-    this.selectedMedicineInstance.selfLife = selfLife;
-    console.log(this.selectedMedicineInstance);
-    this.medicineKitService.editMedicineInstance(this.selectedMedicineInstance)
+    console.log(medicineInstance);
+    this.medicineKitService.editMedicineInstance({
+      id: this.selectedMedicineInstance.id,
+      ...medicineInstance,
+      medicine: this.selectedMedicineInstance.medicine,
+    })
       .pipe(finalize(() => {
         this.refresh();
       }))

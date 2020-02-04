@@ -12,6 +12,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {ToastrModule} from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     ToastrModule.forRoot(),
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxMaskModule.forRoot()
 
   ],
   exports: [
@@ -45,7 +47,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     SpinnerComponent,
     MatMenuModule,
     ToastrModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxMaskModule
   ]
 })
 export class SharedModule {
