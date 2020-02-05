@@ -12,8 +12,8 @@ export class MedicineKitItemComponent implements OnInit {
   public medicineKitItemForm: FormGroup;
   public customPatterns = { '9': { pattern: new RegExp('^-?[0-9]')} };
   @Input() medicineInstance: MedicineInstance;
-  @Output() onItemDelete = new EventEmitter();
-  @Output() onMedicineKitItemFormSubmitted = new EventEmitter();
+  @Output() ItemDelete = new EventEmitter();
+  @Output() MedicineKitItemFormSubmitted = new EventEmitter();
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -31,11 +31,11 @@ export class MedicineKitItemComponent implements OnInit {
   }
 
   deleteItem(id: number) {
-    this.onItemDelete.emit(id);
+    this.ItemDelete.emit(id);
   }
 
   submit() {
-    this.onMedicineKitItemFormSubmitted.emit(this.medicineKitItemForm.value);
+    this.MedicineKitItemFormSubmitted.emit(this.medicineKitItemForm.value);
   }
 
 }
