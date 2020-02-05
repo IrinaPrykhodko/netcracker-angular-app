@@ -10,7 +10,6 @@ import {MedicineInstance} from '../../../../models/medicineInstance';
 export class MedicineKitItemComponent implements OnInit {
 
   public medicineKitItemForm: FormGroup;
-  public customPatterns = { '9': { pattern: new RegExp('^-?[0-9]')} };
   @Input() medicineInstance: MedicineInstance;
   @Output() ItemDelete = new EventEmitter();
   @Output() MedicineKitItemFormSubmitted = new EventEmitter();
