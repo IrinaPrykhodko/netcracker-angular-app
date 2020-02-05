@@ -13,12 +13,14 @@ export class MedicineKitItemComponent implements OnInit {
   @Input() medicineInstance: MedicineInstance;
   @Output() ItemDelete = new EventEmitter();
   @Output() MedicineKitItemFormSubmitted = new EventEmitter();
-  constructor(private formBuilder: FormBuilder) {}
+
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.medicineKitItemForm = this.formBuilder.group({
       selfLife: ['', [Validators.required]],
-      amount: ['', [Validators.required]]
+      amount: ['', [Validators.required, Validators.min(0)]]
     });
 
     if (this.medicineInstance) {
@@ -37,4 +39,11 @@ export class MedicineKitItemComponent implements OnInit {
     this.MedicineKitItemFormSubmitted.emit(this.medicineKitItemForm.value);
   }
 
+  get selfLife() {
+    return this.medicineKitItemForm.get('selfLife');
+  }
+
+  get amount() {
+    return this.medicineKitItemForm.get('amount');
+  }
 }
