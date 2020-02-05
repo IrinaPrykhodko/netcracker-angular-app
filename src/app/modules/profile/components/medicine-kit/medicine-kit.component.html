@@ -16,7 +16,8 @@
              placeholder="Search"
              (input)="validateSearchText()"/>
 
-      <mat-hint class="hint-error" *ngIf="!isSearchTextValid">Search text can contain letters, numbers and hyphen
+      <mat-hint class="hint-error" *ngIf="!isSearchTextValid">
+        Search text can contain letters, numbers and hyphen
       </mat-hint>
     </mat-form-field>
     <button mat-button [disabled]="!isSearchTextValid" (click)="onSearch()">Search</button>

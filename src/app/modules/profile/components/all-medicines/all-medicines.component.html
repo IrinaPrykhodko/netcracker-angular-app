@@ -1,39 +1,44 @@
-  <div class="search">
-    <mat-form-field>
-      <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"/>
-    </mat-form-field>
-    <button mat-button (click)="findMedicines()">Search</button>
-  </div>
+<div class="search">
+  <mat-form-field>
+    <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"
+           (input)="validateSearchText()"/>
 
-  <div class="searchResultHeader" *ngIf="isSearching">
-    <h4>Search result for {{searchText}}</h4>
-    <button mat-raised-button (click)="clearSearchText()">Clear</button>
-  </div>
+    <mat-hint class="hint-error" *ngIf="!isSearchTextValid">
+      Search text can contain letters, numbers and hyphen
+    </mat-hint>
+  </mat-form-field>
+  <button mat-button [disabled]="!isSearchTextValid" (click)="findMedicines()">Search</button>
+</div>
 
-  <ul class="medicines">
-    <li
-      *ngFor="let medicine of medicineList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber + 1}"
-      [class.selected]="medicine === selectedMedicine"
-      (click)="onSelected(medicine)">
-      <span>{{medicine.name}}</span>
-      <span>{{medicine.manufacturer}}</span>
-    </li>
-  </ul>
+<div class="searchResultHeader" *ngIf="isSearching">
+  <h4>Search result for {{searchText}}</h4>
+  <button mat-raised-button (click)="clearSearchText()">Clear</button>
+</div>
 
-  <pagination-controls (pageChange)="changePage($event)" maxSize=""></pagination-controls>
+<ul class="medicines">
+  <li
+    *ngFor="let medicine of medicineList | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber + 1}"
+    [class.selected]="medicine === selectedMedicine"
+    (click)="onSelected(medicine)">
+    <span>{{medicine.name}}</span>
+    <span>{{medicine.manufacturer}}</span>
+  </li>
+</ul>
 
-  <div class="medicine-information" *ngIf="selectedMedicine">
-    <input matInput #medicineAmount type="number" placeholder="amount" class="amountInput">
-    <button mat-raised-button class="addToPurchaseButton"
-            (click)="addMedicineToPurchase(medicineAmount.valueAsNumber)">Add to purchase
-    </button>
-    <button mat-raised-button class="addInstanceButton" (click)="addMedicineToKit()">Add to MedKit</button>
-    <h2>{{selectedMedicine.name}} | Information</h2>
-    <span>Form: {{selectedMedicine.productionForm}}</span>
-    <span>Contraindications: {{selectedMedicine.contraindications}}</span>
-    <span>Interaction: {{selectedMedicine.interactions}}</span>
-    <span>Package contents: {{selectedMedicine.packageContent}}</span>
-    <span>Method of admission: {{selectedMedicine.takingMethod}}</span>
-    <span>Description: {{selectedMedicine.description}}</span>
-    <span>Dosage: {{selectedMedicine.dosage}}</span>
-  </div>
+<pagination-controls (pageChange)="changePage($event)" maxSize=""></pagination-controls>
+
+<div class="medicine-information" *ngIf="selectedMedicine">
+  <input matInput #medicineAmount type="number" placeholder="amount" class="amountInput">
+  <button mat-raised-button class="addToPurchaseButton"
+          (click)="addMedicineToPurchase(medicineAmount.valueAsNumber)">Add to purchase
+  </button>
+  <button mat-raised-button class="addInstanceButton" (click)="addMedicineToKit()">Add to MedKit</button>
+  <h2>{{selectedMedicine.name}} | Information</h2>
+  <span>Form: {{selectedMedicine.productionForm}}</span>
+  <span>Contraindications: {{selectedMedicine.contraindications}}</span>
+  <span>Interaction: {{selectedMedicine.interactions}}</span>
+  <span>Package contents: {{selectedMedicine.packageContent}}</span>
+  <span>Method of admission: {{selectedMedicine.takingMethod}}</span>
+  <span>Description: {{selectedMedicine.description}}</span>
+  <span>Dosage: {{selectedMedicine.dosage}}</span>
+</div>

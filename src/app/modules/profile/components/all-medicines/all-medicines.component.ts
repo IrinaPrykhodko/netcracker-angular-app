@@ -24,6 +24,7 @@ export class AllMedicinesComponent implements OnInit {
     pageNumber: 0,
     size: 10,
   };
+  private isSearchTextValid = true;
 
   constructor(private medicinesService: MedicineService,
               private purchaseService: PurchaseService,
@@ -45,10 +46,12 @@ export class AllMedicinesComponent implements OnInit {
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
-      this.spinnerService.setIsLoading(true);
-      this.medicineList.pop();
+      if (this.isSearchTextValid) {
+        this.spinnerService.setIsLoading(true);
+        this.medicineList.pop();
 
-      this.getMedicines(this.searchText);
+        this.getMedicines(this.searchText);
+      }
     }
   }
 
@@ -107,5 +110,13 @@ export class AllMedicinesComponent implements OnInit {
     this.isSearching = false;
 
     this.getMedicines();
+  }
+
+  validateSearchText() {
+    if (this.searchText) {
+      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(this.searchText);
+    } else {
+      this.isSearchTextValid = true;
+    }
   }
 }
