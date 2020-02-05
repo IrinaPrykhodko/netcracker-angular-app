@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineInstance} from '../../../../../../models/medicineInstance';
 import {MedicineKitService} from '../../../../../../services/medicine-kit.service';
 import {Medicine} from '../../../../../../models/medicine';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Patient} from '../../../../../../models/patient';
-import {MedicineService} from '../../../../../../services/medicine.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {SpinnerService} from '../../../../../../services/spinner.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +19,9 @@ export class AddComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { medicine: Medicine },
               private formBuilder: FormBuilder,
-              private medicineKitService: MedicineKitService) {
+              private medicineKitService: MedicineKitService,
+              public dialogRef: MatDialogRef<AddComponent>,
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -34,14 +36,16 @@ export class AddComponent implements OnInit {
 
 
   submit() {
+    this.spinnerService.setIsLoading(true);
     console.log(this.addForm.value);
     this.medicineInstance.amount = this.addForm.value.amount;
     this.medicineInstance.selfLife = this.addForm.value.selfLife;
     this.medicineInstance.medicine = this.medicine;
     this.medicineKitService.addMedicineInstance(this.medicineInstance)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe((userData) => {
         console.log(userData);
-
+        this.dialogRef.close();
       }, (error => {
         console.log(error);
       }));
