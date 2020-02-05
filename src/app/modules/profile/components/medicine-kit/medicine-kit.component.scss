@@ -29,17 +29,20 @@
       background: #ffe3e3;
     }
 
-    .name{
-     position: absolute;
+    .name {
+      position: absolute;
     }
+
     .manufactory {
       position: absolute;
       margin-left: 3rem;
     }
-    .self-life{
+
+    .self-life {
       margin-left: 23rem;
     }
-    .amount{
+
+    .amount {
       margin-left: 6rem;
     }
   }
@@ -64,7 +67,7 @@
 
 button {
   background: $main-color;
-  color:#EDEDED;
+  color: #EDEDED;
   margin-left: 0.5em;
 }
 
@@ -92,7 +95,8 @@ button:hover {
   }
 
 }
-.add{
+
+.add {
   display: block;
   margin-top: 3.5rem;
   position: absolute;
@@ -100,3 +104,7 @@ button:hover {
 }
 
 
+button:disabled {
+  background-color: #dbdbdb;
+  color: white;
+}

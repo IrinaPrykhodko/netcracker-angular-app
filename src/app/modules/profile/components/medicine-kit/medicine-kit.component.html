@@ -1,63 +1,68 @@
 <div class="medicine-kit">
-<div class="add-modal">
-  <router-outlet></router-outlet>
-</div>
+  <div class="add-modal">
+    <router-outlet></router-outlet>
+  </div>
 
-<div class="component__title">
-  <h2>Medicine kit</h2>
-</div>
+  <div class="component__title">
+    <h2>Medicine kit</h2>
+  </div>
 
-<div class="search">
-  <mat-form-field>
-    <input matInput
-           [(ngModel)]="searchText"
-           type="search"
-           name="search"
-           placeholder="Search"/>
-  </mat-form-field>
-  <button mat-button (click)="onSearch()">Search</button>
-</div>
+  <div class="search">
+    <mat-form-field>
+      <input matInput
+             [(ngModel)]="searchText"
+             type="search"
+             name="search"
+             placeholder="Search"
+             (input)="validateSearchText()"/>
 
-<div class="searchResultHeader" *ngIf="isSearching">
-  <h4>Search result for {{searchText}}</h4>
-  <button mat-raised-button (click)="clearSearchText()">Clear</button>
-</div>
+      <mat-hint class="hint-error" *ngIf="!isSearchTextValid">Search text can contain letters, numbers and hyphen
+      </mat-hint>
+    </mat-form-field>
+    <button mat-button [disabled]="!isSearchTextValid" (click)="onSearch()">Search</button>
+  </div>
 
-<div class="add">
+  <div class="searchResultHeader" *ngIf="isSearching">
+    <h4>Search result for {{searchText}}</h4>
+    <button mat-raised-button (click)="clearSearchText()">Clear</button>
+  </div>
+
+  <div class="add">
     <button mat-raised-button routerLink="/profile/all-medicines">Add medicine</button>
-</div>
+  </div>
 
-<div class="kit">
-  <ul class="medicine-instance">
-    <li>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
-        [ngClass]="{
+  <div class="kit">
+    <ul class="medicine-instance">
+      <li>
+        <mat-accordion>
+          <mat-expansion-panel
+            *ngFor="let medicineInstance of medicineKit | paginate: {itemsPerPage: paginationOptions.size, currentPage: paginationOptions.pageNumber+1}"
+            [ngClass]="{
         'selected': medicineInstance === selectedMedicineInstance,
         'expired': medicineInstance.isExpired
         }"
-        (click)="onSelected(medicineInstance)">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="name">{{medicineInstance.medicine.name}}</span>
-            </mat-panel-title>
-            <mat-panel-description>
-              <span class="manufactory">{{medicineInstance.medicine.manufacturer}}</span>
-              <span class="self-life">{{medicineInstance.selfLife}}</span>
-              <span class="amount">{{medicineInstance.amount}}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
+            (click)="onSelected(medicineInstance)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <span class="name">{{medicineInstance.medicine.name}}</span>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span class="manufactory">{{medicineInstance.medicine.manufacturer}}</span>
+                <span class="self-life">{{medicineInstance.selfLife}}</span>
+                <span class="amount">{{medicineInstance.amount}}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-          <app-medicine-kit-item
-            [medicineInstance]="medicineInstance"
-            (MedicineKitItemFormSubmitted)="submit($event)"
-            (ItemDelete)="delete($event)"
-          ></app-medicine-kit-item>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </li>
-  </ul>
+            <app-medicine-kit-item
+              [medicineInstance]="medicineInstance"
+              (MedicineKitItemFormSubmitted)="submit($event)"
+              (ItemDelete)="delete($event)"
+            ></app-medicine-kit-item>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </li>
+    </ul>
 
-  <pagination-controls (pageChange)=" pageChange($event)" maxSize=""></pagination-controls>
-</div>
+    <pagination-controls (pageChange)=" pageChange($event)" maxSize=""></pagination-controls>
+  </div>
 </div>
