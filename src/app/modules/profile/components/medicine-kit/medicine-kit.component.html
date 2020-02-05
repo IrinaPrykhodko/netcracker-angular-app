@@ -48,42 +48,11 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <ng-container *ngIf="!medicineInstance.isExpired; else expired">
-            <mat-form-field>
-              <input
-                #selfLife
-                matInput
-                type="Date"
-                value="{{medicineInstance.selfLife}}"
-                placeholder="Self life">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input
-                #amount
-                matInput
-                type="number"
-                value="{{medicineInstance.amount}}"
-                pattern="[0-9]{4}"
-                placeholder="Amount">
-            </mat-form-field>
-
-            <button
-              mat-raised-button (click)="submit(selfLife.valueAsDate, amount.valueAsNumber)">Confirm
-            </button>
-
-            <button
-              mat-raised-button (click)="delete(medicineInstance.id)">Delete
-            </button>
-
-
-
-          </ng-container>
-          <ng-template #expired>
-            <button
-              mat-raised-button (click)="delete(medicineInstance.id)">Delete
-            </button>
-          </ng-template>
+          <app-medicine-kit-item
+            [medicineInstance]="medicineInstance"
+            (MedicineKitItemFormSubmitted)="submit($event)"
+            (ItemDelete)="delete($event)"
+          ></app-medicine-kit-item>
         </mat-expansion-panel>
       </mat-accordion>
     </li>

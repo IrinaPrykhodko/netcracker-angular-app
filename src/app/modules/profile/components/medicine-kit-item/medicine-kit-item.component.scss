@@ -1,0 +1,15 @@
+@import "src/styles/variables/variables";
+
+.medicineKitItem{
+  button {
+    background: $main-color;
+    color:#EDEDED;
+    margin-left: 0.5em;
+  }
+
+  button:hover {
+    margin-left: 0.5em;
+    background: $second-color;
+    color: white;
+  }
+}

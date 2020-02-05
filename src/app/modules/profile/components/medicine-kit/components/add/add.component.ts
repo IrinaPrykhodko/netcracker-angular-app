@@ -5,6 +5,7 @@ import {MedicineKitService} from '../../../../../../services/medicine-kit.servic
 import {Medicine} from '../../../../../../models/medicine';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Patient} from '../../../../../../models/patient';
+import {MedicineService} from '../../../../../../services/medicine.service';
 
 @Component({
   selector: 'app-add',
@@ -40,6 +41,7 @@ export class AddComponent implements OnInit {
     this.medicineKitService.addMedicineInstance(this.medicineInstance)
       .subscribe((userData) => {
         console.log(userData);
+
       }, (error => {
         console.log(error);
       }));

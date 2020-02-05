@@ -1,0 +1,40 @@
+<div class="medicineKitItem">
+  <form class="medicineKitItemForm" [formGroup]="medicineKitItemForm">
+    <ng-container *ngIf="!medicineInstance.isExpired; else expired">
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="myDatepicker"
+          formControlName="selfLife"
+          placeholder="Self life" >
+        <mat-datepicker #myDatepicker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          mask="999"
+          type="text"
+          formControlName="amount"
+          placeholder="Amount">
+      </mat-form-field>
+
+      <button
+        mat-raised-button (click)="submit()">Confirm
+      </button>
+
+      <button
+        mat-raised-button (click)="deleteItem(medicineInstance.id)">Delete
+      </button>
+
+
+
+    </ng-container>
+    <ng-template #expired>
+      <button
+        mat-raised-button (click)="deleteItem(medicineInstance.id)">Delete
+      </button>
+    </ng-template>
+  </form>
+</div>

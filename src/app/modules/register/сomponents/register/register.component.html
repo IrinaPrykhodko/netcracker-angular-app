@@ -28,8 +28,13 @@
     </mat-form-field>
 
     <mat-form-field color="primary" class="mat-date">
-      <input matInput [matDatepicker]="birthday" [max]="maxBirthDayDate" formControlName="dateOfBirth"
-             placeholder="* Enter your date of birth" readonly (click)="birthday.open()"/>
+      <input
+        matInput
+        [matDatepicker]="birthday"
+        [max]="maxBirthDayDate"
+        formControlName="dateOfBirth"
+        placeholder="* Enter your date of birth"
+        readonly (click)="birthday.open()"/>
 
       <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
       <mat-datepicker #birthday></mat-datepicker>

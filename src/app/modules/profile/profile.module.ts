@@ -31,6 +31,7 @@ import { ReminderButtonOkComponent } from './components/notifications/components
 import {TooltipModule} from 'ngx-bootstrap';
 // tslint:disable-next-line:max-line-length
 import {NotificationDeleteDialogComponent} from './components/notifications/components/notification-delete-dialog/notification-delete-dialog.component';
+import {MedicineKitItemComponent} from './components/medicine-kit-item/medicine-kit-item.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import {NotificationDeleteDialogComponent} from './components/notifications/comp
     AddPrescriptionItemComponent,
     ReminderButtonOkComponent,
     NotificationDeleteDialogComponent,
+    MedicineKitItemComponent,
+
   ],
 
   imports: [
