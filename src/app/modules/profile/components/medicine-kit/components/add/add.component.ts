@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
 
     this.addForm = this.formBuilder.group({
       selfLife: [this.medicineInstance.selfLife, [Validators.required]],
-      amount: [this.medicineInstance.amount, [Validators.required]]
+      amount: [this.medicineInstance.amount, [Validators.required, Validators.min(0)]]
     });
     this.medicine = this.data.medicine;
   }
