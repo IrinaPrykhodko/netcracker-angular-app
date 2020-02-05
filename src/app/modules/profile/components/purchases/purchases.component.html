@@ -29,7 +29,7 @@
 
         <mat-form-field>
           <input matInput #medicineAmount type="number" min="0" value="{{purchaseItem.amount}}" placeholder="Amount">
-          <mat-hint class="amount-error" [hidden]="!editButton.disabled">
+          <mat-hint class="hint-error" [hidden]="!editButton.disabled">
             Amount must be positive
           </mat-hint>
         </mat-form-field>
