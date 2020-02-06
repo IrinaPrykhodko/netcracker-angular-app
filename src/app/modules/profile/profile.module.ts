@@ -54,7 +54,7 @@ import { ReminderDeleteComponent } from './components/notifications/components/r
     ReminderButtonOkComponent,
     NotificationDeleteDialogComponent,
     MedicineKitItemComponent,
-    AddMedicineToPurchasesComponent
+    AddMedicineToPurchasesComponent,
     ReminderDeleteComponent
   ],
 
@@ -81,7 +81,7 @@ import { ReminderDeleteComponent } from './components/notifications/components/r
     EditComponent,
     AddPrescriptionItemComponent,
     ReminderButtonOkComponent,
-    AddMedicineToPurchasesComponent
+    AddMedicineToPurchasesComponent,
     ReminderDeleteComponent,
     NotificationDeleteDialogComponent
   ]
