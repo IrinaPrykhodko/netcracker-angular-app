@@ -144,4 +144,12 @@ export class PrescriptionsComponent implements OnInit {
 
     return prescriptionItemEndDate.isBefore(todayDate);
   }
+
+  setIsReminderEnabled(prescriptionItem: PrescriptionItem) {
+    this.spinnerService.setIsLoading(true);
+
+    this.prescriptionsService.setIsReminderEnabled(prescriptionItem.id, prescriptionItem.isReminderEnabled)
+      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe();
+  }
 }

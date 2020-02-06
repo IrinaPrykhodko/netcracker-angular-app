@@ -63,4 +63,13 @@ export class PrescriptionService {
   deletePrescriptionItem(prescriptionItemId: number) {
     return this.http.delete(`${environment.apiUrl}/prescriptions/items/${prescriptionItemId}`);
   }
+
+  setIsReminderEnabled(prescriptionItemId: number, isReminderEnabled: boolean) {
+    const setIsReminderEnabledRequest = {
+      prescriptionItemId,
+      isReminderEnabled
+    };
+
+    return this.http.put(`${environment.apiUrl}/prescriptions/items`, setIsReminderEnabledRequest);
+  }
 }
