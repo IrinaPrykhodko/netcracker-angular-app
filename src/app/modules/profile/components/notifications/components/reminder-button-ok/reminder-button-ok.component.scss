@@ -1,3 +1,5 @@
+@import "src/styles/variables/variables";
+
 .dialog-reminder-button-ok{
   &__buttons{
     display: flex;
@@ -6,6 +8,17 @@
 
     button + button {
       margin-left: 1rem;
+    }
+    button {
+      background: $main-color;
+      color:#EDEDED;
+      margin-left: 0.5em;
+    }
+
+    button:hover {
+      margin-left: 0.5em;
+      background: $second-color;
+      color: white;
     }
   }
 }
