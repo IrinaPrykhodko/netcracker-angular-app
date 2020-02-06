@@ -100,6 +100,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
 
   addMedicineInstanceToPurchase(medicineInstanceId: number) {
     console.log('medicine instance id ' + medicineInstanceId);
