@@ -8,6 +8,7 @@ import {ReminderButtonOkComponent} from './components/reminder-button-ok/reminde
 import {NotificationDeleteDialogComponent} from './components/notification-delete-dialog/notification-delete-dialog.component';
 import * as moment from 'moment';
 import {Subject} from 'rxjs';
+import {AddMedicineToPurchasesComponent} from '../add-medicine-to-purchases/add-medicine-to-purchases.component';
 
 @Component({
   selector: 'app-notifications',
@@ -19,13 +20,14 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   public reminderButtonOkRef: MatDialogRef<ReminderButtonOkComponent>;
   public notificationDeleteRef: MatDialogRef<NotificationDeleteDialogComponent>;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  public addMedicineToPurchaseRef: MatDialogRef<AddMedicineToPurchasesComponent>;
 
   notificationList: Notification[];
   reminderList: Notification[];
 
   paginationOptions = {
     pageNumber: 0,
-    size: 10,
+    size: 50,
   };
 
   constructor(private notificationService: NotificationService,
@@ -34,11 +36,11 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.spinnerService.setIsLoading(true);
     this.getAllNotifications();
   }
 
   getAllNotifications() {
-    this.spinnerService.setIsLoading(true);
     this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .pipe(
         takeUntil(this.destroy$)
@@ -68,6 +70,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(result => {
+        this.spinnerService.setIsLoading(true);
         this.notificationList = null;
         this.reminderList = null;
         this.getAllNotifications();
@@ -85,6 +88,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       )
       .subscribe(result => {
         if (result) {
+          this.spinnerService.setIsLoading(true);
           this.notificationList = null;
           this.reminderList = null;
           this.getAllNotifications();
@@ -92,8 +96,16 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       });
   }
 
+
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+
+  addMedicineInstanceToPurchase(medicineInstanceId: number) {
+    console.log('medicine instance id ' + medicineInstanceId);
+    this.addMedicineToPurchaseRef = this.dialog.open(AddMedicineToPurchasesComponent, {
+      data: {medicineInstanceId}
+    });
+
   }
 }
