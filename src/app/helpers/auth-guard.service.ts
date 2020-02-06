@@ -11,6 +11,8 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    this.authService.checkIsTokenExpired();
+
     if (this.authService.isUserLoggedIn()) {
       return true;
     }
