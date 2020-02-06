@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {NotificationService} from '../../../../services/notification.service';
 import {Notification} from '../../../../models/notification';
-import {finalize, map} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ReminderButtonOkComponent} from './components/reminder-button-ok/reminder-button-ok.component';
 import {NotificationDeleteDialogComponent} from './components/notification-delete-dialog/notification-delete-dialog.component';
-import * as moment from 'moment';
+import {AddMedicineToPurchasesComponent} from '../add-medicine-to-purchases/add-medicine-to-purchases.component';
 
 @Component({
   selector: 'app-notifications',
@@ -17,13 +17,14 @@ export class NotificationsComponent implements OnInit {
 
   public reminderButtonOkRef: MatDialogRef<ReminderButtonOkComponent>;
   public notificationDeleteRef: MatDialogRef<NotificationDeleteDialogComponent>;
+  public addMedicineToPurchaseRef: MatDialogRef<AddMedicineToPurchasesComponent>;
 
   notificationList: Notification[];
   reminderList: Notification[];
 
   paginationOptions = {
     pageNumber: 0,
-    size: 10,
+    size: 50,
   };
 
   constructor(private notificationService: NotificationService,
@@ -31,11 +32,11 @@ export class NotificationsComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.spinnerService.setIsLoading(true);
     this.getAllNotifications();
   }
 
   getAllNotifications() {
-    this.spinnerService.setIsLoading(true);
     this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size)
       .subscribe((data: Notification[]) => {
         this.reminderList = this.reminderList ? this.reminderList.concat(data) : data;
@@ -56,6 +57,7 @@ export class NotificationsComponent implements OnInit {
 
     this.reminderButtonOkRef.afterClosed()
       .subscribe(result => {
+        this.spinnerService.setIsLoading(true);
         this.notificationList = null;
         this.reminderList = null;
         this.getAllNotifications();
@@ -70,10 +72,18 @@ export class NotificationsComponent implements OnInit {
     this.notificationDeleteRef.afterClosed()
       .subscribe(result => {
         if (result) {
+          this.spinnerService.setIsLoading(true);
           this.notificationList = null;
           this.reminderList = null;
           this.getAllNotifications();
         }
       });
+  }
+
+  addMedicineInstanceToPurchase(medicineInstanceId: number) {
+    console.log('medicine instance id ' + medicineInstanceId);
+    this.addMedicineToPurchaseRef = this.dialog.open(AddMedicineToPurchasesComponent, {
+      data: {medicineInstanceId}
+    });
   }
 }
