@@ -21,9 +21,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       errorMessage = `Error status: ${err.status}`;
 
       if (err.status === 500) {
-        alert(`Sorry, try again later. ${err.error.message}`);
+        console.log(`Sorry, try again later. ${err.error.message}`);
         errorMessage += (`\nMessage: ${err.message}`);
-      } else if (err.status === 401) {
+      } else
+        if (err.status === 401) {
         console.log('401 error');
         this.authService.logout();
       }
