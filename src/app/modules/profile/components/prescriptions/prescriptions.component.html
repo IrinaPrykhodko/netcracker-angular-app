@@ -39,10 +39,10 @@
             <span>Taking time: {{prescriptionItem.takingTime}}</span>
             <span>From {{prescriptionItem.startDate}} to {{prescriptionItem.endDate}}</span>
             <span>Description: {{prescriptionItem.description}}</span>
-            <mat-checkbox [disabled]="isPrescriptionItemEndDateInPast(prescriptionItem)"
-                          [indeterminate]="isPrescriptionItemEndDateInPast(prescriptionItem)"
-                          [checked]="prescriptionItem.isReminderEnabled"
-                          (click)="setIsReminderEnabled(prescriptionItem)">
+            <mat-checkbox #isReminderEnabled
+                          [disabled]="isPrescriptionItemEndDateInPast(prescriptionItem)"
+                          [checked]="isPrescriptionItemEndDateInPast(prescriptionItem) ? false : prescriptionItem.isReminderEnabled"
+                          (input)="setIsReminderEnabled(prescriptionItem.id, isReminderEnabled.checked)">
               Reminder
             </mat-checkbox>
             <button class="prescriptions__list__items__delete-button" mat-raised-button

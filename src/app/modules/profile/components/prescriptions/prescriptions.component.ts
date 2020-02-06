@@ -78,7 +78,7 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.spinnerService.setIsLoading(false)),
         takeUntil(this.destroy$)
-        )
+      )
       .subscribe(value => {
         const index = this.prescriptionStruct.findIndex(elem => elem.prescription.id === id);
 
@@ -108,7 +108,7 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
         .pipe(
           finalize(() => this.spinnerService.setIsLoading(false)),
           takeUntil(this.destroy$)
-          )
+        )
         .subscribe((data: PrescriptionItem[]) => {
           this.prescriptionStruct[index].prescriptionItems = data;
         });
@@ -122,7 +122,7 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.spinnerService.setIsLoading(false)),
         takeUntil(this.destroy$)
-        )
+      )
       .subscribe((data: Prescription[]) => {
         data.forEach(value => {
           this.prescriptionStruct.push({prescription: value, prescriptionItems: null});
@@ -137,7 +137,7 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.spinnerService.setIsLoading(false)),
         takeUntil(this.destroy$)
-        )
+      )
       .subscribe(value => {
         const prescriptionIndex = this.prescriptionStruct.findIndex(elem => {
           return elem.prescription.id === prescriptionId;
@@ -162,10 +162,10 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
     return prescriptionItemEndDate.isBefore(todayDate);
   }
 
-  setIsReminderEnabled(prescriptionItem: PrescriptionItem) {
+  setIsReminderEnabled(prescriptionItemId: number, isReminderEnabled: boolean) {
     this.spinnerService.setIsLoading(true);
 
-    this.prescriptionsService.setIsReminderEnabled(prescriptionItem.id, prescriptionItem.isReminderEnabled)
+    this.prescriptionsService.setIsReminderEnabled(prescriptionItemId, isReminderEnabled)
       .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe();
   }
