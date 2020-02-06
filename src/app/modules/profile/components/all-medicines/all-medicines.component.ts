@@ -24,7 +24,7 @@ export class AllMedicinesComponent implements OnInit {
     pageNumber: 0,
     size: 10,
   };
-  private isSearchTextValid = true;
+  public isSearchTextValid = true;
 
   constructor(private medicinesService: MedicineService,
               private purchaseService: PurchaseService,
