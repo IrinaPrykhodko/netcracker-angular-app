@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PatientService} from '../../../../services/patient.service';
-import {finalize, map} from 'rxjs/operators';
+import {finalize, map, takeUntil} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {NotificationService} from '../../../../services/notification.service';
-import {combineLatest} from 'rxjs';
+import {combineLatest, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   paginationOptions = {
     pageNumber: 0,
     size: 10,
@@ -26,6 +27,9 @@ export class ProfileComponent implements OnInit {
     this.spinnerService.setIsLoading(true);
 
     this.patientService.getPatient()
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe();
 
     combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
@@ -35,8 +39,14 @@ export class ProfileComponent implements OnInit {
         map(([notifications, reminders]) => {
           this.notificationService.setCounter(notifications.length + reminders.length);
           return [notifications, reminders];
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
