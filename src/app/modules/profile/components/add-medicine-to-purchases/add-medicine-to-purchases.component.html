@@ -1,0 +1,19 @@
+<div class="add-medicine-to-purchases">
+  <form [formGroup]="addForm" class="add-medicine-to-purchase__form">
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="amount"
+        type="number" min="0"
+        placeholder="Enter amount of medicine"/>
+      <mat-error
+        *ngIf="amount.hasError('required') && (amount.dirty || amount.touched)">Amount required
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="add-medicine-to-purchases__buttons">
+    <button mat-raised-button (click)="addMedicineToPurchasesByMedicineInstanceId(medicineInstanceId, amount.value)">Add</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+  </div>
+</div>
