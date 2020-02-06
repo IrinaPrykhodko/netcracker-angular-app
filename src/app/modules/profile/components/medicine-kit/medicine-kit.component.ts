@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
-import {finalize, map} from 'rxjs/operators';
+import {finalize, map, takeUntil} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-medicine-kit',
   templateUrl: './medicine-kit.component.html',
   styleUrls: ['./medicine-kit.component.scss']
 })
-export class MedicineKitComponent implements OnInit {
+export class MedicineKitComponent implements OnInit, OnDestroy {
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   medicineKit: MedicineInstance[];
   public editForm: FormGroup;
   isSearching = false;
@@ -58,7 +60,8 @@ export class MedicineKitComponent implements OnInit {
         }),
         finalize(() => {
           this.spinnerService.setIsLoading(false);
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe((data: MedicineInstance[]) => {
         this.medicineKit = this.medicineKit ? this.medicineKit.concat(data) : data;
@@ -96,9 +99,10 @@ export class MedicineKitComponent implements OnInit {
       ...medicineInstance,
       medicine: this.selectedMedicineInstance.medicine,
     })
-      .pipe(finalize(() => {
-        this.refresh();
-      }))
+      .pipe(
+        finalize(() => { this.refresh(); }),
+        takeUntil(this.destroy$)
+      )
       .subscribe((userData) => {
         console.log(userData);
 
@@ -117,9 +121,9 @@ export class MedicineKitComponent implements OnInit {
     this.spinnerService.setIsLoading(true);
     console.log(id);
     this.medicineKitService.deleteMedicineInstance(id)
-      .pipe(finalize(() => {
-        this.refresh();
-      }))
+      .pipe(finalize(() => { this.refresh(); }),
+        takeUntil(this.destroy$)
+        )
       .subscribe((userData) => {
         console.log(userData);
       }, (error => {
@@ -144,4 +148,10 @@ export class MedicineKitComponent implements OnInit {
       this.isSearchTextValid = true;
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
 }
