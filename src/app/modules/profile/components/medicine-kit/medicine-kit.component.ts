@@ -4,7 +4,7 @@ import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
 import {finalize, map, takeUntil} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-medicine-kit',

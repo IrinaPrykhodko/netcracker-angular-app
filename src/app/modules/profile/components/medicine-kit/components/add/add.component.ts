@@ -6,7 +6,7 @@ import {Medicine} from '../../../../../../models/medicine';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {finalize, takeUntil} from 'rxjs/operators';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-add',
