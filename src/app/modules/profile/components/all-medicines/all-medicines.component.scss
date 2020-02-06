@@ -8,24 +8,26 @@
   width: 100%;
 }
 
-.medicine-information{
-  .amountInput{
+.medicine-information {
+  .amountInput {
     display: inline;
     position: static;
   }
-  button{
+
+  button {
     display: inline-block;
     position: static;
     margin-top: 1rem;
     margin-left: 0.5rem;
   }
+
   button {
-    background: $main-color !important;
+    background: $main-color;
     color: #EDEDED;
   }
 
   button:hover {
-    background: $second-color !important;
+    background: $second-color;
     color: white;
   }
 }
@@ -35,7 +37,7 @@
   position: relative;
   left: 0;
   background-color: white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   margin: 8px;
   padding: 10px;
   border-radius: 4px;
@@ -118,24 +120,29 @@
   }
 
   button {
-    background: $main-color !important;
+    background: $main-color;
     color: #EDEDED;
   }
 
   button:hover {
-    background: $second-color !important;
+    background: $second-color;
+    color: white;
+  }
+
+  button:disabled {
+    background-color: #dbdbdb;
     color: white;
   }
 }
 
-.searchResultHeader{
+.searchResultHeader {
   button {
-    background: $main-color !important;
+    background: $main-color;
     color: #EDEDED;
   }
 
   button:hover {
-    background: $second-color !important;
+    background: $second-color;
     color: white;
   }
 }
@@ -165,7 +172,8 @@
   right: 15px;
   width: auto;
 }
-.addInstanceButton{
+
+.addInstanceButton {
   position: absolute;
   left: auto;
   right: 200px;

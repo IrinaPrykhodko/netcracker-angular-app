@@ -1,6 +1,6 @@
 @import "src/styles/variables/variables";
 
-.add{
+.add {
   width: 400px;
   margin: 1% auto;
   background-color: #fcfcfc;
@@ -20,12 +20,6 @@
     background-color: #BDBDBD !important;
   }
 
-  button:disabled,
-  button[disabled] {
-    background-color: #dbdbdb;
-    color: white;
-  }
-
   mat-form-field {
     padding-left: 1%;
     width: 100%;
@@ -35,20 +29,18 @@
     margin: 2%;
   }
 
-  error-massage {
-    margin-top: -5%;
-    color: red;
-    font-size: 80%;
-  }
-
   button {
-    background: $main-color !important;
+    background: $main-color;
     color: #EDEDED;
   }
 
   button:hover {
-    background: $second-color !important;
+    background: $second-color;
     color: white;
   }
 
+  button:disabled {
+    background-color: #dbdbdb;
+    color: white;
+  }
 }

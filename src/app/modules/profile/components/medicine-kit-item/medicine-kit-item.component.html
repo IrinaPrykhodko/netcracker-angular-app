@@ -6,28 +6,41 @@
           matInput
           [matDatepicker]="myDatepicker"
           formControlName="selfLife"
-          placeholder="Self life" >
+          placeholder="Self life">
         <mat-datepicker #myDatepicker></mat-datepicker>
         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+
+        <mat-error *ngIf="selfLife.hasError('required') && (selfLife.dirty || selfLife.touched)">
+          Self life is required
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input
           matInput
-          mask="999"
-          type="text"
+          type="number"
           formControlName="amount"
-          placeholder="Amount">
+          placeholder="Amount"
+          min="0"
+        >
+
+        <mat-error *ngIf="amount.hasError('required') && (amount.dirty || amount.touched)">
+          Amount must be a number
+        </mat-error>
+        <mat-error *ngIf="amount.hasError('min') && (amount.dirty || amount.touched)">
+          Amount must be positive
+        </mat-error>
+
       </mat-form-field>
 
-      <button
-        mat-raised-button (click)="submit()">Confirm
+      <button mat-raised-button [disabled]="medicineKitItemForm.invalid"
+              (click)="submit()">
+        Confirm
       </button>
 
       <button
         mat-raised-button (click)="deleteItem(medicineInstance.id)">Delete
       </button>
-
 
 
     </ng-container>

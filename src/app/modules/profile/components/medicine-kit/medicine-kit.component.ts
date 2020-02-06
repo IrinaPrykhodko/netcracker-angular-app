@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MedicineKitService} from '../../../../services/medicine-kit.service';
 import {MedicineInstance} from '../../../../models/medicineInstance';
 import {finalize, map} from 'rxjs/operators';
-import {AddComponent} from './components/add/add.component';
-import {MatDialog, MatDialogRef} from '@angular/material';
 import {SpinnerService} from '../../../../services/spinner.service';
 
 @Component({
@@ -17,18 +15,17 @@ export class MedicineKitComponent implements OnInit {
   medicineKit: MedicineInstance[];
   public editForm: FormGroup;
   isSearching = false;
-  public dialogRefEdit: MatDialogRef<AddComponent>;
   selectedMedicineInstance: MedicineInstance;
   paginationOptions = {
     pageNumber: 0,
     size: 10,
   };
   searchText: string;
+  isSearchTextValid = true;
 
   constructor(private medicineKitService: MedicineKitService,
               private formBuilder: FormBuilder,
-              private spinnerService: SpinnerService,
-              private dialog: MatDialog) {
+              private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -45,9 +42,11 @@ export class MedicineKitComponent implements OnInit {
     const requiredNumberOfMI = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
     if (requiredNumberOfMI >= this.medicineKit.length - 1) {
-      this.spinnerService.setIsLoading(true);
-      this.medicineKit.pop();
-      this.getMedicineInstances(this.searchText);
+      if (this.isSearchTextValid) {
+        this.spinnerService.setIsLoading(true);
+        this.medicineKit.pop();
+        this.getMedicineInstances(this.searchText);
+      }
     }
   }
 
@@ -138,4 +137,11 @@ export class MedicineKitComponent implements OnInit {
     this.getMedicineInstances();
   }
 
+  validateSearchText() {
+    if (this.searchText) {
+      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(this.searchText);
+    } else {
+      this.isSearchTextValid = true;
+    }
+  }
 }
