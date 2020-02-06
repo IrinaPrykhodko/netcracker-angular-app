@@ -32,6 +32,7 @@ import {TooltipModule} from 'ngx-bootstrap';
 // tslint:disable-next-line:max-line-length
 import {NotificationDeleteDialogComponent} from './components/notifications/components/notification-delete-dialog/notification-delete-dialog.component';
 import {MedicineKitItemComponent} from './components/medicine-kit-item/medicine-kit-item.component';
+import { AddMedicineToPurchasesComponent } from './components/add-medicine-to-purchases/add-medicine-to-purchases.component';
 import { ReminderDeleteComponent } from './components/notifications/components/reminder-delete/reminder-delete.component';
 
 @NgModule({
@@ -53,8 +54,8 @@ import { ReminderDeleteComponent } from './components/notifications/components/r
     ReminderButtonOkComponent,
     NotificationDeleteDialogComponent,
     MedicineKitItemComponent,
-    ReminderDeleteComponent,
-
+    AddMedicineToPurchasesComponent,
+    ReminderDeleteComponent
   ],
 
   imports: [
@@ -80,6 +81,7 @@ import { ReminderDeleteComponent } from './components/notifications/components/r
     EditComponent,
     AddPrescriptionItemComponent,
     ReminderButtonOkComponent,
+    AddMedicineToPurchasesComponent,
     ReminderDeleteComponent,
     NotificationDeleteDialogComponent
   ]

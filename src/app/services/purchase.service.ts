@@ -64,4 +64,12 @@ export class PurchaseService {
 
     return this.http.post(`${environment.apiUrl}/purchases`, body);
   }
+
+  addPurchaseItemWithMedicineInstanceId(medicineInstanceId: number, amount: number) {
+    const body = {
+      medicineInstanceId,
+      amount
+    };
+    return this.http.post(`${environment.apiUrl}/purchases/medicine-instance`, body);
+  }
 }
