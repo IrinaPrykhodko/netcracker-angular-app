@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RegisterService} from '../../../../services/register.service';
 import {Patient} from '../../../../models/patient';
 import {PasswordStateMatcher} from '../../../../models/PasswordStateMatcher';
 import {CountryISO, SearchCountryField, TooltipLabel} from 'ngx-intl-tel-input';
 import {PhoneNumberUtil} from 'google-libphonenumber';
-import {finalize} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {SpinnerService} from '../../../../services/spinner.service';
+import {Subject} from 'rxjs';
 
 
 @Component({
@@ -14,12 +15,13 @@ import {SpinnerService} from '../../../../services/spinner.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit,OnDestroy {
 
   public patient: Patient = new Patient();
   public registerForm: FormGroup;
   public passwordStateMatcher = new PasswordStateMatcher();
   public isLoading;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
@@ -50,6 +52,11 @@ export class RegisterComponent implements OnInit {
     }, {validator: this.passwordMatchValidator});
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
   clearForm(registerForm: FormGroup) {
     const clearRegisterForm = {
       firstName: this.registerForm.value.firstName,
@@ -70,7 +77,8 @@ export class RegisterComponent implements OnInit {
     this.spinnerService.setIsLoading(true);
     this.registerService.register(this.clearForm(this.registerForm))
       .pipe(
-        finalize(() => this.spinnerService.setIsLoading(false))
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        takeUntil(this.destroy$)
       )
       .subscribe((userData) => {
         console.log(userData);
