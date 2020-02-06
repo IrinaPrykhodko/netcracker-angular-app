@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -13,6 +12,8 @@ import {SharedModule} from './modules/shared/shared.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ErrorInterceptor} from './helpers/error-interceptor.service';
 import {TokenInterceptorService} from './helpers/token-interceptor.service';
+import {Router} from '@angular/router';
+import {AuthService} from './services/auth.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {TokenInterceptorService} from './helpers/token-interceptor.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
+      multi: true,
+      deps: [AuthService, Router]
     },
     {
       provide: HTTP_INTERCEPTORS,
