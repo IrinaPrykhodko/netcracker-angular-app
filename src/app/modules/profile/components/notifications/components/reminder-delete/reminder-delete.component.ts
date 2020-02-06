@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {NotificationService} from '../../../../../../services/notification.service';
 import {SpinnerService} from '../../../../../../services/spinner.service';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-reminder-delete',
@@ -21,7 +21,7 @@ export class ReminderDeleteComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteOk(){
+  deleteOk() {
     this.spinnerService.setIsLoading(true);
     this.notificationService.deleteNotification(this.data.id)
       .pipe(finalize(() => {
@@ -30,7 +30,7 @@ export class ReminderDeleteComponent implements OnInit {
       .subscribe(value => this.dialogRef.close());
   }
 
-  cancel(){
+  cancel() {
     this.dialogRef.close();
   }
 }
