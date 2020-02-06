@@ -27,10 +27,10 @@ export class ReminderDeleteComponent implements OnInit, OnDestroy {
   deleteOk() {
     this.spinnerService.setIsLoading(true);
     this.notificationService.deleteNotification(this.data.id)
-      .pipe(finalize(() => {
-        this.spinnerService.setIsLoading(false),
+      .pipe(
+        finalize(() => { this.spinnerService.setIsLoading(false); }),
         takeUntil(this.destroy$)
-      }))
+        )
       .subscribe(value => this.dialogRef.close());
   }
 
