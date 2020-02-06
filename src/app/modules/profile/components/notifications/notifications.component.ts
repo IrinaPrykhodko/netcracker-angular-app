@@ -30,7 +30,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   constructor(private notificationService: NotificationService,
               private spinnerService: SpinnerService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.getAllNotifications();
@@ -50,7 +51,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.spinnerService.setIsLoading(false)),
         takeUntil(this.destroy$)
-        )
+      )
       .subscribe((data: Notification[]) => {
         this.notificationList = this.notificationList ? this.notificationList.concat(data) : data;
         console.log(this.notificationList);

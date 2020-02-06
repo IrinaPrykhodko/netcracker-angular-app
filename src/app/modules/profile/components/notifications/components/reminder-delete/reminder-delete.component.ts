@@ -10,7 +10,7 @@ import {Subject} from 'rxjs';
   templateUrl: './reminder-delete.component.html',
   styleUrls: ['./reminder-delete.component.scss']
 })
-export class ReminderDeleteComponent implements OnInit,OnDestroy {
+export class ReminderDeleteComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -28,7 +28,7 @@ export class ReminderDeleteComponent implements OnInit,OnDestroy {
     this.spinnerService.setIsLoading(true);
     this.notificationService.deleteNotification(this.data.id)
       .pipe(finalize(() => {
-        this.spinnerService.setIsLoading(false);
+        this.spinnerService.setIsLoading(false),
         takeUntil(this.destroy$)
       }))
       .subscribe(value => this.dialogRef.close());

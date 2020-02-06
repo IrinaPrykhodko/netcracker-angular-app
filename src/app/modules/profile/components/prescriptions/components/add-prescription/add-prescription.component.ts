@@ -5,7 +5,7 @@ import {Prescription} from '../../../../../../models/prescription';
 import {PrescriptionService} from '../../../../../../services/prescription.service';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {Subject} from 'rxjs';
-import {takeUntil} from "rxjs/operators";
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({

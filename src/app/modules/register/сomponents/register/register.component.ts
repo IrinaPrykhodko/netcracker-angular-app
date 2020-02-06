@@ -15,7 +15,7 @@ import {Subject} from 'rxjs';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit,OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   public patient: Patient = new Patient();
   public registerForm: FormGroup;

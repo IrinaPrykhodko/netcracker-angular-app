@@ -4,7 +4,7 @@ import {PatientService} from '../../../../services/patient.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EditComponent} from './components/edit/edit.component';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
