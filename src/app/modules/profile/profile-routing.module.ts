@@ -28,7 +28,8 @@ const routes: Routes = [
         children: [
           {
             path: 'add',
-            component: AddComponent
+            component: AddComponent,
+            canActivate: [AuthGuard]
           }
         ]
       },
@@ -55,6 +56,7 @@ const routes: Routes = [
       {
         path: 'all-medicines',
         component: AllMedicinesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'account',

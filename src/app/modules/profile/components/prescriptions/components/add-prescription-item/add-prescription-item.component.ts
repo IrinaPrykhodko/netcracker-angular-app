@@ -73,9 +73,9 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
               finalize(() => {
                 this.canSearch = true;
                 this.spinnerService.setIsLoading(false);
-            }),
+              }),
               takeUntil(this.destroy$)
-              )
+            )
             .subscribe(medicines => {
               this.medicines = medicines;
             });
@@ -102,13 +102,11 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
       this.prescriptionItem.dosage = this.dosage.value;
       this.prescriptionItem.isReminderEnabled = this.isReminderEnabled.value;
 
-      console.log(this.prescriptionItem);
-
       this.prescriptionService.addPrescriptionItem(this.prescriptionItem)
         .pipe(
           finalize(() => this.spinnerService.setIsLoading(false)),
           takeUntil(this.destroy$)
-          )
+        )
         .subscribe(
           value => {
             this.dialogRef.close(value);
