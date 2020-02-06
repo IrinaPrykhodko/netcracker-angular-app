@@ -33,7 +33,7 @@ import {TooltipModule} from 'ngx-bootstrap';
 import {NotificationDeleteDialogComponent} from './components/notifications/components/notification-delete-dialog/notification-delete-dialog.component';
 import {MedicineKitItemComponent} from './components/medicine-kit-item/medicine-kit-item.component';
 import { AddMedicineToPurchasesComponent } from './components/add-medicine-to-purchases/add-medicine-to-purchases.component';
-
+import { ReminderDeleteComponent } from './components/notifications/components/reminder-delete/reminder-delete.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { AddMedicineToPurchasesComponent } from './components/add-medicine-to-pu
     NotificationDeleteDialogComponent,
     MedicineKitItemComponent,
     AddMedicineToPurchasesComponent
+    ReminderDeleteComponent
   ],
 
   imports: [
@@ -80,8 +81,9 @@ import { AddMedicineToPurchasesComponent } from './components/add-medicine-to-pu
     EditComponent,
     AddPrescriptionItemComponent,
     ReminderButtonOkComponent,
-    NotificationDeleteDialogComponent,
     AddMedicineToPurchasesComponent
+    ReminderDeleteComponent,
+    NotificationDeleteDialogComponent
   ]
 })
 export class ProfileModule {
