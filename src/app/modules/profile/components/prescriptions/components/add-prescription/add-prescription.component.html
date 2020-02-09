@@ -8,8 +8,13 @@
     <form [formGroup]="addPrescriptionForm">
       <mat-form-field class="add-prescription__form__value">
         <input matInput formControlName="name" placeholder="* Enter prescription name"/>
+
         <mat-error *ngIf="name.hasError('required') && (name.dirty || name.touched)">
           Prescription name is required
+        </mat-error>
+
+        <mat-error *ngIf="name.hasError('matchPatternOrEmpty') && (name.dirty || name.touched)">
+          Prescription name can contain letters, numbers, comma and hyphen
         </mat-error>
       </mat-form-field>
 

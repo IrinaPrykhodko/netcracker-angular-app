@@ -1,21 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Medicine} from '../../../../models/medicine';
 import {PurchaseService} from '../../../../services/purchase.service';
 import {PurchaseItem} from '../../../../models/purchase-item';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {AddComponent} from '../medicine-kit/components/add/add.component';
 import {SpinnerService} from '../../../../services/spinner.service';
-import {finalize} from 'rxjs/operators';
+import {finalize, takeUntil} from 'rxjs/operators';
 import {MedicineService} from '../../../../services/medicine.service';
 import {AddMedicineToPurchasesComponent} from '../add-medicine-to-purchases/add-medicine-to-purchases.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-all-medicines',
   templateUrl: './all-medicines.component.html',
   styleUrls: ['./all-medicines.component.scss']
 })
-export class AllMedicinesComponent implements OnInit {
+export class AllMedicinesComponent implements OnInit, OnDestroy {
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   medicineList: Medicine[];
   selectedMedicine: Medicine;
   searchText: string;
@@ -48,16 +50,15 @@ export class AllMedicinesComponent implements OnInit {
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
-      if (this.isSearchTextValid) {
-        this.spinnerService.setIsLoading(true);
-        this.medicineList.pop();
+      this.spinnerService.setIsLoading(true);
+      this.medicineList.pop();
 
-        this.getMedicines(this.searchText);
-      }
+      this.getMedicines(this.searchText);
     }
   }
 
-  findMedicines() {
+  findMedicines(searchText: string) {
+    this.searchText = searchText;
     this.spinnerService.setIsLoading(true);
     this.isSearching = true;
     this.medicineList.length = 0;
@@ -68,7 +69,10 @@ export class AllMedicinesComponent implements OnInit {
 
   private getMedicines(searchText?: string) {
     this.medicinesService.getMedicines(this.paginationOptions.pageNumber, this.paginationOptions.size, searchText)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .pipe(
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        takeUntil(this.destroy$)
+      )
       .subscribe((data: Medicine[]) => {
         this.medicineList = this.medicineList ? this.medicineList.concat(data) : data;
       });
@@ -92,21 +96,6 @@ export class AllMedicinesComponent implements OnInit {
     this.addMedicineToPurchaseRef = this.dialog.open(AddMedicineToPurchasesComponent, {
       data: {medicine}
     });
-    // this.spinnerService.setIsLoading(true);
-    //
-    // const purchaseItem: PurchaseItem = {
-    //   amount,
-    //   medicine: this.selectedMedicine
-    // };
-    //
-    // this.purchaseService.addPurchaseItem(purchaseItem)
-    //   .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-    //   .subscribe(value => {
-    //     console.log(value);
-    //     alert('Purchase item created');
-    //   }, error => {
-    //     console.log(error);
-    //   });
   }
 
   clearSearchText() {
@@ -119,11 +108,17 @@ export class AllMedicinesComponent implements OnInit {
     this.getMedicines();
   }
 
-  validateSearchText() {
-    if (this.searchText) {
-      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(this.searchText);
+  validateSearchText(searchText: string) {
+    if (searchText) {
+      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(searchText);
     } else {
       this.isSearchTextValid = true;
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
 }

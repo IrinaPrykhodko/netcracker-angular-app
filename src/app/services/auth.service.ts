@@ -5,6 +5,8 @@ import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {PatientService} from './patient.service';
+import * as moment from 'moment';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private patientService: PatientService) {
+              private patientService: PatientService,
+              private toast: ToastrService) {
   }
 
   getCurrentUserToken(): string {
@@ -25,9 +28,7 @@ export class AuthService {
 
   login(cred: User) {
     return this.http.post(`${environment.apiUrl}/login`, cred)
-      .pipe(map((value: {token: string}) => {
-        console.log(this.redirectRoute);
-
+      .pipe(map((value: { token: string }) => {
         if (value.token) {
           this.setUserToken(value.token);
           this.router.navigate([this.redirectRoute]);
@@ -49,5 +50,19 @@ export class AuthService {
     localStorage.removeItem(this.tokenSessionStorageKey);
     this.patientService.setPatient(null);
     this.router.navigate(['/login']);
+  }
+
+  checkIsTokenExpired() {
+    const token = this.getCurrentUserToken();
+
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const tokenExpirationTime = moment(decodedToken.exp * 1000);
+
+      if (tokenExpirationTime.isBefore(moment())) {
+        this.toast.info('Your token is expired. Please login again');
+        this.logout();
+      }
+    }
   }
 }
