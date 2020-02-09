@@ -22,7 +22,8 @@ export class AddComponent implements OnInit {
               private formBuilder: FormBuilder,
               private medicineKitService: MedicineKitService,
               public dialogRef: MatDialogRef<AddComponent>,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -47,9 +48,16 @@ export class AddComponent implements OnInit {
       .subscribe((userData) => {
         console.log(userData);
         this.dialogRef.close();
+        this.toastr.success('Medicine added to medicine kit', 'Success');
       }, (error => {
         console.log(error);
+        this.dialogRef.close();
+        this.toastr.error('Please, try again later or contact with administrator', 'Error');
       }));
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 
   get name() {
