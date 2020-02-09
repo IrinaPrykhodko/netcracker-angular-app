@@ -30,23 +30,29 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.patientService.getPatient()
       .pipe(
+        finalize(() => this.spinnerService.setIsLoading(false)),
         takeUntil(this.destroy$)
       )
       .subscribe();
 
+    this.updateNotificationsCounter();
+
     this.intervalId = setInterval(() => {
-      combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
-        this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
-        .pipe(
-          finalize(() => this.spinnerService.setIsLoading(false)),
-          map(([notifications, reminders]) => {
-            this.notificationService.setCounter(notifications.length + reminders.length);
-            return [notifications, reminders];
-          }),
-          takeUntil(this.destroy$)
-        )
-        .subscribe();
+      this.updateNotificationsCounter();
     }, 1000 * 60 * 5);
+  }
+
+  updateNotificationsCounter() {
+    combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+      this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
+      .pipe(
+        map(([notifications, reminders]) => {
+          this.notificationService.setCounter(notifications.length + reminders.length);
+          return [notifications, reminders];
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
