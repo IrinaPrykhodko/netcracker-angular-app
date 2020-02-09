@@ -6,7 +6,7 @@ import {SpinnerService} from '../../../../services/spinner.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ReminderButtonOkComponent} from './components/reminder-button-ok/reminder-button-ok.component';
 import {NotificationDeleteDialogComponent} from './components/notification-delete-dialog/notification-delete-dialog.component';
-import {AddMedicineToPurchasesComponent} from '../add-medicine-to-purchases/add-medicine-to-purchases.component';
+import {AddMiToPurchasesComponent} from '../add-mi-to-purchases/add-mi-to-purchases.component';
 
 @Component({
   selector: 'app-notifications',
@@ -17,7 +17,7 @@ export class NotificationsComponent implements OnInit {
 
   public reminderButtonOkRef: MatDialogRef<ReminderButtonOkComponent>;
   public notificationDeleteRef: MatDialogRef<NotificationDeleteDialogComponent>;
-  public addMedicineToPurchaseRef: MatDialogRef<AddMedicineToPurchasesComponent>;
+  public addMedicineToPurchaseRef: MatDialogRef<AddMiToPurchasesComponent>;
 
   notificationList: Notification[];
   reminderList: Notification[];
@@ -82,7 +82,7 @@ export class NotificationsComponent implements OnInit {
 
   addMedicineInstanceToPurchase(medicineInstanceId: number) {
     console.log('medicine instance id ' + medicineInstanceId);
-    this.addMedicineToPurchaseRef = this.dialog.open(AddMedicineToPurchasesComponent, {
+    this.addMedicineToPurchaseRef = this.dialog.open(AddMiToPurchasesComponent, {
       data: {medicineInstanceId}
     });
   }
