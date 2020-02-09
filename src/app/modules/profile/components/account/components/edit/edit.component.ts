@@ -5,6 +5,7 @@ import {Patient} from '../../../../../../models/patient';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {finalize} from 'rxjs/operators';
 import {SpinnerService} from '../../../../../../services/spinner.service';
+import {CustomValidations} from '../../../../../../helpers/CustomValidations';
 
 @Component({
   selector: 'app-edit',
@@ -29,9 +30,9 @@ export class EditComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
       dateOfBirth: [''],
-      height: ['', Validators.min(0)],
-      weight: ['', Validators.min(0)],
-      location: [''],
+      height: ['', [Validators.min(0), CustomValidations.digitsOnlyOrEmpty]],
+      weight: ['', [Validators.min(0), CustomValidations.digitsOnlyOrEmpty]],
+      location: ['', CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)],
       phoneNumber: ['', [Validators.required, Validators.pattern('[+][0-9]{12}')]],
       email: ['', [Validators.email, Validators.required]],
     });
@@ -62,6 +63,10 @@ export class EditComponent implements OnInit {
 
   get phoneNumber() {
     return this.editForm.get('phoneNumber');
+  }
+
+  get location() {
+    return this.editForm.get('location');
   }
 
   submit() {

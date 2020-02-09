@@ -48,16 +48,15 @@ export class AllMedicinesComponent implements OnInit, OnDestroy {
     const requiredNumberOfMedicines = this.paginationOptions.pageNumber * this.paginationOptions.size;
 
     if (requiredNumberOfMedicines >= this.medicineList.length - 1) {
-      if (this.isSearchTextValid) {
-        this.spinnerService.setIsLoading(true);
-        this.medicineList.pop();
+      this.spinnerService.setIsLoading(true);
+      this.medicineList.pop();
 
-        this.getMedicines(this.searchText);
-      }
+      this.getMedicines(this.searchText);
     }
   }
 
-  findMedicines() {
+  findMedicines(searchText: string) {
+    this.searchText = searchText;
     this.spinnerService.setIsLoading(true);
     this.isSearching = true;
     this.medicineList.length = 0;
@@ -120,9 +119,9 @@ export class AllMedicinesComponent implements OnInit, OnDestroy {
     this.getMedicines();
   }
 
-  validateSearchText() {
-    if (this.searchText) {
-      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(this.searchText);
+  validateSearchText(searchText: string) {
+    if (searchText) {
+      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(searchText);
     } else {
       this.isSearchTextValid = true;
     }
