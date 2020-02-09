@@ -25,6 +25,8 @@
   text-align: center;
 
   a {
+    display: flex;
+    justify-content: center;
     font-size: 22px;
     color: #777;
     text-decoration: none;
