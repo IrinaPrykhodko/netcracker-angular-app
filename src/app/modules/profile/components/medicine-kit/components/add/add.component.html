@@ -32,10 +32,15 @@
         Amount must be positive
       </mat-error>
     </mat-form-field>
+  </form>
 
-    <button [disabled]="addForm.invalid"
+  <div class="add-form__buttons">
+    <button class="add-form__buttons-confirm"
+            [disabled]="addForm.invalid"
             mat-raised-button (click)="submit()">Confirm
     </button>
-  </form>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+  </div>
+
 </div>
 

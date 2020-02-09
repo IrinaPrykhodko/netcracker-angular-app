@@ -5,6 +5,7 @@ import {MedicineKitService} from '../../../../../../services/medicine-kit.servic
 import {Medicine} from '../../../../../../models/medicine';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
+import {ToastrService} from 'ngx-toastr';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
@@ -23,7 +24,8 @@ export class AddComponent implements OnInit, OnDestroy {
               private formBuilder: FormBuilder,
               private medicineKitService: MedicineKitService,
               public dialogRef: MatDialogRef<AddComponent>,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -50,10 +52,17 @@ export class AddComponent implements OnInit, OnDestroy {
       )
       .subscribe((userData) => {
         console.log(userData);
+        this.toastr.success('Medicine added to medicine kit', 'Success');
         this.dialogRef.close();
       }, (error => {
         console.log(error);
+        this.dialogRef.close();
+        this.toastr.error('Please, try again later or contact with administrator', 'Error');
       }));
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 
   get name() {

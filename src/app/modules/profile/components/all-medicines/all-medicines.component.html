@@ -28,9 +28,8 @@
 <pagination-controls (pageChange)="changePage($event)" maxSize=""></pagination-controls>
 
 <div class="medicine-information" *ngIf="selectedMedicine">
-  <input matInput #medicineAmount type="number" placeholder="amount" class="amountInput">
   <button mat-raised-button class="addToPurchaseButton"
-          (click)="addMedicineToPurchase(medicineAmount.valueAsNumber)">Add to purchase
+          (click)="addMedicineToPurchase()">Add to purchase
   </button>
   <button mat-raised-button class="addInstanceButton" (click)="addMedicineToKit()">Add to MedKit</button>
   <h2>{{selectedMedicine.name}} | Information</h2>

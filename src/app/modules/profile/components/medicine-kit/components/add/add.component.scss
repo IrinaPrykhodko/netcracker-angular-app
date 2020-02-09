@@ -6,9 +6,24 @@
   background-color: #fcfcfc;
 
   .add-form {
-    button {
-      width: 100%;
-      margin-top: 4%;
+
+    &__buttons{
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+
+      button + button {
+        margin-left: 1rem;
+      }
+
+      &-confirm:hover {
+        background: $second-color;
+        color: white;
+      }
+      &-confirm:disabled {
+        background-color: #dbdbdb;
+        color: white;
+      }
     }
   }
 
@@ -32,15 +47,5 @@
   button {
     background: $main-color;
     color: #EDEDED;
-  }
-
-  button:hover {
-    background: $second-color;
-    color: white;
-  }
-
-  button:disabled {
-    background-color: #dbdbdb;
-    color: white;
   }
 }

@@ -7,6 +7,7 @@ import {AddComponent} from '../medicine-kit/components/add/add.component';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {finalize, takeUntil} from 'rxjs/operators';
 import {MedicineService} from '../../../../services/medicine.service';
+import {AddMedicineToPurchasesComponent} from '../add-medicine-to-purchases/add-medicine-to-purchases.component';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -27,6 +28,7 @@ export class AllMedicinesComponent implements OnInit, OnDestroy {
     size: 10,
   };
   public isSearchTextValid = true;
+  public addMedicineToPurchaseRef: MatDialogRef<AddMedicineToPurchasesComponent>;
 
   constructor(private medicinesService: MedicineService,
               private purchaseService: PurchaseService,
@@ -88,25 +90,12 @@ export class AllMedicinesComponent implements OnInit, OnDestroy {
     //   });
   }
 
-  addMedicineToPurchase(amount: number) {
-    this.spinnerService.setIsLoading(true);
-
-    const purchaseItem: PurchaseItem = {
-      amount,
-      medicine: this.selectedMedicine
-    };
-
-    this.purchaseService.addPurchaseItem(purchaseItem)
-      .pipe(
-        finalize(() => this.spinnerService.setIsLoading(false)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(value => {
-        console.log(value);
-        alert('Purchase item created');
-      }, error => {
-        console.log(error);
-      });
+  addMedicineToPurchase() {
+    const medicine = this.selectedMedicine;
+    console.log('medicine for add to purchase ' + medicine);
+    this.addMedicineToPurchaseRef = this.dialog.open(AddMedicineToPurchasesComponent, {
+      data: {medicine}
+    });
   }
 
   clearSearchText() {
