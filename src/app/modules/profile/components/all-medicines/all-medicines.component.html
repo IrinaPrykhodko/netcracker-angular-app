@@ -1,18 +1,18 @@
 <div class="search">
   <mat-form-field>
-    <input matInput [(ngModel)]="searchText" type="search" name="search" placeholder="Search"
-           (input)="validateSearchText()"/>
+    <input #searchTextInput matInput type="search" name="search" placeholder="Search"
+           (input)="validateSearchText(searchTextInput.value)"/>
 
     <mat-hint class="hint-error" *ngIf="!isSearchTextValid">
       Search text can contain letters, numbers and hyphen
     </mat-hint>
   </mat-form-field>
-  <button mat-button [disabled]="!isSearchTextValid" (click)="findMedicines()">Search</button>
+  <button mat-button [disabled]="!isSearchTextValid" (click)="findMedicines(searchTextInput.value)">Search</button>
 </div>
 
 <div class="searchResultHeader" *ngIf="isSearching">
   <h4>Search result for {{searchText}}</h4>
-  <button mat-raised-button (click)="clearSearchText()">Clear</button>
+  <button mat-raised-button (click)="searchTextInput.value = '';clearSearchText()">Clear</button>
 </div>
 
 <ul class="medicines">
