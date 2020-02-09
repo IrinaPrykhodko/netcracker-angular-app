@@ -2,6 +2,8 @@ import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 export class CustomValidations {
 
+  static defaultTextPattern = /^[a-zA-Z0-9,\-\s]+$/;
+
   static matchPatternOrEmpty(pattern: RegExp): ValidatorFn {
     return ((control: AbstractControl): { [key: string]: any } | null => {
         const value = control.value;

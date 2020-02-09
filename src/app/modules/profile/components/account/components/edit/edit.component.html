@@ -65,7 +65,7 @@
       <input matInput formControlName="location" type="text" placeholder="Enter your location"/>
 
       <mat-error *ngIf="location.hasError('matchPatternOrEmpty') && (location.dirty || location.touched)">
-        Location can contain letters, comma and hyphen
+        Location can contain letters, numbers, comma and hyphen
       </mat-error>
     </mat-form-field>
 

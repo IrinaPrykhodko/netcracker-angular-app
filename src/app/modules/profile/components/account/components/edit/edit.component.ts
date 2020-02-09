@@ -32,7 +32,7 @@ export class EditComponent implements OnInit {
       dateOfBirth: [''],
       height: ['', [Validators.min(0), CustomValidations.digitsOnlyOrEmpty]],
       weight: ['', [Validators.min(0), CustomValidations.digitsOnlyOrEmpty]],
-      location: ['', CustomValidations.matchPatternOrEmpty(/^[a-zA-Z,\-\s]+$/)],
+      location: ['', CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)],
       phoneNumber: ['', [Validators.required, Validators.pattern('[+][0-9]{12}')]],
       email: ['', [Validators.email, Validators.required]],
     });
