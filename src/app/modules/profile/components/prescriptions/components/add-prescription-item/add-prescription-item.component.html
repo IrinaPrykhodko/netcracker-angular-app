@@ -62,6 +62,10 @@
 
     <mat-form-field>
       <input matInput formControlName="description" placeholder="Enter description"/>
+
+      <mat-error *ngIf="description.hasError('matchPatternOrEmpty') && (description.dirty || description.touched)">
+        Description can contain letters, numbers, comma and hyphen
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>

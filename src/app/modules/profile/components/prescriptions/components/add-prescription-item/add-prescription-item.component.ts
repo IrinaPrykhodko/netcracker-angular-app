@@ -10,6 +10,7 @@ import {PrescriptionService} from '../../../../../../services/prescription.servi
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {Subject} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {CustomValidations} from '../../../../../../helpers/CustomValidations';
 
 @Component({
   selector: 'app-add-prescription-item',
@@ -43,7 +44,7 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       takingTime: ['', Validators.required],
-      description: [''],
+      description: ['', CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)],
       dosage: ['', [Validators.required, Validators.min(0)]],
       isReminderEnabled: [true, Validators.required]
     });
