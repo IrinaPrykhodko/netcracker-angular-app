@@ -9,6 +9,8 @@ import {delay, finalize, takeUntil} from 'rxjs/operators';
 import {PrescriptionService} from '../../../../../../services/prescription.service';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {Subject} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {CustomValidations} from '../../../../../../helpers/CustomValidations';
 
 @Component({
   selector: 'app-add-prescription-item',
@@ -32,16 +34,17 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
               private dialogRef: MatDialogRef<AddPrescriptionItemComponent>,
               private medicinesService: MedicineService,
               private prescriptionService: PrescriptionService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toast: ToastrService) {
   }
 
   ngOnInit() {
     this.addItemForm = this.formBuilder.group({
-      medicineName: ['', Validators.required],
+      medicineName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-]+$')]],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       takingTime: ['', Validators.required],
-      description: [''],
+      description: ['', CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)],
       dosage: ['', [Validators.required, Validators.min(0)]],
       isReminderEnabled: [true, Validators.required]
     });
@@ -63,10 +66,12 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((value: string) => {
-        if (value && value.trim().length !== 0 && this.currentSearchText === value && this.canSearch) {
+        if (value && value.trim().length !== 0 && this.currentSearchText === value && this.canSearch &&
+          !this.medicineName.hasError('pattern')) {
           this.spinnerService.setIsLoading(true);
           this.canSearch = false;
           this.medicines = null;
+          this.selectedMedicine = null;
 
           this.medicinesService.getMedicinesByParams(0, 8, value)
             .pipe(
@@ -78,6 +83,10 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
             )
             .subscribe(medicines => {
               this.medicines = medicines;
+
+              if (this.medicines.length === 0) {
+                this.toast.info('Sorry, no medicines found');
+              }
             });
         }
       });
@@ -93,7 +102,7 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
   addPrescriptionItem() {
     this.spinnerService.setIsLoading(true);
 
-    if (this.medicines.filter(value => value.name === this.currentSearchText).length !== 0) {
+    if (this.medicines.filter(value => value.name === this.currentSearchText).length !== 0 && this.selectedMedicine) {
       this.prescriptionItem.medicine = this.selectedMedicine;
       this.prescriptionItem.startDate = this.startDate.value;
       this.prescriptionItem.endDate = this.endDate.value;
@@ -114,7 +123,8 @@ export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
           error => console.log(error)
         );
     } else {
-      alert('Invalid medicine name');
+      this.spinnerService.setIsLoading(false);
+      this.toast.error('Please select medicine from dropdown list');
     }
   }
 

@@ -29,8 +29,6 @@ export class AuthService {
   login(cred: User) {
     return this.http.post(`${environment.apiUrl}/login`, cred)
       .pipe(map((value: { token: string }) => {
-        console.log(this.redirectRoute);
-
         if (value.token) {
           this.setUserToken(value.token);
           this.router.navigate([this.redirectRoute]);
@@ -60,7 +58,6 @@ export class AuthService {
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const tokenExpirationTime = moment(decodedToken.exp * 1000);
-      console.log(tokenExpirationTime);
 
       if (tokenExpirationTime.isBefore(moment())) {
         this.toast.info('Your token is expired. Please login again');

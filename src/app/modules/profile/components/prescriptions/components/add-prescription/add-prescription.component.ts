@@ -6,6 +6,7 @@ import {PrescriptionService} from '../../../../../../services/prescription.servi
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CustomValidations} from '../../../../../../helpers/CustomValidations';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class AddPrescriptionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.addPrescriptionForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)]],
       date: ['', Validators.required]
     });
   }

@@ -38,29 +38,35 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput formControlName="height" type="number" min="0" placeholder="Enter your height"/>
+      <input matInput formControlName="height" type="text" min="0" placeholder="Enter your height"/>
 
-      <mat-error *ngIf="height.hasError('min') && (height.dirty || height.touched)">
+      <mat-error
+        *ngIf="height.hasError('min') && !height.hasError('digitsOnlyOrEmpty') && (height.dirty || height.touched)">
         Height must be positive
       </mat-error>
-      <mat-error *ngIf="height.hasError('pattern') && (height.dirty || height.touched)">
-        Pattern error
+      <mat-error *ngIf="height.hasError('digitsOnlyOrEmpty') && (height.dirty || height.touched)">
+        Height can contain only numbers
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput formControlName="weight" type="number" min="0" placeholder="Enter your weight"/>
+      <input matInput formControlName="weight" type="text" min="0" placeholder="Enter your weight"/>
 
-      <mat-error *ngIf="weight.hasError('min') && (weight.dirty || weight.touched)">
+      <mat-error
+        *ngIf="weight.hasError('min') && !weight.hasError('digitsOnlyOrEmpty') && (weight.dirty || weight.touched)">
         Weight must be positive
       </mat-error>
-      <mat-error *ngIf="weight.hasError('pattern') && (weight.dirty || weight.touched)">
-        Pattern error
+      <mat-error *ngIf="weight.hasError('digitsOnlyOrEmpty') && (weight.dirty || weight.touched)">
+        Weight can contain only numbers
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput formControlName="location" type="location" placeholder="Enter your location"/>
+      <input matInput formControlName="location" type="text" placeholder="Enter your location"/>
+
+      <mat-error *ngIf="location.hasError('matchPatternOrEmpty') && (location.dirty || location.touched)">
+        Location can contain letters, numbers, comma and hyphen
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>

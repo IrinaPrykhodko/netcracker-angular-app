@@ -7,6 +7,7 @@ import {PurchaseService} from '../../../../services/purchase.service';
 import {Medicine} from '../../../../models/medicine';
 import {ToastrService} from 'ngx-toastr';
 import {PurchaseItem} from '../../../../models/purchase-item';
+import {CustomValidations} from '../../../../helpers/CustomValidations';
 
 @Component({
   selector: 'app-add-medicine-to-purchases',
@@ -23,13 +24,14 @@ export class AddMedicineToPurchasesComponent implements OnInit {
               private formBuilder: FormBuilder,
               private spinnerService: SpinnerService,
               private purchaseService: PurchaseService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.medicine = this.data.medicine;
 
     this.addForm = this.formBuilder.group({
-      amount: ['', [Validators.required]]
+      amount: ['', [Validators.required, Validators.min(0), CustomValidations.digitsOnly]]
     });
   }
 
