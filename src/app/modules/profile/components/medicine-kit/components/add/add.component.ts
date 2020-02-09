@@ -52,7 +52,6 @@ export class AddComponent implements OnInit, OnDestroy {
       )
       .subscribe((userData) => {
         console.log(userData);
-        this.toastr.success('Medicine added to medicine kit', 'Success');
         this.dialogRef.close();
         this.toastr.success('Medicine added to medicine kit', 'Success');
       }, (error => {
