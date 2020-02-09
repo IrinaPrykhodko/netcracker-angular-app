@@ -24,7 +24,7 @@ export class AllMedicinesComponent implements OnInit, OnDestroy {
   public dialogRefEdit: MatDialogRef<AddComponent>;
   paginationOptions = {
     pageNumber: 0,
-    size: 3,
+    size: 10,
   };
   public isSearchTextValid = true;
 
