@@ -49,11 +49,11 @@ export class AddMedicineToPurchasesComponent implements OnInit {
       .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
       .subscribe(value => {
         console.log(value);
-        this.toastr.success('Purchase item created', 'Success');
         this.dialogRef.close(true);
+        this.toastr.success('Purchase item created', 'Success');
       }, error => {
-        this.toastr.error('Please, try again later or contact with administrator', 'Error');
         this.dialogRef.close(false);
+        this.toastr.error('Please, try again later or contact with administrator', 'Error');
       });
   }
 

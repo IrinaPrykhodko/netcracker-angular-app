@@ -6,6 +6,7 @@ import {Medicine} from '../../../../../../models/medicine';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add',
