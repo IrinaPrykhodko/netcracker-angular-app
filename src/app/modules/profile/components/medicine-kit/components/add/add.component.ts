@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MedicineInstance} from '../../../../../../models/medicineInstance';
 import {MedicineKitService} from '../../../../../../services/medicine-kit.service';
@@ -7,16 +7,19 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {finalize} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {finalize, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnInit, OnDestroy {
   public medicine: Medicine = new Medicine();
   public medicineInstance: MedicineInstance = new MedicineInstance();
   public addForm: FormGroup;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { medicine: Medicine },
               private formBuilder: FormBuilder,
@@ -43,7 +46,10 @@ export class AddComponent implements OnInit {
     this.medicineInstance.selfLife = this.addForm.value.selfLife;
     this.medicineInstance.medicine = this.medicine;
     this.medicineKitService.addMedicineInstance(this.medicineInstance)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .pipe(
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        takeUntil(this.destroy$)
+      )
       .subscribe((userData) => {
         console.log(userData);
         this.dialogRef.close();
@@ -66,5 +72,10 @@ export class AddComponent implements OnInit {
 
   get amount() {
     return this.addForm.get('amount');
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

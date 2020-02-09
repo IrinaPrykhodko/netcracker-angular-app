@@ -1,21 +1,23 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PrescriptionItem} from '../../../../../../models/prescriptionItem';
 import {Prescription} from '../../../../../../models/prescription';
 import {Medicine} from '../../../../../../models/medicine';
 import {MedicineService} from '../../../../../../services/medicine.service';
-import {delay, finalize} from 'rxjs/operators';
+import {delay, finalize, takeUntil} from 'rxjs/operators';
 import {PrescriptionService} from '../../../../../../services/prescription.service';
 import {SpinnerService} from '../../../../../../services/spinner.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-add-prescription-item',
   templateUrl: './add-prescription-item.component.html',
   styleUrls: ['./add-prescription-item.component.scss']
 })
-export class AddPrescriptionItemComponent implements OnInit {
+export class AddPrescriptionItemComponent implements OnInit, OnDestroy {
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public addItemForm: FormGroup;
   private prescriptionItem: PrescriptionItem = new PrescriptionItem();
   private currentSearchText: string;
@@ -45,6 +47,9 @@ export class AddPrescriptionItemComponent implements OnInit {
     });
 
     this.medicineName.valueChanges
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe(value => {
         if (this.medicines && !this.medicines.find(medicine => medicine.name === value)) {
           this.canSearch = true;
@@ -54,7 +59,8 @@ export class AddPrescriptionItemComponent implements OnInit {
 
     this.medicineName.valueChanges
       .pipe(
-        delay(1000)
+        delay(1000),
+        takeUntil(this.destroy$)
       )
       .subscribe((value: string) => {
         if (value && value.trim().length !== 0 && this.currentSearchText === value && this.canSearch) {
@@ -63,10 +69,13 @@ export class AddPrescriptionItemComponent implements OnInit {
           this.medicines = null;
 
           this.medicinesService.getMedicinesByParams(0, 8, value)
-            .pipe(finalize(() => {
-              this.canSearch = true;
-              this.spinnerService.setIsLoading(false);
-            }))
+            .pipe(
+              finalize(() => {
+                this.canSearch = true;
+                this.spinnerService.setIsLoading(false);
+              }),
+              takeUntil(this.destroy$)
+            )
             .subscribe(medicines => {
               this.medicines = medicines;
             });
@@ -74,6 +83,11 @@ export class AddPrescriptionItemComponent implements OnInit {
       });
 
     this.prescriptionItem.prescription = this.data.prescription;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   addPrescriptionItem() {
@@ -88,10 +102,11 @@ export class AddPrescriptionItemComponent implements OnInit {
       this.prescriptionItem.dosage = this.dosage.value;
       this.prescriptionItem.isReminderEnabled = this.isReminderEnabled.value;
 
-      console.log(this.prescriptionItem);
-
       this.prescriptionService.addPrescriptionItem(this.prescriptionItem)
-        .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+        .pipe(
+          finalize(() => this.spinnerService.setIsLoading(false)),
+          takeUntil(this.destroy$)
+        )
         .subscribe(
           value => {
             this.dialogRef.close(value);
