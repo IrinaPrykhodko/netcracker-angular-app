@@ -7,29 +7,27 @@
     <h2>Medicine kit</h2>
   </div>
 
-  <div class="search">
-    <mat-form-field>
-      <input matInput
-             [(ngModel)]="searchText"
-             type="search"
-             name="search"
-             placeholder="Search"
-             (input)="validateSearchText()"/>
+  <div class="medicine-kit__buttons">
+    <div class="add">
+      <button mat-raised-button routerLink="/profile/all-medicines">Add medicine</button>
+    </div>
 
-      <mat-hint class="hint-error" *ngIf="!isSearchTextValid">
-        Search text can contain letters, numbers and hyphen
-      </mat-hint>
-    </mat-form-field>
-    <button mat-button [disabled]="!isSearchTextValid" (click)="onSearch()">Search</button>
+    <div class="search">
+      <mat-form-field>
+        <input #searchTextInput matInput type="search" name="search" placeholder="Search"
+               (input)="validateSearchText(searchTextInput.value)"/>
+
+        <mat-hint class="hint-error" *ngIf="!isSearchTextValid">
+          Search text can contain letters, numbers and hyphen
+        </mat-hint>
+      </mat-form-field>
+      <button mat-button [disabled]="!isSearchTextValid" (click)="onSearch(searchTextInput.value)">Search</button>
+    </div>
   </div>
 
   <div class="searchResultHeader" *ngIf="isSearching">
     <h4>Search result for {{searchText}}</h4>
-    <button mat-raised-button (click)="clearSearchText()">Clear</button>
-  </div>
-
-  <div class="add">
-    <button mat-raised-button routerLink="/profile/all-medicines">Add medicine</button>
+    <button mat-raised-button (click)="searchTextInput.value = '';clearSearchText()">Clear</button>
   </div>
 
   <div class="kit">

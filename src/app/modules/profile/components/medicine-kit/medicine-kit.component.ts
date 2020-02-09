@@ -82,12 +82,13 @@ export class MedicineKitComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearch() {
-    console.log(this.searchText);
+  onSearch(searchText: string) {
     this.spinnerService.setIsLoading(true);
     this.isSearching = true;
-    this.medicineKit = null;
+    this.medicineKit.length = 0;
     this.paginationOptions.pageNumber = 0;
+    this.searchText = searchText;
+
     this.getMedicineInstances(this.searchText);
   }
 
@@ -100,7 +101,9 @@ export class MedicineKitComponent implements OnInit, OnDestroy {
       medicine: this.selectedMedicineInstance.medicine,
     })
       .pipe(
-        finalize(() => { this.refresh(); }),
+        finalize(() => {
+          this.refresh();
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe((userData) => {
@@ -112,8 +115,9 @@ export class MedicineKitComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    this.medicineKit = null;
+    this.medicineKit.length = 0;
     this.paginationOptions.pageNumber = 0;
+
     this.getMedicineInstances();
   }
 
@@ -121,9 +125,11 @@ export class MedicineKitComponent implements OnInit, OnDestroy {
     this.spinnerService.setIsLoading(true);
     console.log(id);
     this.medicineKitService.deleteMedicineInstance(id)
-      .pipe(finalize(() => { this.refresh(); }),
+      .pipe(finalize(() => {
+          this.refresh();
+        }),
         takeUntil(this.destroy$)
-        )
+      )
       .subscribe((userData) => {
         console.log(userData);
       }, (error => {
@@ -141,9 +147,9 @@ export class MedicineKitComponent implements OnInit, OnDestroy {
     this.getMedicineInstances();
   }
 
-  validateSearchText() {
-    if (this.searchText) {
-      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(this.searchText);
+  validateSearchText(searchText: string) {
+    if (searchText) {
+      this.isSearchTextValid = /^[a-zA-Z0-9-]+$/.test(searchText);
     } else {
       this.isSearchTextValid = true;
     }

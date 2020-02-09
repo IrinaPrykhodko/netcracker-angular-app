@@ -16,18 +16,19 @@ export class AddMiToPurchasesComponent implements OnInit {
   public medicineInstanceId: number;
   public addForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {medicineInstanceId: number},
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { medicineInstanceId: number },
               private dialogRef: MatDialogRef<AddMiToPurchasesComponent>,
               private formBuilder: FormBuilder,
               private spinnerService: SpinnerService,
               private purchaseService: PurchaseService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.medicineInstanceId = this.data.medicineInstanceId;
 
     this.addForm = this.formBuilder.group({
-      amount: ['', [Validators.required]]
+      amount: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
