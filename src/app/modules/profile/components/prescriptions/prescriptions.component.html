@@ -45,10 +45,13 @@
                           (input)="setIsReminderEnabled(prescriptionItem.id, isReminderEnabled.checked)">
               Reminder
             </mat-checkbox>
-            <button class="prescriptions__list__items__delete-button" mat-raised-button
-                    (click)="deletePrescriptionItem(element.prescription.id, prescriptionItem.id)">
-              Delete
-            </button>
+
+            <div class="prescriptions__list__items__delete-button">
+              <button mat-raised-button
+                      (click)="deletePrescriptionItem(element.prescription.id, prescriptionItem.id)">
+                Delete
+              </button>
+            </div>
           </li>
         </ul>
       </div>
