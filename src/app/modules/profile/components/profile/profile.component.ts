@@ -13,6 +13,8 @@ import {combineLatest, Subject} from 'rxjs';
 export class ProfileComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
+  private intervalId;
+
   paginationOptions = {
     pageNumber: 0,
     size: 10,
@@ -32,21 +34,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
-      this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
-      .pipe(
-        finalize(() => this.spinnerService.setIsLoading(false)),
-        map(([notifications, reminders]) => {
-          this.notificationService.setCounter(notifications.length + reminders.length);
-          return [notifications, reminders];
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+    this.intervalId = setInterval(() => {
+      combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+        this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
+        .pipe(
+          finalize(() => this.spinnerService.setIsLoading(false)),
+          map(([notifications, reminders]) => {
+            this.notificationService.setCounter(notifications.length + reminders.length);
+            return [notifications, reminders];
+          }),
+          takeUntil(this.destroy$)
+        )
+        .subscribe();
+    }, 1000 * 60 * 5);
   }
 
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
