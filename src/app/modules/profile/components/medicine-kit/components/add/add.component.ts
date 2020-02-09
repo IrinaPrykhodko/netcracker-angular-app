@@ -60,7 +60,7 @@ export class AddComponent implements OnInit, OnDestroy {
         this.toastr.error('Please, try again later or contact with administrator', 'Error');
       }));
   }
-  
+
   cancel() {
     this.dialogRef.close();
   }
