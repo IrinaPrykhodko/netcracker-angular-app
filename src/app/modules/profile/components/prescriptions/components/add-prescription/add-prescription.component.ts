@@ -6,7 +6,7 @@ import {PrescriptionService} from '../../../../../../services/prescription.servi
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {CustomValidations} from "../../../../../../helpers/CustomValidations";
+import {CustomValidations} from '../../../../../../helpers/CustomValidations';
 
 
 @Component({
