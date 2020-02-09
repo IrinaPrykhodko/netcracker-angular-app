@@ -3,13 +3,15 @@ import {Prescription} from '../../../../models/prescription';
 import {PrescriptionService} from '../../../../services/prescription.service';
 import {PrescriptionItem} from '../../../../models/prescriptionItem';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {finalize, takeUntil} from 'rxjs/operators';
+import {finalize, map, takeUntil} from 'rxjs/operators';
 import {AddPrescriptionComponent} from './components/add-prescription/add-prescription.component';
 import {AddPrescriptionItemComponent} from './components/add-prescription-item/add-prescription-item.component';
 import {SpinnerService} from '../../../../services/spinner.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import * as moment from 'moment';
-import {Subject} from 'rxjs';
+import {combineLatest, Subject} from 'rxjs';
+import {NotificationService} from '../../../../services/notification.service';
+import {Notification} from '../../../../models/notification';
 
 @Component({
   selector: 'app-prescriptions',
@@ -34,7 +36,8 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
 
   constructor(private prescriptionsService: PrescriptionService,
               private dialog: MatDialog,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -62,6 +65,18 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
       )
       .subscribe(value => {
         if (value) {
+          combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+            this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
+            .pipe(
+              finalize(() => this.spinnerService.setIsLoading(false)),
+              map(([notifications, reminders]) => {
+                this.notificationService.setCounter(notifications.length + reminders.length);
+                return [notifications, reminders];
+              }),
+              takeUntil(this.destroy$)
+            )
+            .subscribe();
+
           const index = this.prescriptionStruct.findIndex(elem => elem.prescription.id === prescription.id);
 
           if (isNotNullOrUndefined(index)) {
