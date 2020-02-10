@@ -23,7 +23,9 @@
   </form>
 
   <div class="add-medicine-to-purchases__buttons">
-    <button mat-raised-button (click)="addMedicineToPurchase(medicine, amount.value)">Add</button>
+    <button mat-raised-button [disabled]="addForm.invalid" (click)="addMedicineToPurchase(medicine, amount.value)">
+      Add
+    </button>
     <button mat-raised-button (click)="cancel()">Cancel</button>
   </div>
 </div>
