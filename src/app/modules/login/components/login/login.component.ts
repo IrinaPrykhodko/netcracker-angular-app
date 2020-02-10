@@ -32,6 +32,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+
+    if (sessionStorage.getItem('registerUser') !== null) {
+      const userEmail = JSON.parse(sessionStorage.getItem('registerUser')).email;
+      sessionStorage.removeItem('registerUser');
+      this.email.patchValue(userEmail);
+    }
   }
 
   submitForm() {
@@ -48,14 +54,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.toastr.error('Incorrect email or password', 'Error');
       }));
 
-  }
-
-  get registerUserEmail() {
-    if (sessionStorage.getItem('registerUser') !== null) {
-      return JSON.parse(sessionStorage.getItem('registerUser')).email;
-    } else {
-      return '';
-    }
   }
 
   get email() {

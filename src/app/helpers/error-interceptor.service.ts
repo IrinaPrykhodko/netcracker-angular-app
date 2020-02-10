@@ -29,6 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             errorMessage += (`\nMessage: ${err.message}`);
           } else if (err.status === 401 || err.status === 403) {
             this.authService.redirectRoute = this.router.url;
+            this.authService.logout();
             this.router.navigate(['/login']);
           }
         }
