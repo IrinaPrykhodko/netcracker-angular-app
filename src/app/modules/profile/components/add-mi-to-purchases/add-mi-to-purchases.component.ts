@@ -5,6 +5,7 @@ import {SpinnerService} from '../../../../services/spinner.service';
 import {PurchaseService} from '../../../../services/purchase.service';
 import {ToastrService} from 'ngx-toastr';
 import {finalize} from 'rxjs/operators';
+import {CustomValidations} from '../../../../helpers/CustomValidations';
 
 @Component({
   selector: 'app-add-mi-to-purchases',
@@ -28,7 +29,7 @@ export class AddMiToPurchasesComponent implements OnInit {
     this.medicineInstanceId = this.data.medicineInstanceId;
 
     this.addForm = this.formBuilder.group({
-      amount: ['', [Validators.required, Validators.min(0)]]
+      amount: ['', [Validators.required, Validators.min(0), CustomValidations.digitsOnly]]
     });
   }
 
