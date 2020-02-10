@@ -6,8 +6,18 @@
         formControlName="amount"
         type="number" min="0"
         placeholder="Enter amount of medicine"/>
+
       <mat-error
-        *ngIf="amount.hasError('required') && (amount.dirty || amount.touched)">Amount required
+        *ngIf="amount.hasError('required') && !amount.hasError('digitsOnly') && (amount.dirty || amount.touched)">
+        Amount required
+      </mat-error>
+
+      <mat-error *ngIf="amount.hasError('min') && (amount.dirty || amount.touched)">
+        Amount must be positive
+      </mat-error>
+
+      <mat-error *ngIf="amount.hasError('digitsOnly') && (amount.dirty || amount.touched)">
+        Amount must contain only digits
       </mat-error>
     </mat-form-field>
   </form>
