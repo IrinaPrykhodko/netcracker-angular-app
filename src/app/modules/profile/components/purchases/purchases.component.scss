@@ -1,6 +1,20 @@
 @import "src/styles/classes/classes";
 @import "src/styles/variables/variables";
 
+.name {
+  position: absolute;
+}
+
+.manufactory {
+  position: absolute;
+  margin-left: 0rem;
+}
+
+.amount{
+  position: absolute;
+  margin-left: 21rem;
+}
+
 .purchases {
   &__buttons {
     display: flex;

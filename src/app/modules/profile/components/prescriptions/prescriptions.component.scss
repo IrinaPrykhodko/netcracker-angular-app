@@ -54,6 +54,19 @@
   }
 }
 
+.desc{
+  display: flex;
+}
+
+.prescriptions__list__title{
+position: absolute;
+}
+
+.prescriptions__list__date{
+  position: absolute;
+  margin-left: 20rem;
+}
+
 .prescriptions li {
   cursor: pointer;
   position: relative;
