@@ -11,7 +11,6 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import * as moment from 'moment';
 import {combineLatest, Subject} from 'rxjs';
 import {NotificationService} from '../../../../services/notification.service';
-import {Notification} from '../../../../models/notification';
 
 @Component({
   selector: 'app-prescriptions',
@@ -65,10 +64,9 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
       )
       .subscribe(value => {
         if (value) {
-          combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
-            this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
+          combineLatest(this.notificationService.getReminders(0, 50),
+            this.notificationService.getNotifications(0, 50))
             .pipe(
-              finalize(() => this.spinnerService.setIsLoading(false)),
               map(([notifications, reminders]) => {
                 this.notificationService.setCounter(notifications.length + reminders.length);
                 return [notifications, reminders];
@@ -181,8 +179,20 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
     this.spinnerService.setIsLoading(true);
 
     this.prescriptionsService.setIsReminderEnabled(prescriptionItemId, isReminderEnabled)
-      .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
-      .subscribe();
+      .subscribe(value => {
+        console.log('value ' + value);
+        combineLatest(this.notificationService.getReminders(0, 50),
+          this.notificationService.getNotifications(0, 50))
+          .pipe(
+            finalize(() => this.spinnerService.setIsLoading(false)),
+            map(([notifications, reminders]) => {
+              this.notificationService.setCounter(notifications.length + reminders.length);
+              return [notifications, reminders];
+            }),
+            takeUntil(this.destroy$)
+          )
+          .subscribe();
+      });
   }
 
   ngOnDestroy() {
