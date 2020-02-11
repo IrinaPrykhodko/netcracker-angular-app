@@ -68,7 +68,6 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
           combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
             this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
             .pipe(
-              finalize(() => this.spinnerService.setIsLoading(false)),
               map(([notifications, reminders]) => {
                 this.notificationService.setCounter(notifications.length + reminders.length);
                 return [notifications, reminders];
@@ -182,6 +181,18 @@ export class PrescriptionsComponent implements OnInit, OnDestroy {
 
     this.prescriptionsService.setIsReminderEnabled(prescriptionItemId, isReminderEnabled)
       .pipe(finalize(() => this.spinnerService.setIsLoading(false)))
+      .subscribe();
+
+    combineLatest(this.notificationService.getReminders(this.paginationOptions.pageNumber, this.paginationOptions.size),
+      this.notificationService.getNotifications(this.paginationOptions.pageNumber, this.paginationOptions.size))
+      .pipe(
+        finalize(() => this.spinnerService.setIsLoading(false)),
+        map(([notifications, reminders]) => {
+          this.notificationService.setCounter(notifications.length + reminders.length);
+          return [notifications, reminders];
+        }),
+        takeUntil(this.destroy$)
+      )
       .subscribe();
   }
 
