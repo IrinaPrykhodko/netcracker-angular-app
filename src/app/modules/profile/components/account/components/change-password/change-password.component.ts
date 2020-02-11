@@ -5,6 +5,7 @@ import {finalize} from 'rxjs/operators';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SpinnerService} from '../../../../../../services/spinner.service';
 import {PasswordStateMatcher} from '../../../../../../models/PasswordStateMatcher';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-change-password',
@@ -19,7 +20,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
               public dialogRef: MatDialogRef<ChangePasswordComponent>,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private toast: ToastrService) {
   }
 
   ngOnInit() {
@@ -56,9 +58,12 @@ export class ChangePasswordComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.spinnerService.setIsLoading(false);
-          this.dialogRef.close();
         })
       )
-      .subscribe();
+      .subscribe(value => {
+        this.dialogRef.close();
+      }, error => {
+        this.toast.warning('Incorrect password');
+      });
   }
 }
