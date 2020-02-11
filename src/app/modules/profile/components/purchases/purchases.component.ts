@@ -21,7 +21,7 @@ export class PurchasesComponent implements OnInit, OnDestroy {
 
   paginationOptions = {
     pageNumber: 0,
-    size: 10
+    size: 8
   };
 
   constructor(private purchaseService: PurchaseService,

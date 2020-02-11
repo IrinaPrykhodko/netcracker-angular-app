@@ -34,7 +34,6 @@ export class EditComponent implements OnInit {
       weight: ['', [Validators.min(0), CustomValidations.digitsOnlyOrEmpty]],
       location: ['', CustomValidations.matchPatternOrEmpty(CustomValidations.defaultTextPattern)],
       phoneNumber: ['', [Validators.required, Validators.pattern('[+][0-9]{12}')]],
-      email: ['', [Validators.email, Validators.required]],
     });
 
     this.patient = this.data.patient;
@@ -47,10 +46,6 @@ export class EditComponent implements OnInit {
 
   get weight() {
     return this.editForm.get('weight');
-  }
-
-  get email() {
-    return this.editForm.get('email');
   }
 
   get firstName() {

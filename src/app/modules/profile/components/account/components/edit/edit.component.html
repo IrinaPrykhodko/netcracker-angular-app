@@ -82,13 +82,6 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput formControlName="email" type="email" placeholder="* Enter your email">
-
-      <mat-error *ngIf="email.getError('required')">Email is required</mat-error>
-      <mat-error *ngIf="email.getError('email')">Email is invalid</mat-error>
-    </mat-form-field>
-
     <button [disabled]="editForm.invalid" mat-raised-button (click)="submit()">
       Confirm
     </button>
