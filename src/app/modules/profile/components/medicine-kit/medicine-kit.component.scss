@@ -7,6 +7,18 @@
   height: 100%;
 }
 
+.expired ::ng-deep .mat-expansion-panel-header {
+   background: #ffe3e3;
+ }
+
+.expired ::ng-deep .mat-expansion-panel-header:hover {
+  background: #ffe3e3;
+}
+
+.expired ::ng-deep .mat-expansion-panel-content {
+  background: #ffe3e3;
+}
+
 .kit {
   padding-top: 5%;
 
@@ -21,25 +33,17 @@
 
     margin-top: 4rem;
 
-    &.expired ::ng-deep .mat-expansion-panel {
-      background: #ffe3e3;
-    }
-
-    &.expired ::ng-deep .mat-expansion-panel-header {
-      background: #ffe3e3;
-    }
-
     .name {
       position: absolute;
     }
 
     .manufactory {
       position: absolute;
-      margin-left: 3rem;
+      margin-left: 10rem;
     }
 
     .self-life {
-      margin-left: 23rem;
+      margin-left: 29rem;
     }
 
     .amount {

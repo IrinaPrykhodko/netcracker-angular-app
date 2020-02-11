@@ -34,11 +34,11 @@
       <div class="prescriptions__list__items">
         <ul>
           <li *ngFor="let prescriptionItem of element.prescriptionItems">
-            <span>Medicine: {{prescriptionItem.medicine.name}}</span>
+            <span class="desc">Medicine: {{prescriptionItem.medicine.name}}</span>
             <span>Dosage: {{prescriptionItem.dosage}}</span>
             <span>Taking time: {{prescriptionItem.takingTime}}</span>
             <span>From {{prescriptionItem.startDate}} to {{prescriptionItem.endDate}}</span>
-            <span>Description: {{prescriptionItem.description}}</span>
+            <span class="desc">Description: {{prescriptionItem.description}}</span>
             <mat-checkbox #isReminderEnabled
                           [disabled]="isPrescriptionItemEndDateInPast(prescriptionItem)"
                           [checked]="isPrescriptionItemEndDateInPast(prescriptionItem) ? false : prescriptionItem.isReminderEnabled"
